@@ -36,7 +36,7 @@
         <!-- Кнопки -->
         <div class="flex space-x-3">
           <!-- component Profile -->
-          <!-- <header-profile /> -->
+          <header-profile />
 
           <div class="header__cart">
             <NuxtLink

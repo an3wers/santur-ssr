@@ -1,37 +1,55 @@
 <template>
   <div class="nav__item relative">
-    <a
+    <button
       @click="dropDownHandler($event)"
       class="text-gray-700 no-underline inline-flex justify-center items-center px-2.5 py-2"
       :class="`nav__link-${index}`"
-      href="#"
-      >{{ title }}
+    >
+      {{ title }}
       <expand-more-icon-20 color="#6b7280" />
-    </a>
+    </button>
 
-    <SubMenu
-      @closeSubmenu="onClose"
-      v-if="isOpen"
-      :items="items"
-      :isOpen="isOpen"
-      :idx="index"
-      :position="position"
-    />
+    <transition
+      enter-active-class="transition ease-out duration-100"
+      enter-from-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100"
+      leave-active-class="transition ease-in duration-75"
+      leave-from-class="transform opacity-100 scale-100"
+      leave-to-class="transform opacity-0 scale-95"
+    >
+      <SubMenu
+        v-if="isOpen"
+        @closeSubmenu="onClose"
+        :isOpen="isOpen"
+        :items="items"
+        :idx="index"
+        :position="position"
+      >
+        <div v-for="(item, index) in items" :key="index" class="nav__item">
+          <NuxtLink
+            :to="item.url"
+            class="text-gray-700 no-underline py-2 px-4 rounded-md hover:bg-slate-150 block"
+          >
+            {{ item.name }}
+          </NuxtLink>
+        </div>
+      </SubMenu>
+    </transition>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import ExpandMoreIcon20 from '@/components/UI/Icons/ExpandMoreIcon_20.vue';
 import SubMenu from './SubMenu.vue';
 
 defineProps({
-  title: String,
   items: {
     type: Array,
     default: [],
   },
-  index: String,
+  title: String,
+  index: Number,
   position: {
     type: String,
     default: 'left',
@@ -48,14 +66,4 @@ function dropDownHandler(event) {
 function onClose() {
   isOpen.value = false;
 }
-
-onMounted(() => {
-  // console.log(333);
-  // window.addEventListener('click', (e) => {
-  //   console.log(e.target);
-  //   // if (e.target.classList.contains('nav__item')) {
-  //   //   console.log(333);
-  //   // }
-  // });
-});
 </script>

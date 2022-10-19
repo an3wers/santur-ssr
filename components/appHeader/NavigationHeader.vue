@@ -3,33 +3,20 @@
     <!-- mainMenu -->
 
     <DropDown
-      :title="mainMenu[0]['name']"
-      :items="mainMenu[0]['child']"
-      index="0"
-      position="left"
-    />
-    <DropDown
-      :title="mainMenu[1]['name']"
-      :items="mainMenu[1]['child']"
-      index="1"
-      position="left"
-    />
-    <DropDown
-      :title="mainMenu[2]['name']"
-      :items="mainMenu[2]['child']"
-      index="2"
-      position="left"
-    />
-
+      v-for="(item, index) in getMenuWithChild"
+      :key="index"
+      :index="index"
+      :items="item.child"
+      :title="item.name"
+    >
+    </DropDown>
     <div class="nav__item relative">
       <NuxtLink
         class="text-gray-700 no-underline inline-flex justify-center items-center px-2.5 py-2"
-        to="/"
-        >Контакты</NuxtLink
+        :to="getMenuContact.url"
+        >{{ getMenuContact.name }}</NuxtLink
       >
     </div>
-
-    <!-- <DropDownItem v-for="(item, index) in mainMenu" :item="item" :key="index" /> -->
   </nav>
 </template>
 
@@ -40,17 +27,11 @@ import DropDown from '@/components/UI/DropDown/DropDown.vue';
 
 const mainMenu = useMainMenu(); // []
 
-// import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-// import { useMainMenu } from "@/utils/config";
-// import DropDownItem from '@/components/appHeader/DropDownItem.vue';
+const getMenuWithChild = computed(() => {
+  return mainMenu.filter((el) => el.child);
+});
 
-// const mainMenu = useMainMenu();
-
-// const getMenuWithChild = computed(() => {
-//   return mainMenu.filter((el) => el.child.length);
-// });
-
-// const getMenuWithoutChild = computed(() => {
-//   return mainMenu.filter((el) => !el.child.length);
-// });
+const getMenuContact = computed(() => {
+  return mainMenu.filter((el) => el.name === 'Контакты')[0];
+});
 </script>
