@@ -1,5 +1,6 @@
 <template>
-  <div v-if="categoryIsLoaded" class="category-page">
+  <!-- <div v-if="categoryIsLoaded" class="category-page"> -->
+  <div class="category-page">
     <div class="container">
       <app-breadcrumbs :breadcrumbs="getBreadcrumbs" />
       <div class="inline-flex space-x-2">
@@ -60,7 +61,7 @@
       </div>
     </div>
   </div>
-  <page-loader v-else />
+  <!-- <page-loader v-else /> -->
 </template>
 
 <script setup>
@@ -248,8 +249,10 @@ async function loadCategory() {
   categoryIsLoaded.value = true;
 }
 
-loadCategory();
+// Load category
+await loadCategory();
 
+// Add query params to url
 function pushUrlState(payload) {
   let result = [];
 

@@ -116,8 +116,9 @@ const router = useRouter();
 
 // Открываем модальное окно входа
 
-function onOpen() {
+async function onOpen() {
   profileMenuIsOpen.value = !profileMenuIsOpen.value;
+  await profileHandler();
 }
 
 function onClose() {

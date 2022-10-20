@@ -1,5 +1,6 @@
 <template>
-  <div v-if="productIsLoaded" class="product-page">
+  <!-- <div v-if="productIsLoaded" class="product-page"> -->
+  <div class="product-page">
     <div class="container">
       <app-breadcrumbs
         v-if="!Object.keys($route.query).length"
@@ -131,7 +132,7 @@
                 <button
                   v-else
                   @click="removeFavoritiesHandler"
-                  class="py-3 text-lg px-4 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75 bg-blue-100 border border-transparent hover:bg-blue-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-600"
+                  class="py-3 text-lg px-3 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75 bg-blue-100 border border-transparent hover:bg-blue-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-600"
                 >
                   <bookmark-icon-fill-24 color="#1976D2" />
                 </button>
@@ -167,7 +168,7 @@
                 {{ product.ed }}
               </app-button>
 
-              <RouterLink
+              <NuxtLink
                 to="/cart"
                 class="no-underline w-full inline-flex items-center text-center justify-center rounded-md disabled:opacity-75 py-2.5 text-lg px-4 border border-transparent bg-blue-100 hover:bg-blue-200 focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-600 hover:text-gray-600"
                 v-else
@@ -175,7 +176,7 @@
                 <!-- Иконка -->
                 <check-icon-24 color="#16a34a" />
                 <span class="ml-1">В корзине</span>
-              </RouterLink>
+              </NuxtLink>
             </div>
             <div
               class="inline-flex space-x-1"
@@ -222,7 +223,7 @@
     </div>
   </div>
 
-  <PageLoader v-else />
+  <!-- <PageLoader v-else /> -->
 </template>
 <script setup>
 import { useRoute } from 'vue-router';
@@ -244,10 +245,9 @@ import CheckIcon24 from '@/components/UI/Icons/CheckIcon_24.vue';
 import { useProfileStore } from '@/stores/profile';
 import BookmarkIconFill24 from '@/components/UI/Icons/BookmarkIconFill_24.vue';
 import AppGoBack from '@/components/AppGoBack.vue';
-// import { useToFixedNumber, setCountProduct } from "@/utils/helpers";
-// import { useCustomFetch } from "@/utils/fetch";
 import PageLoader from '@/components/loaders/PageLoader.vue';
 import { useCartStore } from '@/stores/cart';
+import { useAppMessage } from '@/stores/appMessage';
 
 const productIsLoaded = ref(false);
 
@@ -258,6 +258,7 @@ const productId = route.params.id;
 const cartStore = useCartStore();
 
 const profileStore = useProfileStore();
+const appMessageStore = useAppMessage();
 
 const product = ref({});
 const characteristics = ref([]);
@@ -346,6 +347,8 @@ async function changeCountHandler(param) {
           product.value.qty_incart = 0;
         }
       }
+
+      clearTimeout(timer.value);
     }, 800);
   } else if (!isAddedCart.value && selectedValue.value == 0) {
     selectedValue.value = product.value.salekrat;
@@ -410,9 +413,14 @@ async function loadProduct(id) {
         isAddedCart.value = true;
         selectedValue.value = response.data.qty_incart;
       }
+    } else {
+      throw new Error(
+        response.message || 'При загрузке товара произошла ошибка'
+      );
     }
   } catch (error) {
     console.log(error);
+    appMessageStore.open('error', error.message, 'error');
   }
 }
 

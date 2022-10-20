@@ -6,10 +6,8 @@
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 xl:col-span-8">
           <!-- <div v-if="getContent" v-html="getContent"></div> -->
-          <div v-if="getContent">
-            <div v-html="getContent"></div>
-          </div>
-          <!-- {{ getContent }} -->
+          <!-- <div v-html="decodeHTMLEntities(getContent)"></div> -->
+          <div v-html="parse(getContent)"></div>
         </div>
       </div>
     </div>
@@ -59,8 +57,31 @@ async function loadPost(id) {
 
 await loadPost(route.params.id);
 
+function decodeHTMLEntities(text) {
+  let textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+}
+
+function parse(str) {
+  //.Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&apos;").Replace(">", "&gt;").Replace("<", "&lt;");
+
+  return str
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+}
+
 const getContent = computed(() => {
-  return post.value.post_content.replace(/\\\\r|\\\\n|\\\\t|\\n|\\t|\\r/g, '');
+  let tmp = post.value.post_content.replace(
+    /\\\\r|\\\\n|\\\\t|\\n|\\t|\\r/g,
+    ''
+  );
+
+  // console.log(tmp);
+
+  return tmp;
 });
 
 const breadcrumbs = [{ name: 'Новости', url: '/about/news' }, {}];

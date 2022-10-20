@@ -1,32 +1,34 @@
 <template>
   <div class="checkout-page">
-    <div class="container">
-      <!-- back stap -->
-      <app-go-back />
-      <checkout-empty-state
-        v-if="cartStore.cartItems.length === 0 || !authStore.getIsAuth"
-      />
-      <div v-else class="grid grid-cols-12 gap-6">
-        <div class="col-start-1 col-end-9 space-y-6">
-          <h1 v-if="!cartStore.cartId">Оформление заказа</h1>
-          <h1 v-else>Сохранение заказа</h1>
+    <client-only>
+      <div class="container">
+        <!-- back stap -->
+        <app-go-back />
+        <checkout-empty-state
+          v-if="cartStore.cartItems.length === 0 || !authStore.getIsAuth"
+        />
+        <div v-else class="grid grid-cols-12 gap-6">
+          <div class="col-start-1 col-end-9 space-y-6">
+            <h1 v-if="!cartStore.cartId">Оформление заказа</h1>
+            <h1 v-else>Сохранение заказа</h1>
 
-          <checkout-person-info
-            v-model:getMethod="getMethod"
-            v-model:deliveryAddress="deliveryAddress"
-            v-model:comment="orderComment"
-          />
+            <checkout-person-info
+              v-model:getMethod="getMethod"
+              v-model:deliveryAddress="deliveryAddress"
+              v-model:comment="orderComment"
+            />
+          </div>
+          <div class="col-start-9 col-end-13 space-y-6">
+            <checkout-info
+              :isConfirm="getOrderIsConfirm"
+              :btnProcessing="btnProcessing"
+              @onClick="orderSubmitHandler"
+            />
+          </div>
         </div>
-        <div class="col-start-9 col-end-13 space-y-6">
-          <checkout-info
-            :isConfirm="getOrderIsConfirm"
-            :btnProcessing="btnProcessing"
-            @onClick="orderSubmitHandler"
-          />
-        </div>
+        <!-- Пустое состояние ? -->
       </div>
-      <!-- Пустое состояние ? -->
-    </div>
+    </client-only>
     <page-loader v-if="!checkoutIsLoaded" />
   </div>
 </template>
@@ -57,18 +59,20 @@ const payMethod = ref('бн');
 
 const orderIsConfirm = ref(true);
 
+if (process.client) {
+  if (cartStore.cartId === null) {
+    loadCart();
+  } else {
+    checkoutIsLoaded.value = true;
+  }
+}
+
 async function loadCart() {
   const res = await cartStore.getCart();
   if (res instanceof Error) {
     // TODO: Обработать ошибку
     console.log('Error', res);
   }
-  checkoutIsLoaded.value = true;
-}
-
-if (cartStore.cartId === null) {
-  loadCart();
-} else {
   checkoutIsLoaded.value = true;
 }
 
@@ -107,7 +111,7 @@ async function orderSubmitHandler() {
       );
     }
   } else {
-    console.log(res);
+    // console.log(res);
     if (cartStore.cartId) {
       await cartStore.getCart();
       btnProcessing.value = false;
