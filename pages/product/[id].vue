@@ -413,6 +413,8 @@ async function loadProduct(id) {
         isAddedCart.value = true;
         selectedValue.value = response.data.qty_incart;
       }
+
+      // TODO: обработать не существующую страницу
     } else {
       throw new Error(
         response.message || 'При загрузке товара произошла ошибка'

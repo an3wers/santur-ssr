@@ -90,6 +90,7 @@
       <app-button
         :disabled="!isBtnSubmit || isTooManyAttempts || isSubmitting"
         type="submit"
+        btnSize="lg"
       >
         <btn-spinner v-if="isSubmitting" />
         Отправить</app-button
@@ -107,7 +108,6 @@ import { useAppMessage } from '@/stores/appMessage';
 import { useProfileStore } from '@/stores/profile';
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
-// import axios from "axios";
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
@@ -239,22 +239,7 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
       },
       credentials: 'include',
     });
-    // const res = await axios({
-    //   method: "post",
-    //   url: "https://isantur.ru/apissz/SendFeedback",
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   data: {
-    //     authorname: name,
-    //     subjectname: companyName,
-    //     subjectinn: companyInn,
-    //     email: email,
-    //     descr: comment,
-    //   },
-    //   withCredentials: true,
-    // });
-    // console.log(res);
+
     if (res.data.success) {
       // console.log(res);
       resetForm();
@@ -268,9 +253,6 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
     }
   } catch (error) {
     appMessage.openWithTimer('error', error.message, 'error');
-    // console.log(error);
   }
-
-  // console.log("ФОРМА", values, submitCount.value);
 });
 </script>

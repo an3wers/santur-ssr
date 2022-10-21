@@ -7,9 +7,9 @@
         class="pl-4 pr-10 py-2.5 text-lg w-full rounded-md border form-input bg-transparent border-gray-300 focus:border-primary focus:ring focus:ring-blue-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500"
         type="text"
         placeholder="Найти товары"
-        @blur="inputBlurHandler"
         @focus="inputFocusHandler"
       />
+      <!-- @blur="inputBlurHandler" -->
       <span
         v-if="isClearBtn"
         @click="clearSearchHandler"
@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import SearchIcon24 from '@/components/UI/Icons/SearchIcon_24.vue';
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
@@ -76,12 +76,16 @@ function clearSearchHandler() {
   mainStore.searchResultStore = [];
 }
 
-function inputBlurHandler() {
-  const tmr = setTimeout(() => {
-    isResultSearch.value = false;
-    clearTimeout(tmr);
-  }, 100);
-}
+// function inputBlurHandler() {
+//   const tmr = setTimeout(() => {
+//     // isResultSearch.value = false;
+//     clearTimeout(tmr);
+//   }, 100);
+// }
+
+watch(route, () => {
+  isResultSearch.value = false;
+});
 
 function inputFocusHandler() {
   if (mainStore.searchValueStore && mainStore.searchResultStore.length) {

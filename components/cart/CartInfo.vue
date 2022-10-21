@@ -99,15 +99,15 @@
 </template>
 
 <script setup>
-import { useCartStore } from "@/stores/cart";
-import { useAuthStore } from "@/stores/auth";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import AppSpinnerMedium from "@/components/loaders/AppSpinnerMedium.vue";
-import AppSelector from "@/components/UI/Forms/AppSelector.vue";
-import { useProfileStore } from "@/stores/profile";
-import { useAppMessage } from "../../stores/appMessage";
+import { useCartStore } from '@/stores/cart';
+import { useAuthStore } from '@/stores/auth';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
+import AppSelector from '@/components/UI/Forms/AppSelector.vue';
+import { useProfileStore } from '@/stores/profile';
+import { useAppMessage } from '../../stores/appMessage';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();
@@ -115,7 +115,7 @@ const authStore = useAuthStore();
 const appMessageStore = useAppMessage();
 const router = useRouter();
 const contarctSelected = ref(
-  cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ""
+  cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ''
 );
 
 async function contractHandler(val) {
@@ -123,7 +123,7 @@ async function contractHandler(val) {
   cartStore.cartIsUpdated = false;
   const res = await cartStore.changeContractInCart(val);
   if (res instanceof Error) {
-    appMessageStore.open("error", res.message, "error");
+    appMessageStore.open('error', res.message, 'error');
   } else {
     // await profileStore.loadProfile();
     await cartStore.getCart();
@@ -133,22 +133,22 @@ async function contractHandler(val) {
 }
 
 async function saveOrderHandler() {
-  const res = await cartStore.cartConfirm("бн", "", "", "draft");
+  const res = await cartStore.cartConfirm('бн', '', '', 'draft');
   if (res instanceof Error) {
     // При сохранении заказа произошла ошибка
     appMessageStore.open(
-      "error",
-      "При сохранении заказа произошла ошибка",
-      "error"
+      'error',
+      'При сохранении заказа произошла ошибка',
+      'error'
     );
   } else {
     // Заказ сохранен
-    router.push({ name: "thank", query: { draft: res } });
+    router.push({ name: 'thank', query: { draft: res } });
   }
 }
 
 async function editOrderSaveHandler() {
-  router.push({ path: "/checkout" });
+  router.push({ path: '/checkout' });
 
   // Сохраняю заказ и делаю редирект в заказ
   // const res = cartStore.cartConfirm('бн', '', '')
@@ -160,9 +160,9 @@ async function editOrderCancelHandler(id) {
 
   if (res instanceof Error) {
     appMessageStore.open(
-      "error",
-      "При отмене сохранения произошла ошибка",
-      "error"
+      'error',
+      'При отмене редактирования произошла ошибка',
+      'error'
     );
   } else {
     router.push({ path: `/profile/orderhistory/${id}` });

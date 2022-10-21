@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 // import { useCustomFetch } from "@/utils/fetch";
 import { useMainStore } from './main';
+import { useAuthStore } from './auth';
 // import { useRoute } from "vue-router";
 
 export const useCategoryStore = defineStore('category', {
@@ -29,8 +30,27 @@ export const useCategoryStore = defineStore('category', {
   actions: {
     async setCategory(params) {
       const mainStore = useMainStore();
+      const authStore = useAuthStore();
+
+      const request = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      };
+
+      if (process.server) {
+        request.headers.Cookie = `ASP.NET_SessionId=${authStore.sessionCookie}`;
+      }
+
       try {
-        const response = await useCustomFetch(`apissz/setgoodsearch/${params}`);
+        // const response = await useCustomFetch(`apissz/setgoodsearch/${params}`);
+        const resp = await fetch(
+          `https://isantur.ru/apissz/setgoodsearch/${params}`,
+          request
+        );
+        const response = await resp.json();
         // TODO throw
         if (response.success) {
           // return response

@@ -95,9 +95,20 @@ const appMessageStore = useAppMessage();
 const page = ref(route.query.page ? Number(route.query.page) : 1);
 
 const currentCat = computed(() => {
-  return catalogStore.getProductCatalog.find(
+  const tmpObj = catalogStore.getProductCatalog.find(
     (el) => el.id === +route.params.id
   );
+
+  if (tmpObj) {
+    return tmpObj;
+  } else {
+    // console.log(404);
+    // router.replace({ path: '/404' });
+    // navigateTo('/404');
+    return undefined;
+  }
+
+  // return
 });
 
 const getIsTn = computed(() => {
@@ -197,7 +208,8 @@ async function loadCategory() {
   if (getParams.value) {
     await categoryStore.setCategory(getParams.value);
   } else {
-    router.replace({ name: 'NotFound' });
+    // router.replace({ path: '/404' });
+    navigateTo({ path: '/404' });
   }
 
   //   console.log(route.query)

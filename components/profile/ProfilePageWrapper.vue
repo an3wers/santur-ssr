@@ -1,34 +1,34 @@
 <template>
-  <client-only>
-    <div class="profile-pages container">
+  <div class="profile-pages container">
+    <client-only>
       <h1>{{ title }}</h1>
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-3">
           <div class="space-y-6">
             <profile-menu :menu="profileStore.menu" />
             <profile-ta
-              v-if="!profileStore.profile.is_ta && authStore.user.id"
+              v-if="!profileStore?.profile?.is_ta && authStore?.user?.id"
             />
           </div>
         </div>
         <div class="col-span-9">
           <!-- render body -->
-          <slot><p>Profile page wrapper</p></slot>
+          <slot :key="$route.fullPath"></slot>
         </div>
       </div>
-    </div>
-  </client-only>
+    </client-only>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+// import { computed } from 'vue';
+// import { useRoute } from 'vue-router';
 import ProfileMenu from '@/components/profile/ProfileMenu.vue';
 import ProfileTa from '@/components/profile/ProfileTa.vue';
 import { useProfileStore } from '@/stores/profile';
 import { useAuthStore } from '@/stores/auth';
 
-const route = useRoute();
+// const route = useRoute();
 const profileStore = useProfileStore();
 const authStore = useAuthStore();
 

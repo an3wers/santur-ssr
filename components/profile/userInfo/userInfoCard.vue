@@ -4,7 +4,7 @@
       <div class="input-group space-y-2">
         <label for="userName">Имя и Фамилия</label>
         <app-input
-          v-model="name"
+          v-model.trim="name"
           placeholder="Ваше имя"
           inputType="border"
           inputSize="md"
@@ -14,7 +14,7 @@
         <label for="userPhone">Телефон</label>
         <app-input
           type="tel"
-          v-model="phone"
+          v-model.trim="phone"
           v-mask="'+# (###) ###-##-##'"
           placeholder="Ваш телефон"
           inputType="border"
@@ -25,7 +25,7 @@
       <div class="input-group space-y-2">
         <label for="userEmail">Email</label>
         <app-input
-          v-model="email"
+          v-model.trim="email"
           placeholder="Ваш email"
           inputType="border"
           inputSize="md"
@@ -70,13 +70,7 @@ import AppInput from '@/components/UI/Forms/AppInput.vue';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { useProfileStore } from '@/stores/profile';
 import { useAppMessage } from '@/stores/appMessage';
-// import { phoneCleanerFormat } from "@/utils/helpers";
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
-
-// import { useField, useForm } from 'vee-validate'
-// import * as yup from 'yup'
-
-// const { handleSubmit } = useForm()
 
 const profileStore = useProfileStore();
 const appMessage = useAppMessage();
@@ -87,31 +81,6 @@ const name = ref(profileStore.profile.name || '');
 const email = ref(profileStore.profile.email || '');
 const phone = ref(profileStore.profile.phone || '');
 const psw = ref('123864343');
-
-// const getName = computed({
-//   get() {
-//     return name.value
-//   },
-//   set(value) {
-//     name.value = value
-//   }
-// })
-// const getEmail = computed({
-//   get() {
-//     return email.value
-//   },
-//   set(value) {
-//     email.value = value
-//   }
-// })
-// const getPhone = computed({
-//   get() {
-//     return phone.value
-//   },
-//   set(value) {
-//     phone.value = value
-//   }
-// })
 
 const errorMessage = ref(null);
 
@@ -144,7 +113,7 @@ async function changeProfileHandler() {
       'При сохранении профиля произошла ошибка',
       'error'
     );
-    console.log('Error', res);
+    // console.log('Error', res);
   } else {
     // console.log("ИЗМЕНЕНИЕ ПРОФИЛЯ", res)
     await profileStore.loadProfile();

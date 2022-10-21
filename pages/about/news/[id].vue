@@ -45,7 +45,7 @@ async function loadPost(id) {
       isError.value = false;
       //   console.log('POST', res);
     } else {
-      router.push({ name: 'NotFound' });
+      navigateTo({ path: '/404' });
     }
   } catch (error) {
     console.log(error);

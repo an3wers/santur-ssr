@@ -10,6 +10,7 @@ export const useCustomFetch = async (url, method = 'GET', params = {}) => {
       baseURL: API_BASE_URL,
       credentials: 'include',
       headers: {
+        // Cookie: `ASP.NET_SessionId=${authStore.sessionCookie}; usrcook=${authStore.userCookie}`,
         Cookie: `ASP.NET_SessionId=${authStore.sessionCookie}`,
       },
       params: params,

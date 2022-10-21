@@ -106,19 +106,19 @@
 </template>
 
 <script setup>
-import AppSelectorSlots from "@/components/UI/Forms/AppSelectorSlots.vue";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import SearchIcon20 from "@/components/UI/Icons/SearchIcon_20.vue";
-import { ref, computed } from "vue";
-import CloseIcon20 from "@/components/UI/Icons/CloseIcon_20.vue";
-import { useProfileStore } from "@/stores/profile";
+import AppSelectorSlots from '@/components/UI/Forms/AppSelectorSlots.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import SearchIcon20 from '@/components/UI/Icons/SearchIcon_20.vue';
+import { ref, computed } from 'vue';
+import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
+import { useProfileStore } from '@/stores/profile';
 
 const profileStore = useProfileStore();
 
 const props = defineProps({
   orderSearchValue: {
     type: String,
-    default: "",
+    default: '',
   },
   timeRangeOptions: {
     type: Array,
@@ -138,32 +138,32 @@ const props = defineProps({
 });
 
 const emits = defineEmits([
-  "onInput",
-  "onRemoveSearchValue",
-  "onChangeTimeRange",
-  "onChangeStatus",
-  "onCleanAllFilters",
-  "openModalWithProducts",
-  'submitMerge'
+  'onInput',
+  'onRemoveSearchValue',
+  'onChangeTimeRange',
+  'onChangeStatus',
+  'onCleanAllFilters',
+  'openModalWithProducts',
+  'submitMerge',
 ]);
 
 const isRemoveSearchValue = computed(() => {
   return !!props.orderSearchValue;
 });
 
-const selectedAuthor = ref("");
+// const selectedAuthor = ref("");
 
 // tests
-const authorOptions = [
-  { text: "Корчагин Михаил Егорович", value: "Корчагин Михаил Егорович" },
-  { text: "Яшина Софья Никитична", value: "Яшина Софья Никитична" },
-];
+// const authorOptions = [
+//   { text: "Корчагин Михаил Егорович", value: "Корчагин Михаил Егорович" },
+//   { text: "Яшина Софья Никитична", value: "Яшина Софья Никитична" },
+// ];
 
 function onOpenModalWithProducts() {
-  emits("openModalWithProducts");
+  emits('openModalWithProducts');
 }
 
 function mergeHandler() {
-  emits('submitMerge')
+  emits('submitMerge');
 }
 </script>

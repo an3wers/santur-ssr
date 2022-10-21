@@ -128,7 +128,7 @@ export const useDate = (date = new Date()) => {
     mm = '0' + mm;
   }
 
-  return dd + '.' + mm + '.' + yy;
+  return `${dd}.${mm}.${yy}`;
 };
 
 export const useDateFormatter = (

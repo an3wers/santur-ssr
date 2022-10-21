@@ -85,10 +85,9 @@ import InfoIcon20 from '@/components/UI/Icons/InfoIcon_20.vue';
 import AppBadge from '@/components/UI/Badge/AppBadge.vue';
 import Popper from 'vue3-popper';
 import AppCheckbox from '@/components/UI/Forms/AppCheckbox.vue';
-// import { useNounEnding } from "@/utils/helpers";
 import { useProfileStore } from '@/stores/profile';
 
-const profileStore = useProfileStore();
+// const profileStore = useProfileStore();
 
 const props = defineProps({
   isOrderMergeMode: {
