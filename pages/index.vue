@@ -38,6 +38,13 @@ import PageLoader from '@/components/loaders/PageLoader.vue';
 import { useHomeStore } from '@/stores/home';
 import { ref } from 'vue';
 
+const pageDescr =
+  'Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.';
+
+useHead({
+  meta: [{ name: 'description', content: pageDescr }],
+});
+
 const homeIsLoaded = ref(false);
 const homeStore = useHomeStore();
 

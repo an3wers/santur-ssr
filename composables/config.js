@@ -15,15 +15,15 @@ export const useMainMenu = () => {
       child: [
         {
           name: 'О Сантехкомплект-Урал',
-          url: '#',
+          url: '/about/company',
         },
         {
           name: 'Менеджмент компании',
-          url: '#',
+          url: '/about/company-managers',
         },
         {
           name: 'Информация для поставщиков',
-          url: '#',
+          url: '/about/informaciya-dlya-postavshhikov',
         },
         {
           name: 'Новости компании',
@@ -31,11 +31,11 @@ export const useMainMenu = () => {
         },
         {
           name: 'Объекты комплектации',
-          url: '#',
+          url: '/about/objects-category',
         },
         {
           name: 'Вакансии',
-          url: '#',
+          url: '/about/vacancy',
         },
       ],
     },
@@ -45,16 +45,16 @@ export const useMainMenu = () => {
       child: [
         {
           name: 'Доставка',
-          url: '#',
+          url: '/services/delivery',
         },
         {
           name: 'Проектирование и производство',
-          url: '#',
+          url: 'https://pro.santur.ru',
         },
-        {
-          name: 'Сервис и ремонт котлов',
-          url: '#',
-        },
+        // {
+        //   name: 'Сервис и ремонт котлов',
+        //   url: '#',
+        // },
       ],
     },
     {
@@ -63,19 +63,19 @@ export const useMainMenu = () => {
       child: [
         {
           name: 'Дилерские сертификаты',
-          url: '#',
+          url: '/clients/brands',
         },
         {
           name: 'Сотрудничество',
-          url: '#',
+          url: '/clients/cooperation',
         },
         {
           name: 'Отзывы о компании',
-          url: '#',
+          url: '/clients/reviews',
         },
         {
           name: 'Прием рекламаций',
-          url: '#',
+          url: '/clients/claim',
         },
       ],
     },
@@ -85,23 +85,23 @@ export const useMainMenu = () => {
       child: [
         {
           name: 'Мастер-Сантехник',
-          url: '#',
+          url: 'https://msantehnik.ru',
         },
         {
           name: 'Инженерный форум',
-          url: '#',
+          url: 'https://forum.santur.ru',
         },
         {
           name: 'Пожарное оборудование',
-          url: '#',
+          url: 'https://fire.santur.ru',
         },
         {
           name: 'Собственное производство',
-          url: '#',
+          url: 'https://pro.santur.ru',
         },
         {
           name: 'Наружные сети',
-          url: '#',
+          url: 'https://seti.santur.ru',
         },
       ],
     },

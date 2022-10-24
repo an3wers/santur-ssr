@@ -40,7 +40,7 @@
 // import {useHomeStore} from '@/stores/home'
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
 
-import 'vue3-carousel/dist/carousel.css';
+// import 'vue3-carousel/dist/carousel.css';
 import { ref } from 'vue';
 
 // const { getNarrowBanner } = useHomeStore()

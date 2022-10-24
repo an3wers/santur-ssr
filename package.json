@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.3",
+    "@nuxt/babel-preset-app": "^2.15.8",
     "pinia": "^2.0.23",
+    "postcss-preset-env": "^7.8.2",
     "sass": "^1.55.0",
     "vee-validate": "^4.7.0",
     "vue-the-mask": "^0.11.1",

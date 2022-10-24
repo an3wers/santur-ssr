@@ -35,6 +35,17 @@ import PageLoader from '@/components/loaders/PageLoader.vue';
 import OrderEditBar from '@/components/profile/orderhistory/order/orderEditBar.vue';
 import { useOrderStore } from '@/stores/order';
 
+const titleTail =
+  'Сантехкомплект-Урал — продажа сантехники оптов в Екатеринбурге и Нижнем Тагиле';
+const defaultTitle =
+  'Сантехкомплект-Урал — продажа сантехники оптов в Екатеринбурге и Нижнем Тагиле';
+
+useHead({
+  titleTemplate: (title) => {
+    return title ? `${title} | ${titleTail}` : `${defaultTitle}`;
+  },
+});
+
 const appMessageStore = useAppMessage();
 
 const isLoading = ref(false);

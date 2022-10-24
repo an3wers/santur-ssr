@@ -80,5 +80,5 @@ const breakpoints = {
 </script>
 
 <style scoped>
-@import '@/node_modules/vue3-carousel/dist/carousel.css';
+/* @import '@/node_modules/vue3-carousel/dist/carousel.css'; */
 </style>

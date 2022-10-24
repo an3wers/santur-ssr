@@ -153,7 +153,7 @@ const {
     .required('Введите ваш email')
     .email('Введите корректный email')
     .trim(),
-  { initialValue: profileStore.profile.email || '' }
+  { initialValue: profileStore?.profile?.email || '' }
 );
 const {
   value: companyName,
@@ -161,7 +161,7 @@ const {
   handleBlur: blurCompanyName,
   meta: metaCompanyName,
 } = useField('companyName', yup.string(), {
-  initialValue: profileStore.profile.subjInfo.name || '',
+  initialValue: profileStore?.profile?.subjInfo?.name || '',
 });
 
 const {
@@ -177,7 +177,7 @@ const {
     .max(MAX_LENGTH_INN, `Максимальная длина поля ${MAX_LENGTH_INN} символов`)
     .trim(),
   {
-    initialValue: profileStore.profile.subjInfo.inn || undefined,
+    initialValue: profileStore?.profile?.subjInfo?.inn || undefined,
   }
 );
 
@@ -224,23 +224,22 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
 
   */
 
+  const data = new FormData();
+
+  data.append('authorname', name);
+  data.append('subjectname', companyName);
+  data.append('subjectinn', companyInn);
+  data.append('email', email);
+  data.append('descr', comment);
+
   try {
     const res = await $fetch('https://isantur.ru/apissz/SendFeedback', {
       method: 'post',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      data: {
-        authorname: name,
-        subjectname: companyName,
-        subjectinn: companyInn,
-        email: email,
-        descr: comment,
-      },
+      body: data,
       credentials: 'include',
     });
 
-    if (res.data.success) {
+    if (res.success) {
       // console.log(res);
       resetForm();
       appMessage.openWithTimer(

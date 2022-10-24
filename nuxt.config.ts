@@ -13,6 +13,9 @@ export default defineNuxtConfig({
         },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       ],
+      htmlAttrs: {
+        lang: 'ru',
+      },
     },
   },
   modules: ['@pinia/nuxt'],
@@ -22,10 +25,16 @@ export default defineNuxtConfig({
         plugins: {
           tailwindcss: {},
           autoprefixer: {},
+          'postcss-preset-env': {},
         },
       },
     },
     transpile: ['vue3-popper'],
+    babel: {
+      // presets(env, [preset, options]) {
+      //   return [['@nuxt/babel-preset-app', options]];
+      // },
+    },
   },
   vite: {
     resolve: {

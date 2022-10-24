@@ -33,11 +33,11 @@
           <app-input
             type="tel"
             inputSize="md"
-            v-mask="'+# (###) ###-##-##'"
             inputType="border"
             placeholder="Введите ваш телефон"
             v-model="phone"
           />
+          <!-- v-mask="'+# (###) ###-##-##'" -->
           <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
         </div>
         <div class="input-group space-y-2">
@@ -136,6 +136,7 @@
         <div class="input-group">
           <input
             class=""
+            ref="refFileOne"
             id="file_input_one"
             type="file"
             @change="uploadFileHandler($event)"
@@ -144,6 +145,7 @@
         <div class="input-group">
           <input
             class=""
+            ref="refFileTwo"
             id="file_input_two"
             type="file"
             @change="uploadFileHandler($event)"
@@ -152,6 +154,7 @@
         <div class="input-group">
           <input
             class=""
+            ref="refFileThree"
             id="file_input_three"
             type="file"
             @change="uploadFileHandler($event)"
@@ -180,7 +183,6 @@ import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 import { useAppMessage } from '@/stores/appMessage';
-// import axios from "axios";
 
 const MIN_LENGTH_INN = 10;
 const MAX_LENGTH_INN = 12;
@@ -288,6 +290,10 @@ const formFiles = reactive({
   file_three: '',
 });
 
+const refFileOne = ref(null);
+const refFileTwo = ref(null);
+const refFileThree = ref(null);
+
 const getIsSubmit = computed(() => {
   return selectedReason.value !== 'default';
 });
@@ -347,26 +353,24 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     const res = await $fetch('https://isantur.ru/apissz/SendClaim', {
       method: 'post',
       credentials: 'include',
-      data: data,
+      body: data,
     });
-    // const res = await axios({
-    //   method: "post",
-    //   url: "https://isantur.ru/apissz/SendClaim",
-    //   withCredentials: true,
-    //   data: data,
-    // });
 
     // console.log(res);
 
-    if (res.data.success) {
+    if (res.success) {
       // Обнуляем данные
       resetForm();
       selectedReason.value = 'default';
+
+      // очищаю файлы
       formFiles.file_one = '';
       formFiles.file_two = '';
       formFiles.file_three = '';
 
-      // console.log("Forms", values);
+      refFileOne.value.value = '';
+      refFileTwo.value.value = '';
+      refFileThree.value.value = '';
 
       appMessageStore.open(
         'success',
@@ -378,7 +382,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     }
   } catch (error) {
     // console.log(error);
-    appMessageStore.open('error', error, 'error');
+    appMessageStore.open('error', error.message, 'error');
   } finally {
     formIsSubmiting.value = false;
   }
