@@ -99,11 +99,6 @@ function searchHandler(value) {
   mainStore.searchValueStore = value.trim();
 
   /*
-  apissz/quicksearch/?search=…
-  https://isantur.ru/apissz/setgoodsearch?tk_id=892833&search=труба
-  
-  */
-  /*
     Если произвольный запрос, то роутинг на страницу search
     Роутинг в категорию
   */
@@ -119,7 +114,7 @@ function searchHandler(value) {
     timer.value = setTimeout(async () => {
       try {
         const res = await useCustomFetch(
-          `apissz//quicksearch/?search=${mainStore.searchValueStore}`
+          `apissz/quicksearch/?search=${mainStore.searchValueStore}`
         );
 
         if (res.success) {

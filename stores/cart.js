@@ -155,6 +155,7 @@ export const useCartStore = defineStore('cart', {
       }
     },
     async cartConfirm(payMethod, comment, address, tip) {
+      const { API_BASE_URL } = useConfig();
       try {
         // CartToOrd/?pay=бн&cmnt=...&address=...
         // const response = await useCustomFetch(`apissz/CartToOrd/?pay=бн&cmnt=...&address=...`)
@@ -165,7 +166,7 @@ export const useCartStore = defineStore('cart', {
         */
         //  debugger
         const response = await fetch(
-          `https://isantur.ru/apissz/CartToOrd/?pay=${payMethod}&cmnt=${comment}&address=${address}&tip=${tip}`,
+          `${API_BASE_URL}apissz/CartToOrd/?pay=${payMethod}&cmnt=${comment}&address=${address}&tip=${tip}`,
           {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },

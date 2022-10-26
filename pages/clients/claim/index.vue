@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="post-wrapper">
-      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
-      <h1>Прием рекламаций</h1>
-      <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-12 xl:col-span-8">
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
+      <h1 class="text-center">Прием рекламаций</h1>
+      <div class="grid grid-cols-12">
+        <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11">
           <claim-form />
         </div>
       </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <app-breadcrumbs :breadcrumbs="breadcrumbs" />
+    <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
 
-    <h1>Контакты и реквизиты</h1>
+    <h1 class="text-center">Контакты и реквизиты</h1>
 
     <div class="grid gap-6 grid-cols-12">
       <div class="col-span-6">

@@ -184,6 +184,7 @@ import * as yup from 'yup';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 import { useAppMessage } from '@/stores/appMessage';
 
+const { API_BASE_URL } = useConfig();
 const MIN_LENGTH_INN = 10;
 const MAX_LENGTH_INN = 12;
 
@@ -350,7 +351,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
 
   try {
     formIsSubmiting.value = true;
-    const res = await $fetch('https://isantur.ru/apissz/SendClaim', {
+    const res = await $fetch(`${API_BASE_URL}apissz/SendClaim`, {
       method: 'post',
       credentials: 'include',
       body: data,

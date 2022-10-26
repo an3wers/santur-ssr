@@ -31,6 +31,7 @@ export const useCategoryStore = defineStore('category', {
     async setCategory(params) {
       const mainStore = useMainStore();
       const authStore = useAuthStore();
+      const { API_BASE_URL } = useConfig();
 
       const request = {
         method: 'GET',
@@ -45,9 +46,8 @@ export const useCategoryStore = defineStore('category', {
       }
 
       try {
-        // const response = await useCustomFetch(`apissz/setgoodsearch/${params}`);
         const resp = await fetch(
-          `https://isantur.ru/apissz/setgoodsearch/${params}`,
+          `${API_BASE_URL}apissz/setgoodsearch/${params}`,
           request
         );
         const response = await resp.json();

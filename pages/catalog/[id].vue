@@ -98,17 +98,11 @@ const currentCat = computed(() => {
   const tmpObj = catalogStore.getProductCatalog.find(
     (el) => el.id === +route.params.id
   );
-
   if (tmpObj) {
     return tmpObj;
   } else {
-    // console.log(404);
-    // router.replace({ path: '/404' });
-    // navigateTo('/404');
     return undefined;
   }
-
-  // return
 });
 
 const getIsTn = computed(() => {
@@ -131,7 +125,6 @@ const getCatalogTitle = computed(() => {
 
 const getParams = computed(() => {
   if (currentCat.value) {
-    //   console.log(currentCat.value);
     if (currentCat.value.parent_id === 0) {
       // return `?tn_id=${currentCat.value.id}&tk_id=0`
       // return `?tn_id=${currentCat.value.id}`;
@@ -208,12 +201,8 @@ async function loadCategory() {
   if (getParams.value) {
     await categoryStore.setCategory(getParams.value);
   } else {
-    // router.replace({ path: '/404' });
     navigateTo({ path: '/404' });
   }
-
-  //   console.log(route.query)
-  //   console.log(Object.keys(route.query))
 
   if (
     Object.keys(route.query).filter(
@@ -398,8 +387,6 @@ async function handleResetPrice(name, type) {
 }
 
 async function handleChangeSort(value) {
-  // console.log('Сортировка в родительском компоненте: ', value)
-
   categoryIsUpdated.value = false;
   page.value = 1;
 

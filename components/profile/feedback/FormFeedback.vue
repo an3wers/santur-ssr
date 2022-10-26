@@ -111,7 +111,7 @@ import * as yup from 'yup';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
-
+const { API_BASE_URL } = useConfig();
 const profileStore = useProfileStore();
 const appMessage = useAppMessage();
 
@@ -233,7 +233,7 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
   data.append('descr', comment);
 
   try {
-    const res = await $fetch('https://isantur.ru/apissz/SendFeedback', {
+    const res = await $fetch(`${API_BASE_URL}apissz/SendFeedback`, {
       method: 'post',
       body: data,
       credentials: 'include',

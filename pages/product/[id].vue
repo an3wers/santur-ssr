@@ -300,6 +300,8 @@ const tabMenuSections = ref([
   { name: 'Документы', alias: 'documents', enable: false },
 ]);
 
+await setProduct();
+
 const timer = ref(true);
 
 async function changeCountHandler(param) {
@@ -404,7 +406,6 @@ async function setProductValue() {
 async function loadProduct(id) {
   try {
     const response = await useCustomFetch(`apissz/GetGoodCart/?gcode=${id}`);
-
     if (response.success == true) {
       product.value = response.data;
       selectedValue.value = response.data.salekrat; // ?
@@ -421,7 +422,6 @@ async function loadProduct(id) {
       );
     }
   } catch (error) {
-    console.log(error);
     appMessageStore.open('error', error.message, 'error');
   }
 }
@@ -448,22 +448,26 @@ async function setProduct() {
   productIsLoaded.value = true;
 }
 
-await setProduct();
-
 // Делаю хлебные крошки
 const getBreadcrumbsProduct = computed(() => {
-  const tnName = catalogStore.productCatalog.find(
-    (el) => el.id === product.value.tn_id
-  );
-  const tkName = catalogStore.productCatalog.find(
-    (el) => el.id === product.value.tk_id
-  );
-  return [
-    { name: 'Каталог', url: '/catalog' },
-    { name: `${tnName.name}`, url: `/catalog/${product.value.tn_id}` }, // направление
-    { name: `${tkName.name}`, url: `/catalog/${product.value.tk_id}` }, // категория
-    {},
-  ];
+  if (product.value?.code) {
+    const tnName = catalogStore.productCatalog.find(
+      (el) => el.id === product.value.tn_id
+    );
+    const tkName = catalogStore.productCatalog.find(
+      (el) => el.id === product.value.tk_id
+    );
+    return [
+      { name: 'Каталог', url: '/catalog' },
+      { name: `${tnName.name}`, url: `/catalog/${product.value.tn_id}` }, // направление
+      { name: `${tkName.name}`, url: `/catalog/${product.value.tk_id}` }, // категория
+      {},
+    ];
+  } else {
+    // обрабатываю некорректный роут
+    navigateTo({ path: '/404' });
+    return undefined;
+  }
 });
 
 // Получаю 6 характеристик

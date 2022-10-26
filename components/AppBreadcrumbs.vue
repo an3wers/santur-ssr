@@ -1,5 +1,9 @@
 <template>
-  <nav class="flex" aria-label="Breadcrumb">
+  <nav
+    class="flex"
+    :class="position === 'center' ? 'justify-center' : ''"
+    aria-label="Breadcrumb"
+  >
     <ol class="inline-flex mb-4 items-center space-x-3 relative">
       <!-- Статичный первый элемент -->
       <li class="inline-flex items-center">
@@ -42,6 +46,10 @@ const props = defineProps({
   breadcrumbs: {
     type: Array,
     default: [],
+  },
+  position: {
+    type: String,
+    default: 'left', // center
   },
 });
 

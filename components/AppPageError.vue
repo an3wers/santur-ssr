@@ -8,5 +8,5 @@
 </template>
 
 <script setup>
-import AppButton from "../components/UI/Buttons/AppButton.vue";
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
 </script>

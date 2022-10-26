@@ -78,6 +78,7 @@ import AppModal from '@/components/modal/AppModal.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 import orderProductsList from '@/components/profile/orderhistory/orderProductsList.vue';
 
+const { API_BASE_URL } = useConfig();
 const selectedTimeRange = ref('all');
 
 const isModalProductsList = ref(false);
@@ -142,9 +143,7 @@ async function loadOrders(params) {
     .join('&');
 
   try {
-    // const response = await useCustomFetch('apissz/GetOrders/', 'GET', query)
-    // const response = await useCustomFetch('apissz/GetOrders/?' + query)
-    const resp = await fetch('https://isantur.ru/apissz/GetOrders/?' + query, {
+    const resp = await fetch(`${API_BASE_URL}apissz/GetOrders/?` + query, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

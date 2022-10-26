@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <app-breadcrumbs :breadcrumbs="breadcrumbs" />
-    <h1>Новости</h1>
+    <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
+    <h1 class="text-center">Новости компании</h1>
     <!-- Перебор новостей + постраничная навигация -->
 
-    <div v-if="!isError && isNewsLoaded" class="grid gap-6 grid-cols-12">
-      <div class="col-span-12 xl:col-span-8 relative">
+    <div v-if="!isError && isNewsLoaded" class="grid grid-cols-12">
+      <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11 relative">
         <div v-if="news.length" class="space-y-10 mb-6">
           <news-preview v-for="item in news" :key="item.ID" :news="item" />
         </div>
@@ -33,8 +33,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-// import { useCustomFetch } from "@/utils/fetch";
-// import axios from "axios";
 import NewsPreview from '@/components/news/NewsPreview.vue';
 import AppPageError from '@/components/AppPageError.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
@@ -42,6 +40,7 @@ import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import { useAppMessage } from '@/stores/appMessage';
 
+const { API_ADMIN } = useConfig();
 const appMessageStore = useAppMessage();
 const news = ref([]);
 const isError = ref(false);
@@ -68,25 +67,14 @@ const setNewsParams = {
 };
 
 async function loadNews(page) {
-  const urls = [
-    'https://10.10.10.77:7168/api/post/news',
-    'http://10.10.10.77:5168/api/post/news',
-  ];
+  const urls = [`${API_ADMIN}api/post/news`, `${API_ADMIN}api/post/news`];
 
   try {
-    // isNewsLoaded.value = false;
     const res = await $fetch(urls[1], {
       method: 'post',
       credentials: 'include',
       body: { page: page, search: '', ...setNewsParams },
     });
-    // const res = await axios({
-    //   url: urls[1],
-    //   method: "POST",
-    //   withCredentials: true,
-    //   data: { page: page, search: "", ...setNewsParams },
-    // });
-    // console.log("NEWS", res);
     isError.value = false;
     news.value = res.items;
     countPages.value = res.all_pages_count;
