@@ -3,7 +3,7 @@
     <client-only>
       <h1>{{ title }}</h1>
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-3">
+        <div class="col-span-12 lg:col-span-3 order-2 lg:order-1">
           <div class="space-y-6">
             <profile-menu :menu="profileStore.menu" />
             <profile-ta
@@ -11,7 +11,7 @@
             />
           </div>
         </div>
-        <div class="col-span-9">
+        <div class="col-span-12 lg:col-span-9 order-1 lg:order-2">
           <!-- render body -->
           <slot :key="$route.fullPath"></slot>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="p-6 border border-gray-300 rounded-xl space-y-4">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="input-group space-y-2">
         <label for="userName">Имя и Фамилия</label>
         <app-input
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="space-x-4">
+    <div class="space-x-0 sm:space-x-4 space-y-2 sm:space-y-0">
       <app-button
         @click="changeProfileHandler"
         :disabled="!getIsBtnChangeProfile"
@@ -57,7 +57,9 @@
         <btn-spinner v-if="!userInfoIsUpdated" />
         Сохранить изменения
       </app-button>
-      <span v-if="!getIsBtnChangeProfile" class="text-sm text-gray-500"
+      <span
+        v-if="!getIsBtnChangeProfile"
+        class="text-sm text-gray-500 block sm:inline-block"
         >Изменения сохранены</span
       >
     </div>

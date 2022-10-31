@@ -21,7 +21,7 @@
               <close-icon-24 />
             </app-button-icon>
           </div>
-          <div>
+          <div class="py-2">
             <mobile-menu-item
               v-for="item in getMenu"
               :key="item.name"

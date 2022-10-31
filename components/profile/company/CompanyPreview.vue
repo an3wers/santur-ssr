@@ -18,7 +18,7 @@
           <select
             v-model="selectedContarct"
             aria-label="selectContract"
-            class="w-48 rounded-md border form-select bg-slate-150 hover:bg-slate-200 border-transparent focus:border-primary focus:bg-white focus:ring focus:ring-blue-500 focus:ring-opacity-20 py-2 text-base px-3 leading-5"
+            class="w-40 sm:w-48 rounded-md border form-select bg-slate-150 hover:bg-slate-200 border-transparent focus:border-primary focus:bg-white focus:ring focus:ring-blue-500 focus:ring-opacity-20 py-2 text-base px-3 leading-5"
             v-if="profileStore.getIsActiveContracts.length"
           >
             <option

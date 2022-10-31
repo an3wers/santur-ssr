@@ -1,18 +1,18 @@
 <template>
   <div class="border border-gray-300 rounded-xl p-6">
     <div class="text-2xl font-bold mb-5">Документы</div>
-
     <div class="divide-y divide-gray-300">
       <div class="py-4 first:pt-0 last:pb-0">
         <div class="text-lg font-bold mb-3">Закрывающие документы</div>
-
         <form @submit.prevent="documentRequestHandler" class="space-y-4">
           <!-- switch -->
           <button-group-wrapper @onClickBtnGroup="btnGroupHandler">
             <button-group :title="`${documentRequestMethods[0]['title']}`">
-              <div class="input-group w-96 space-y-2">
+              <div class="input-group w-auto sm:w-96 space-y-2">
                 <label for="documentRange">Выбрать период</label>
-                <div class="flex space-x-2 items-center">
+                <div
+                  class="flex flex-col sm:flex-row space-y-1 sm:space-y-0 space-x-0 sm:space-x-2 items-center"
+                >
                   <app-input
                     type="date"
                     v-model="documents.rangeStart"
@@ -28,7 +28,7 @@
               </div>
             </button-group>
             <button-group :title="`${documentRequestMethods[1]['title']}`">
-              <div class="input-group w-96 space-y-2">
+              <div class="input-group w-auto sm:w-96 space-y-2">
                 <label>Номер заказа или счета</label>
                 <app-input
                   type="text"
@@ -49,9 +49,11 @@
       <div class="py-4 first:pt-0 last:pb-0">
         <div class="text-lg font-bold mb-3">Акт сверки</div>
         <form @submit.prevent="actsRequestHandler" class="space-y-4">
-          <div class="input-group w-96 space-y-2">
+          <div class="input-group w-auto sm:w-96 space-y-2">
             <label for="ActRange">Выбрать период</label>
-            <div class="flex space-x-2 items-center">
+            <div
+              class="flex flex-col sm:flex-row space-y-1 sm:space-y-0 space-x-0 sm:space-x-2 items-center"
+            >
               <app-input
                 type="date"
                 v-model="acts.rangeStart"

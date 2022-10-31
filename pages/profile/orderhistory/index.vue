@@ -3,7 +3,7 @@
     <ProfilePageWrapper title="История заказов">
       <div
         v-if="authStore.getIsAuth && profileStore.profile.name !== 'Гость'"
-        class="space-y-6"
+        class="space-y-6 w-[767.98px] md:w-auto overflow-x-auto"
       >
         <!-- 
               Фильтры
