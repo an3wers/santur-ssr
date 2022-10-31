@@ -113,3 +113,10 @@
     }
   }
 }
+
+.mobile-menu {
+  a.router-link-active,
+  a.router-link-exact-active {
+    color: #1976d2;
+  }
+}

@@ -152,6 +152,14 @@
 
 @import 'vue3-carousel/dist/carousel.css';
 
+.carousel-cards .carousel__slide {
+  padding: 12px 12px !important;
+}
+
+.carousel__pagination {
+  margin: 8px 0 0 !important;
+}
+
 .carousel-cards {
   text-align: left !important;
   margin-left: -12px;
@@ -216,5 +224,11 @@
   }
   .carousel__next {
     // right: 12px;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .carousel-cards__navigation {
+    display: none;
   }
 }

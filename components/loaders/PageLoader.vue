@@ -3,7 +3,8 @@
     <div class="app-loader relative z-20 py-40 text-center">
       <svg
         role="status"
-        class="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary"
+        class="inline mr-2 text-gray-200 animate-spin fill-primary"
+        style="width: 2.5rem; height: 2.5rem"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +23,4 @@
   </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>

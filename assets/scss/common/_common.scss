@@ -1,13 +1,13 @@
-@import "./header.scss";
-@import "./buttons.scss";
-@import "./home.scss";
-@import "./catatog.scss";
-@import "./footer.scss";
-@import "./product.scss";
-@import "./profile.scss";
-@import "./carousel.scss";
-@import "./badges.scss";
-@import "./popper.scss";
+@import './header.scss';
+@import './buttons.scss';
+@import './home.scss';
+@import './catatog.scss';
+@import './footer.scss';
+@import './product.scss';
+@import './profile.scss';
+@import './carousel.scss';
+@import './badges.scss';
+@import './popper.scss';
 // @import '../../../node_modules/vue3-carousel/dist/carousel.css';
 
 /* GLOBAL*/
@@ -73,7 +73,7 @@ body.modal-open {
 }
 
 .container {
-  min-width: 1024px;
+  // min-width: 1024px;
 }
 
 .img-responsive {
@@ -171,7 +171,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -186,10 +186,10 @@ input[type="number"] {
 
 // scrollbar
 
-input[type="radio"] {
+input[type='radio'] {
   color: #1976d2;
 }
-input[type="radio"]:focus {
+input[type='radio']:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.2);

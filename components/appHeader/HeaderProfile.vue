@@ -3,13 +3,13 @@
     <button
       type="button"
       @click="onOpen"
-      class="py-1 px-3 relative flex items-center rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 nav__link-99"
+      class="py-2 px-2 lg:py-1 lg:px-3 relative flex items-center rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 nav__link-99"
     >
-      <div class="text-right nav__link-99 block">
+      <div class="hidden lg:block text-right nav__link-99">
         <div>Личный кабинет</div>
         <div class="text-xs">{{ authStore.getUserNameForHeader }}</div>
       </div>
-      <account-icon-24 class="ml-2" />
+      <account-icon-24 class="ml-0 lg:ml-2" />
       <span
         v-if="authStore.user.id"
         class="absolute w-2 h-2 rounded-full bg-red-500 right-2 top-2"
@@ -62,7 +62,7 @@
           <button
             v-if="!authStore.user.id"
             @click="onClickAuthHandler"
-            class="flex text-left w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150"
+            class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
           >
             <!-- Content -->
             Войти
@@ -71,7 +71,7 @@
         <template #footer>
           <button
             @click="onClickLogoutHandler"
-            class="flex text-left w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150"
+            class="flex text-left w-full text-[0.9375rem] text-gray-700 px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
             v-if="authStore.user.id"
           >
             <!-- Content -->

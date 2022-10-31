@@ -2,7 +2,7 @@
   <div v-if="homeIsLoaded" class="home-page -mt-5">
     <div class="home-page -mt-5">
       <!-- <home-body /> -->
-      <div class="section_grey pt-10 pb-20 bg-slate-150">
+      <div class="section_grey pt-8 pb-16 bg-slate-150">
         <div class="container">
           <div>
             <home-slider />
@@ -12,10 +12,10 @@
           </div>
         </div>
       </div>
-      <div class="section pt-20">
+      <div class="section pt-16">
         <div class="container">
           <sale-products />
-          <bottom-banner />
+          <!-- <bottom-banner /> -->
           <news v-if="homeStore.news.length" />
         </div>
       </div>

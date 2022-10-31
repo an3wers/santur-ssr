@@ -98,12 +98,30 @@ const features = ref([
 ]);
 
 const settings = {
-  itemsToShow: 2.5,
+  itemsToShow: 1.25,
   snapAlign: 'start',
 };
 
 const breakpoints = {
-  1296: {
+  640: {
+    itemsToShow: 1.5,
+    snapAlign: 'start',
+  },
+
+  768: {
+    itemsToShow: 2.25,
+    snapAlign: 'start',
+  },
+
+  1024: {
+    itemsToShow: 2.5,
+    snapAlign: 'start',
+  },
+  1280: {
+    itemsToShow: 3.5,
+    snapAlign: 'start',
+  },
+  1536: {
     itemsToShow: 3.5,
     snapAlign: 'start',
   },

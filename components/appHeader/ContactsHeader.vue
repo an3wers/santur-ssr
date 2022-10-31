@@ -1,5 +1,7 @@
 <template>
-  <div class="header__contacts flex items-center space-x-4 header-contacts">
+  <div
+    class="hidden lg:flex header__contacts items-center space-x-4 header-contacts"
+  >
     <span class="font-semibold"
       ><a class="no-underline text-gray-900" :href="`tel:${PHONE_SITE}`">{{
         phoneFormatter(PHONE_SITE)

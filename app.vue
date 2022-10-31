@@ -1,7 +1,7 @@
 <template>
   <div class="default-layout flex flex-col min-h-screen">
     <the-header />
-    <div class="page-wrapper grow mt-5 mb-20">
+    <div class="page-wrapper grow mt-5 mb-16">
       <NuxtPage :key="$route.fullPath"></NuxtPage>
       <PageLoader v-if="isLoading" />
     </div>

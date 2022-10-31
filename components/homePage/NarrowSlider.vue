@@ -1,5 +1,5 @@
 <template>
-  <div class="narrow-slider mt-16">
+  <div class="narrow-slider mt-10">
     <Carousel
       class="carousel-cards"
       :settings="settings"
@@ -12,7 +12,7 @@
               <img
                 :src="slide.image"
                 alt=""
-                class="w-full h-full object-cover object-center rounded-2xl"
+                class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
               />
             </a>
           </div>
@@ -64,16 +64,16 @@ const sliders = ref([
 ]);
 
 const settings = {
-  itemsToShow: 1.3,
+  itemsToShow: 1,
   snapAlign: 'start',
   autoplay: 7000,
   wrapAround: true,
 };
 
 const breakpoints = {
-  // 1296: {
-  //     itemsToShow: 3.5,
-  //      snapAlign: 'start',
-  // }
+  768: {
+    itemsToShow: 1.3,
+    snapAlign: 'start',
+  },
 };
 </script>

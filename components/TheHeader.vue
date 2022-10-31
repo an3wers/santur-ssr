@@ -8,46 +8,77 @@
       <div class="header-info items-center flex justify-between">
         <!-- Логотип -->
         <div class="header__logo">
-          <NuxtLink to="/"
-            ><img src="~/assets/images/logo-santur.svg" alt=""
-          /></NuxtLink>
+          <NuxtLink class="block" to="/">
+            <img
+              class="hidden md:inline-block"
+              src="~/assets/images/logo-santur.svg"
+              alt="logo"
+            />
+            <img
+              class="inline-block md:hidden w-12"
+              src="~/assets/images/logo_santur_mini.svg"
+              alt="logo-mini"
+            />
+          </NuxtLink>
         </div>
         <!-- Навигация -->
-        <div class="header__nav">
+        <div class="hidden lg:block header__nav">
           <nav-header />
         </div>
         <!-- Контакты -->
         <contacts-header />
+        <!-- mobile-menu -->
+        <div class="flex lg:hidden space-x-2">
+          <mobile-menu />
+          <header-profile />
+          <NuxtLink
+            to="/cart"
+            class="no-underline text-gray-900 hover:text-gray-900 py-2 px-2 relative inline-flex items-center justify-end rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20"
+          >
+            <cart-icon-24 />
+            <span
+              v-if="cartStore.cartCount > 0"
+              class="absolute w-2 h-2 rounded-full bg-red-500 right-2 top-2"
+            ></span>
+          </NuxtLink>
+        </div>
+
+        <!-- # mobile-menu -->
       </div>
       <!-- # Топ -->
       <!-- START Каталог, поиск, кнопки -->
-      <div class="header-main mt-4 flex space-x-6">
+      <div class="header-main mt-4 flex space-x-0 lg:space-x-6">
         <!-- Каталог -->
-        <div class="header__catalog">
+        <div class="hidden lg:block header__catalog">
           <catalog-header />
-          <!-- Дропдаун каталога -->
-
           <catalog-dropdown v-if="catalogStore.getIsMenu" />
         </div>
+        <!-- Mobile button catalog -->
+        <div class="block lg:hidden !ml-0 !mr-4">
+          <app-button @click="$router.push({ path: '/catalog' })"
+            >Каталог</app-button
+          >
+        </div>
+        <!-- # Mobile button catalog -->
         <!-- Поиск -->
-
         <search-header />
-
         <!-- Кнопки -->
         <div class="flex space-x-3">
           <!-- component Profile -->
-          <header-profile />
+          <div class="hidden lg:block">
+            <header-profile />
+          </div>
 
-          <div class="header__cart">
+          <div class="hidden lg:block header__cart">
             <NuxtLink
-              class="no-underline w-36 text-gray-900 hover:text-gray-900 py-1 px-3 relative inline-flex items-center justify-end rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20"
+              class="no-underline w-auto lg:w-36 text-gray-900 hover:text-gray-900 py-1.5 px-2 lg:py-1 lg:px-3 relative inline-flex items-center justify-end rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20"
               to="/cart"
             >
               <div class="text-right">
-                <div class="">Корзина</div>
+                <div>Корзина</div>
                 <div class="text-xs">{{ cartStore.cartSum }} ₽</div>
               </div>
-              <cart-icon-24 class="ml-2" />
+              <cart-icon-24 class="ml-0 lg:ml-2" />
               <!-- Счетчик корзина -->
               <span v-if="cartStore.cartCount > 0" class="cart-badge">{{
                 cartStore.cartCount < 99 ? cartStore.cartCount : '99+'
@@ -93,6 +124,8 @@ import { useCartStore } from '@/stores/cart';
 import AppModal from '@/components/modal/AppModal.vue';
 import { useAuthStore } from '@/stores/auth';
 import HeaderProfile from '@/components/appHeader/HeaderProfile.vue';
+import MobileMenu from '@/components/appHeader/MobileMenu.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();

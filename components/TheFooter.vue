@@ -1,9 +1,9 @@
 <template>
-  <footer class="bg-slate-150 pt-20 pb-10">
+  <footer class="bg-slate-150 pt-16 pb-10">
     <div class="container divide-y divide-gray-300 space-y-10">
       <!-- Section one -->
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-3">
+        <div class="col-span-12 md:col-span-6 lg:col-span-3">
           <div class="space-y-6">
             <div><img src="~/assets/images/logo-santur.svg" /></div>
             <div class="text-sm">
@@ -80,7 +80,7 @@
             </div>
           </div>
         </div>
-        <div class="col-span-3">
+        <div class="col-span-6 lg:col-span-3">
           <div>
             <span class="font-semibold mb-4 block">Наши ресурсы</span>
             <ul class="text-sm space-y-2">
@@ -112,7 +112,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-span-3">
+        <div class="col-span-6 lg:col-span-3">
           <div>
             <span class="font-semibold mb-4 block">О компании</span>
             <ul class="text-sm space-y-2">
@@ -154,7 +154,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-span-3">
+        <div class="col-span-6 lg:col-span-3">
           <div class="mb-4">
             <span class="font-semibold mb-4 block">Сервис и услуги</span>
             <ul class="text-sm space-y-2">
@@ -196,7 +196,9 @@
       <!-- Section two -->
       <div>
         <div class="flex items-center justify-between mt-10">
-          <div class="flex items-center space-x-4 order-2">
+          <div
+            class="flex flex-col md:flex-row items-center space-x-0 space-y-2 md:space-y-0 md:space-x-4 order-2"
+          >
             <NuxtLink
               to="https://apps.apple.com/ru/app/%D1%81%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%82-%D1%83%D1%80%D0%B0%D0%BB/id1577478673"
               ><img

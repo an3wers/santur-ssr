@@ -11,7 +11,7 @@
         </div>
         <NuxtLink
           :to="`/about/news/${news.ID}`"
-          class="hover:text-primary no-underline text-gray-900 text-lg font-medium"
+          class="hover:text-primary no-underline text-gray-900 text-base lg:text-lg font-medium"
           >{{ news.post_title }}
         </NuxtLink>
       </div>

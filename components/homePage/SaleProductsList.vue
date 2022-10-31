@@ -39,11 +39,19 @@ const profileStore = useProfileStore();
 // qty_incart
 
 const settings = {
-  itemsToShow: 4,
+  itemsToShow: 1.5,
   snapAlign: 'start',
 };
 
 const breakpoints = {
+  640: {
+    itemsToShow: 2,
+    snapAlign: 'start',
+  },
+  768: {
+    itemsToShow: 3,
+    snapAlign: 'start',
+  },
   1024: {
     itemsToShow: 4,
     snapAlign: 'start',

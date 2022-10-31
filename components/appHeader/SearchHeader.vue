@@ -4,7 +4,7 @@
       <input
         :value="$route.query.search || mainStore.searchValueStore"
         @input="searchHandler($event.target.value)"
-        class="pl-4 pr-10 py-2.5 text-lg w-full rounded-md border form-input bg-transparent border-gray-300 focus:border-primary focus:ring focus:ring-blue-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500"
+        class="pl-2 pr-6 py-2 lg:pl-4 lg:pr-10 lg:py-2.5 text-base lg:text-lg leading-5 w-full rounded-md border form-input bg-transparent border-gray-300 focus:border-primary focus:ring focus:ring-blue-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500"
         type="text"
         placeholder="Найти товары"
         @focus="inputFocusHandler"
@@ -13,12 +13,20 @@
       <span
         v-if="isClearBtn"
         @click="clearSearchHandler"
-        class="absolute right-[64px] top-[13px] cursor-pointer"
+        class="absolute right-[40px] top-[7.5px] lg:right-[64px] lg:top-[13px] cursor-pointer"
       >
         <close-icon-24 color="#6b7280" />
       </span>
-      <app-button-icon type="submit" class="absolute search-icon"
+      <app-button-icon
+        type="submit"
+        class="hidden lg:block absolute search-icon"
         ><search-icon-24 color="#ffffff"
+      /></app-button-icon>
+      <app-button-icon
+        type="submit"
+        btnSize="xs"
+        class="block lg:hidden absolute search-icon !top-[4px]"
+        ><search-icon-20 color="#ffffff"
       /></app-button-icon>
     </form>
     <!-- search results -->
@@ -46,6 +54,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import SearchIcon24 from '@/components/UI/Icons/SearchIcon_24.vue';
+import SearchIcon20 from '@/components/UI/Icons/SearchIcon_20.vue';
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 import CloseIcon24 from '@/components/UI/Icons/CloseIcon_24.vue';
 // import { useCustomFetch } from "@/utils/fetch";

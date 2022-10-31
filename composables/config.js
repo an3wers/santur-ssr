@@ -109,6 +109,7 @@ export const useMainMenu = () => {
     {
       name: 'Контакты',
       url: '/contact',
+      child: [],
     },
   ];
 };

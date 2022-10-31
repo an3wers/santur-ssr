@@ -1,5 +1,5 @@
 <template>
-  <div class="home-slider mb-14">
+  <div class="home-slider mb-10">
     <div class="home-slider__body">
       <Carousel
         class="carousel-cards"
@@ -13,7 +13,7 @@
                 <img
                   :src="slide.image"
                   alt=""
-                  class="w-full h-full object-cover object-center rounded-2xl"
+                  class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
                 />
               </NuxtLink>
             </div>

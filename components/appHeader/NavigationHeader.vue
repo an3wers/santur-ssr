@@ -28,7 +28,7 @@ import DropDown from '@/components/UI/DropDown/DropDown.vue';
 const mainMenu = useMainMenu(); // []
 
 const getMenuWithChild = computed(() => {
-  return mainMenu.filter((el) => el.child);
+  return mainMenu.filter((el) => el.child.length > 0);
 });
 
 const getMenuContact = computed(() => {
