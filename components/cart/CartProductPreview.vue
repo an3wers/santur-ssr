@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-start space-x-4 py-4 first:pt-0 last:pb-0">
+  <div
+    class="flex flex-col sm:flex-row items-start space-y-2 sm:space-y-0 space-x-0 sm:space-x-4 py-4 first:pt-0 last:pb-0"
+  >
     <div class="shrink-0 w-24 h-24">
       <!-- Изображение -->
       <img
@@ -52,7 +54,7 @@
         </button>
       </div>
     </div>
-    <div class="shrink-0 w-52 flex flex-col text-right">
+    <div class="shrink-0 w-52 flex flex-col text-left sm:text-right">
       <!-- Цена и т.д. -->
       <div>
         <span class="font-semibold text-lg">{{ product.summs }} ₽</span>
@@ -63,7 +65,7 @@
         >
       </div>
 
-      <div class="relative flex items-center w-40 my-3 ml-auto">
+      <div class="relative flex items-center w-40 my-3 ml-0 sm:ml-auto">
         <app-button-icon
           :disabled="!isRemoveBtn"
           btnType="light"

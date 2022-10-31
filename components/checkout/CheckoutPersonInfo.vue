@@ -23,7 +23,9 @@
     </section>
     <section class="border border-gray-300 rounded-xl p-6">
       <h2>Способ получения</h2>
-      <div class="flex items-stretch space-x-6">
+      <div
+        class="flex flex-col sm:flex-row items-stretch space-y-6 sm:space-y-0 space-x-0 sm:space-x-6"
+      >
         <div
           class="p-6 border rounded-xl flex flex-col basis-1/2"
           :class="[
@@ -135,11 +137,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import AppInput from "@/components/UI/Forms/AppInput.vue";
-import AppTextarea from "@/components/UI/Forms/AppTextarea.vue";
-import { useProfileStore } from "@/stores/profile";
+import { ref, computed } from 'vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import AppTextarea from '@/components/UI/Forms/AppTextarea.vue';
+import { useProfileStore } from '@/stores/profile';
 
 const { profile } = useProfileStore();
 
@@ -156,9 +158,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
-  "update:getMethod",
-  "update:deliveryAddress",
-  "update:comment",
+  'update:getMethod',
+  'update:deliveryAddress',
+  'update:comment',
 ]);
 
 const methods = computed({
@@ -166,7 +168,7 @@ const methods = computed({
     return props.getMethod;
   },
   set(value) {
-    emit("update:getMethod", value);
+    emit('update:getMethod', value);
   },
 });
 
@@ -175,11 +177,11 @@ const radioSelf = ref(null);
 const radioDelivery = ref(null);
 
 function getMethodHandler(method) {
-  if (method === "self") {
+  if (method === 'self') {
     radioSelf.value.focus();
-  } else if (method === "delivery") {
+  } else if (method === 'delivery') {
     radioDelivery.value.focus();
   }
-  emit("update:getMethod", method);
+  emit('update:getMethod', method);
 }
 </script>

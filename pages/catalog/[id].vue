@@ -14,7 +14,10 @@
 
       <app-page-error v-if="mainStore.pageError" />
 
-      <div v-else class="grid grid-cols-12 gap-6">
+      <div
+        v-else
+        class="grid grid-cols-12 gap-6 min-w-[1024px] overflow-x-auto"
+      >
         <div class="col-span-4 xl:col-span-3">
           <div v-if="getIsTn">
             <catalog-subcategory :subcategory="getSubcatgory" />

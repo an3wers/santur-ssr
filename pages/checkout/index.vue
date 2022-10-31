@@ -8,7 +8,9 @@
           v-if="cartStore.cartItems.length === 0 || !authStore.getIsAuth"
         />
         <div v-else class="grid grid-cols-12 gap-6">
-          <div class="col-start-1 col-end-9 space-y-6">
+          <div
+            class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-9 space-y-6"
+          >
             <h1 v-if="!cartStore.cartId">Оформление заказа</h1>
             <h1 v-else>Сохранение заказа</h1>
 
@@ -18,7 +20,9 @@
               v-model:comment="orderComment"
             />
           </div>
-          <div class="col-start-9 col-end-13 space-y-6">
+          <div
+            class="col-start-1 col-end-13 lg:col-start-9 lg:col-end-13 space-y-6"
+          >
             <checkout-info
               :isConfirm="getOrderIsConfirm"
               :btnProcessing="btnProcessing"

@@ -8,7 +8,9 @@
         class="grid grid-cols-12 gap-6"
         v-if="cartIsLoaded && cartStore.cartItems.length"
       >
-        <div class="col-start-1 col-end-9 space-y-6">
+        <div
+          class="col-start-1 col-end-13 lg:col-start-1 lg:col-end-9 space-y-6"
+        >
           <div class="flex justify-between items-baseline">
             <h1>Корзина</h1>
             <app-button
@@ -39,7 +41,9 @@
             <cart-product-free-form />
           </div>
         </div>
-        <div class="col-start-9 col-end-13 space-y-6">
+        <div
+          class="col-start-1 col-end-13 lg:col-start-9 lg:col-end-13 space-y-6"
+        >
           <!-- инофрмация по заказу -->
           <cart-info />
         </div>

@@ -28,7 +28,7 @@
             v-model.trim="name"
           />
         </div>
-        <div class="input-group space-y-2">
+        <div class="input-group col-span-2 md:col-span-1 space-y-2">
           <label>Телефон</label>
           <app-input
             type="tel"
@@ -40,7 +40,7 @@
           <!-- v-mask="'+# (###) ###-##-##'" -->
           <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
         </div>
-        <div class="input-group space-y-2">
+        <div class="input-group col-span-2 md:col-span-1 space-y-2">
           <label>Email*</label>
           <app-input
             type="text"
@@ -59,7 +59,7 @@
             {{ errorEmail }}
           </div>
         </div>
-        <div class="input-group space-y-2">
+        <div class="input-group col-span-2 md:col-span-1 space-y-2">
           <label>Компания*</label>
           <app-input
             type="text"
@@ -78,7 +78,7 @@
             {{ errorCompany }}
           </div>
         </div>
-        <div class="input-group space-y-2">
+        <div class="input-group col-span-2 md:col-span-1 space-y-2">
           <label>ИНН*</label>
           <app-input
             type="number"

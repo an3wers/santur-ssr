@@ -26,8 +26,8 @@
       <!-- TODO: Вынести product detail в компонент -->
 
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-start-1 col-span-7 col-end-8">
-          <div class="grid grid-cols-2 gap-6">
+        <div class="col-start-1 col-end-13 sm:col-end-7 lg:col-end-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="">
               <!-- Product image -->
               <div class="w-full aspect-square overflow-hidden">
@@ -38,7 +38,7 @@
                 />
               </div>
             </div>
-            <div class="">
+            <div class="hidden lg:block">
               <!-- Product characteristic -->
               <div class="font-bold text-lg mb-4">Характеристики</div>
               <ul class="list-none divide-y">
@@ -62,7 +62,7 @@
             </div>
           </div>
         </div>
-        <div class="col-start-9 col-span-4 col-end-13">
+        <div class="col-start-1 sm:col-start-7 lg:col-start-9 col-end-13">
           <div class="flex-col space-y-6">
             <!-- Если не авторизован -->
 

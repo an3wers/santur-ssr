@@ -8,18 +8,41 @@
     </div>
     <div class="p-6">
       <form @submit.prevent="onSubmit">
-        <div class="flex items-end space-x-4">
+        <div
+          class="flex flex-col md:flex-row items-end space-y-4 md:space-y-0 space-x-0 md:space-x-4"
+        >
           <div class="input-group grow space-y-2">
             <label for="productFreeName">Товар</label>
-            <app-input type="text" inputType="border" inputSize="md" id="productFreeName" placeholder="Введите название" v-model="freeProduct.name" />
+            <app-input
+              type="text"
+              inputType="border"
+              inputSize="md"
+              id="productFreeName"
+              placeholder="Введите название"
+              v-model="freeProduct.name"
+            />
           </div>
-          <div class="input-group w-40 space-y-2">
+          <div class="input-group w-full md:w-40 space-y-2">
             <label for="productFreePrice">Цена, ₽</label>
-            <app-input type="number" inputType="border" inputSize="md" id="productFreePrice" placeholder="0,00" v-model="freeProduct.price" />
+            <app-input
+              type="number"
+              inputType="border"
+              inputSize="md"
+              id="productFreePrice"
+              placeholder="0,00"
+              v-model="freeProduct.price"
+            />
           </div>
-          <div class="input-group w-40 space-y-2">
+          <div class="input-group w-full md:w-40 space-y-2">
             <label for="productFreeAmount">Количество</label>
-            <app-input type="number" inputType="border" inputSize="md" id="productFreeAmount" placeholder="0" v-model="freeProduct.amount" />
+            <app-input
+              type="number"
+              inputType="border"
+              inputSize="md"
+              id="productFreeAmount"
+              placeholder="0"
+              v-model="freeProduct.amount"
+            />
           </div>
         </div>
         <app-button type="submit" class="mt-4">Добавить товар</app-button>
@@ -29,22 +52,21 @@
 </template>
 
 <script setup>
-import AppInput from '@/components/UI/Forms/AppInput.vue'
-import AppButton from '@/components/UI/Buttons/AppButton.vue'
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
 
-import { reactive } from 'vue'
+import { reactive } from 'vue';
 
 const freeProduct = reactive({
-    name: '',
-    amount: '',
-    price: ''
-})
+  name: '',
+  amount: '',
+  price: '',
+});
 
 function onSubmit() {
-    console.log('Free product', freeProduct)
-    freeProduct.name = ''
-    freeProduct.amount = ''
-    freeProduct.price = ''
+  console.log('Free product', freeProduct);
+  freeProduct.name = '';
+  freeProduct.amount = '';
+  freeProduct.price = '';
 }
-
 </script>

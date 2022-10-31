@@ -49,7 +49,7 @@
               <div
                 class="text-4xl sm:text-5xl xl:text-4xl lg:text-5xl 2xl:text-5xl font-semibold"
               >
-                25 000 <span class="text-3xl">м²</span>
+                25 000 <span class="text-base sm:text-3xl">м²</span>
               </div>
               <div>складской комплекс</div>
             </div>
@@ -58,11 +58,19 @@
         <!-- # Фактойды -->
         <!-- Фото -->
         <div class="grid grid-cols-2 my-12 gap-4">
-          <div class="col-span-2 md:col-span-1 w-full h-[350px] bg-slate-200">
-            <img src="" alt="" />
+          <div class="col-span-2 md:col-span-1 w-full h-[350px]">
+            <img
+              class="object-cover w-full h-full rounded-xl"
+              src="~/assets/images/about/3.png"
+              alt="about company"
+            />
           </div>
-          <div class="col-span-2 md:col-span-1 w-full h-[350px] bg-slate-200">
-            <img src="" alt="" />
+          <div class="col-span-2 md:col-span-1 w-full h-[350px]">
+            <img
+              class="object-cover w-full h-full rounded-xl"
+              src="~/assets/images/about/4.jpg"
+              alt="about company"
+            />
           </div>
         </div>
         <!-- # Фото -->
@@ -70,32 +78,31 @@
           Более 10 тысяч клиентов ежегодно выбирают сотрудничество с
           Сантехкомплект-Урал.
         </p>
-
         <div class="my-12">
           <h2 class="text-center">Наши клиенты</h2>
-          <div class="flex space-x-4 items-stretch my-8">
+          <div class="flex flex-wrap justify-center items-stretch my-8">
             <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium"
+              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
             >
               <span>Застройщики</span>
             </div>
             <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium"
+              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
             >
               <span>Монтажные компании</span>
             </div>
             <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium"
+              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
             >
               <span>Сфера ЖКХ</span>
             </div>
             <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium"
+              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
             >
               <span>Промышленные предприятия. АПК региона</span>
             </div>
             <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium"
+              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mb-2 max-w-[240px]"
             >
               <span>Ритейлеры</span>
             </div>
@@ -134,11 +141,19 @@
         </div>
         <!-- Фото -->
         <div class="grid grid-cols-2 my-12 gap-4">
-          <div class="col-span-2 md:col-span-1 w-full h-[350px] bg-slate-200">
-            <img src="" alt="" />
+          <div class="col-span-2 md:col-span-1 w-full h-[400px]">
+            <img
+              class="object-cover w-full h-full rounded-xl"
+              src="~/assets/images/about/1.png"
+              alt="about company"
+            />
           </div>
-          <div class="col-span-2 md:col-span-1 w-full h-[350px] bg-slate-200">
-            <img src="" alt="" />
+          <div class="col-span-2 md:col-span-1 w-full h-[400px]">
+            <img
+              class="object-cover w-full h-full rounded-xl"
+              src="~/assets/images/about/2.png"
+              alt="about company"
+            />
           </div>
         </div>
         <!-- # Фото -->
@@ -153,7 +168,7 @@
         </div>
         <!-- # Миссия -->
         <!-- Ценности -->
-        <div class="my-12">
+        <div class="mt-12">
           <h2 class="text-center">Наши ценности</h2>
           <p>
             Ценностью можно назвать то, что обладает особой важностью для

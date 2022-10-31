@@ -17,7 +17,7 @@
       <!-- Итерируемый li если массив не пустой -->
       <span class="absolute" v-if="items.length == 0"></span>
       <li v-else v-for="(item, index) in items" :key="index">
-        <div class="flex items-center">
+        <div class="inline-flex items-center">
           <span class="text-gray-400">/</span>
           <NuxtLink
             :to="item.url"
@@ -28,7 +28,7 @@
       </li>
       <!-- Статичный последний элемент -->
       <li v-if="breadcrumbs.length" aria-current="page">
-        <div class="flex items-center">
+        <div class="inline-flex items-center">
           <span class="text-gray-400">/</span>
           <span class="ml-3 text-sm font-medium text-gray-700">{{
             current.name
