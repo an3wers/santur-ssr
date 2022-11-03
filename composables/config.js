@@ -1,7 +1,7 @@
 export const useConfig = () => {
   return {
-    API_BASE_URL: 'https://isantur.ru/', //'https://testv.santur.ru/',
-    API_ADMIN: 'http://10.10.10.77:5168/', //'https://testv.santur.ru/',
+    API_BASE_URL: 'https://testv.santur.ru/', //'https://isantur.ru/',
+    API_ADMIN: 'https://testv.santur.ru/', //'http://10.10.10.77:5168/',
     PHONE_SITE: '73432700404',
     EMAIL_SITE: 'santur@santur.ru',
     WHATSAPP_SITE: '79321217497',
