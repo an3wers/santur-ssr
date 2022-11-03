@@ -1,27 +1,31 @@
 <template>
-  <div v-if="homeIsLoaded" class="home-page -mt-5">
+  <!-- <div v-if="homeIsLoaded" class="home-page -mt-5"> -->
+  <div class="home-page -mt-5">
     <div class="home-page -mt-5">
       <!-- <home-body /> -->
       <div class="section_grey pt-8 pb-16 bg-slate-150">
         <div class="container">
           <div>
             <home-slider />
-            <features />
-            <popular-categories />
-            <narrow-slider />
+            <AppLoader v-if="!homeIsLoaded" />
+            <template v-else>
+              <features />
+              <popular-categories />
+              <narrow-slider />
+            </template>
           </div>
         </div>
       </div>
       <div class="section pt-16">
         <div class="container">
-          <sale-products />
+          <sale-products v-if="homeIsLoaded" />
           <!-- <bottom-banner /> -->
           <news v-if="homeStore.news.length" />
         </div>
       </div>
     </div>
   </div>
-  <PageLoader v-else />
+  <!-- <PageLoader v-else /> -->
   <!-- <AppLoader v-else /> -->
 </template>
 
@@ -33,10 +37,11 @@ import SaleProducts from '@/components/homePage/SaleProducts.vue';
 import BottomBanner from '@/components/homePage/BottomBanner.vue';
 import News from '@/components/homePage/News.vue';
 import Features from '@/components/homePage/Features.vue';
-import PageLoader from '@/components/loaders/PageLoader.vue';
+// import PageLoader from '@/components/loaders/PageLoader.vue';
+import AppLoader from '@/components/loaders/AppLoader.vue';
 
 import { useHomeStore } from '@/stores/home';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const pageDescr =
   'Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.';
@@ -56,6 +61,5 @@ async function loadHomePage() {
   await homeStore.loadSales();
   homeIsLoaded.value = true;
 }
-
 loadHomePage();
 </script>

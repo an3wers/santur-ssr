@@ -39,7 +39,6 @@
         </div>
       </div>
     </Slide>
-
     <template #addons>
       <Navigation class="carousel-cards__navigation" />
     </template>
