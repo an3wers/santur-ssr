@@ -5,10 +5,10 @@
       <template #button>
         <app-button
           @click="$router.push({ path: '/about/news' })"
-          btnType="secondary"
+          btnType="link"
         >
           Все новости
-          <arrow-right-alt-icon-20 class="ml-1" color="#4b5563" />
+          <arrow-right-alt-icon-20 class="ml-1" color="#1976D2" />
         </app-button>
       </template>
     </section-title>

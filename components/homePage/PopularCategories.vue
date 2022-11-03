@@ -4,9 +4,9 @@
       <section-title>
         <template #title>Популярные категории</template>
         <template #button>
-          <app-button @click="$router.push('/catalog')" btnType="secondary">
+          <app-button @click="$router.push('/catalog')" btnType="link">
             Все категории
-            <arrow-right-alt-icon-20 class="ml-1" color="#4b5563" />
+            <arrow-right-alt-icon-20 class="ml-1" color="#1976D2" />
           </app-button>
         </template>
       </section-title>
