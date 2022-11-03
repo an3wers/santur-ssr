@@ -1,8 +1,9 @@
 <template>
   <div class="header__search grow relative">
     <form @submit.prevent="searchRequestSubmit" class="relative">
+      <!-- :value="$route.query.search || mainStore.searchValueStore" -->
       <input
-        :value="$route.query.search || mainStore.searchValueStore"
+        :value="mainStore.searchValueStore"
         @input="searchHandler($event.target.value)"
         class="pl-2 pr-6 py-2 lg:pl-4 lg:pr-10 lg:py-2.5 text-base lg:text-lg leading-5 w-full rounded-md border form-input bg-transparent border-gray-300 focus:border-primary focus:ring focus:ring-blue-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500"
         type="text"

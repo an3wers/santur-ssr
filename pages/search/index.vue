@@ -21,7 +21,7 @@
       </div>
 
       <div v-else class="grid grid-cols-12 gap-6">
-        <div class="col-span-4 xl:col-span-3">
+        <div class="col-span-12 lg:col-span-4 xl:col-span-3">
           <div class="catalog-subcategory flex flex-col pb-4 border-b mb-6">
             <div class="text-2xl font-bold pb-4 mb-4 border-b">Категории</div>
             <div
@@ -41,10 +41,9 @@
             </div>
           </div>
         </div>
-        <div class="col-span-8 xl:col-span-9 relative">
+        <div class="col-span-12 lg:col-span-8 xl:col-span-9 relative">
           <page-loader v-if="!productsIsUpdated" />
           <catalog-product-list :products="categoryStore.categoryProducts" />
-
           <product-list-pagination
             @change="handleChangePage"
             v-if="categoryStore.pageCount > 1"
