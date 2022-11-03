@@ -18,7 +18,7 @@
           <div class="w-12 h-12">
             <img
               class="w-full h-full object-contain"
-              :src="item.iconPath"
+              :src="`/images/features/${item.iconPath}`"
               :alt="item.title"
             />
           </div>
@@ -57,7 +57,7 @@ import { Carousel, Navigation, Slide } from 'vue3-carousel';
 const features = ref([
   {
     id: 1,
-    iconPath: '../assets/images/features/feature_factory.svg',
+    iconPath: 'feature_factory.svg',
     title: 'Собственное производство',
     text: 'Проектирование и аудит проектов. Изготовление блочных ИТП, нестандартных узлов и изделий, блочных котельных.',
     url: 'https://pro.santur.ru',
@@ -65,7 +65,7 @@ const features = ref([
   },
   {
     id: 2,
-    iconPath: '../assets/images/features/feature_seti.svg',
+    iconPath: 'feature_seti.svg',
     title: 'Наружные сети',
     text: 'Инженерное направление компании Сантехкомплект-Урал, которое занимается комплексом определенных систем и коммуникаций, которые располагаются снаружи здания.',
     url: 'https://seti.santur.ru',
@@ -73,7 +73,7 @@ const features = ref([
   },
   {
     id: 3,
-    iconPath: '../assets/images/features/feature_fire.svg',
+    iconPath: 'feature_fire.svg',
     title: 'Пожаротушение',
     text: 'Инженерное направление Сантехкомплект-Урал, которое включает в себя: разработку проектной документации, поставку оборудования, аудит и техническую консультацию.',
     url: 'https://fire.santur.ru',
@@ -81,7 +81,7 @@ const features = ref([
   },
   {
     id: 4,
-    iconPath: '../assets/images/features/feature_ms.svg',
+    iconPath: 'feature_ms.svg',
     title: 'Магазины Мастер-Сантехник',
     text: 'С 1996 года развиваем сеть магазинов, где быстро может отгрузиться и сделать покупку оптовый клиент, получить профессиональную консультацию каждый человек.',
     url: 'https://msantehnik.ru',
@@ -89,7 +89,7 @@ const features = ref([
   },
   {
     id: 5,
-    iconPath: '../assets/images/features/feature_forum.png',
+    iconPath: 'feature_forum.png',
     title: 'Инженерный форум',
     text: 'Универсальная площадка неограниченных возможностей для профессионального общения и обмена опытом, поиска современных инженерных решений, соответствующих новым экономическим реалиям и тенденциям рынка.',
     url: 'https://forum.santur.ru',

@@ -69,7 +69,7 @@
       <div
         v-if="catalogStore.displaySelectedFilterBtn"
         @click="catalogStore.handleDisplaySelectedFilterBtn"
-        class="fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 filter-float-btn z-10 text-white font-semibold"
+        class="fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 2xl:w-80 filter-float-btn z-10 text-white font-semibold"
       >
         Товаров найдено: {{ categoryStore.productCount }} шт.
       </div>
@@ -78,15 +78,15 @@
 </template>
 
 <script setup>
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import AppCheckbox from "@/components/UI/Forms/AppCheckbox.vue";
-import AppInput from "@/components/UI/Forms/AppInput.vue";
-import CatalogFilterItem from "@/components/catalog/CatalogFilterItem.vue";
-import CloseIcon20 from "@/components/UI/Icons/CloseIcon_20.vue";
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppCheckbox from '@/components/UI/Forms/AppCheckbox.vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import CatalogFilterItem from '@/components/catalog/CatalogFilterItem.vue';
+import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
 
-import { computed, ref } from "vue";
-import { useCatalogStore } from "@/stores/catalog";
-import { useCategoryStore } from "@/stores/category";
+import { computed, ref } from 'vue';
+import { useCatalogStore } from '@/stores/catalog';
+import { useCategoryStore } from '@/stores/category';
 
 const catalogStore = useCatalogStore();
 const categoryStore = useCategoryStore();
@@ -102,16 +102,16 @@ const props = defineProps({
 // const isResetMax = ref(false)
 
 function clickFloatBtn() {
-  emit("clickFloatBtn");
+  emit('clickFloatBtn');
 }
 
 const emit = defineEmits([
-  "handleFilter",
-  "cleanAll",
-  "clickFloatBtn",
-  "changeMaxLimitPrice",
-  "changeMinLimitPrice",
-  "resetPrice",
+  'handleFilter',
+  'cleanAll',
+  'clickFloatBtn',
+  'changeMaxLimitPrice',
+  'changeMinLimitPrice',
+  'resetPrice',
 ]);
 
 const getFiltersCheckbox = computed(() => {
@@ -120,7 +120,7 @@ const getFiltersCheckbox = computed(() => {
 
 const getFilterPrice = computed(() => {
   return props.filters.filter(
-    (el) => el.IsNumeric === true && el.Name === "Цена"
+    (el) => el.IsNumeric === true && el.Name === 'Цена'
   )[0];
 });
 
@@ -139,30 +139,30 @@ function onChangeMinLimitPrice(value) {
 
   let settedMinValue = 0;
   categoryStore.setedFiltersPrice.forEach((el) => {
-    el.split(":").forEach((p, i, arr) => {
-      if (arr[0] === "minprice") {
+    el.split(':').forEach((p, i, arr) => {
+      if (arr[0] === 'minprice') {
         settedMinValue = arr[1];
       }
     });
   });
 
   if (minPriceVal.value && minPriceVal.value !== settedMinValue) {
-    emit("changeMinLimitPrice", value, getFilterPrice.value.Name);
+    emit('changeMinLimitPrice', value, getFilterPrice.value.Name);
   }
 }
 
 function onChangeMaxLimitPrice(value) {
   let settedMaxValue = 0;
   categoryStore.setedFiltersPrice.forEach((el) => {
-    el.split(":").forEach((p, i, arr) => {
-      if (arr[0] === "maxprice") {
+    el.split(':').forEach((p, i, arr) => {
+      if (arr[0] === 'maxprice') {
         settedMaxValue = arr[1];
       }
     });
   });
 
   if (maxPriceVal.value && maxPriceVal.value !== settedMaxValue) {
-    emit("changeMaxLimitPrice", value, getFilterPrice.value.Name);
+    emit('changeMaxLimitPrice', value, getFilterPrice.value.Name);
   }
 }
 
@@ -171,19 +171,19 @@ categoryStore.$subscribe((setedFiltersPrice) => {
   if (categoryStore.setedFiltersPrice.length !== 0) {
     const arr = [];
     categoryStore.setedFiltersPrice.forEach((el) => {
-      const priceArr = el.split(":");
+      const priceArr = el.split(':');
       arr.push(priceArr[0]);
     });
 
-    if (!arr.includes("maxprice")) {
-      maxPriceVal.value = "";
+    if (!arr.includes('maxprice')) {
+      maxPriceVal.value = '';
     }
-    if (!arr.includes("minprice")) {
-      minPriceVal.value = "";
+    if (!arr.includes('minprice')) {
+      minPriceVal.value = '';
     }
   } else {
-    maxPriceVal.value = "";
-    minPriceVal.value = "";
+    maxPriceVal.value = '';
+    minPriceVal.value = '';
   }
 });
 
@@ -192,37 +192,37 @@ function resetLimit(type) {
   let settedMaxValue = 0;
   let settedMinValue = 0;
 
-  if (type === "min") {
+  if (type === 'min') {
     categoryStore.setedFiltersPrice.forEach((el) => {
-      el.split(":").forEach((p, i, arr) => {
-        if (arr[0] === "maxprice") {
+      el.split(':').forEach((p, i, arr) => {
+        if (arr[0] === 'maxprice') {
           settedMinValue = arr[1];
         }
       });
     });
-    minPriceVal.value = "";
+    minPriceVal.value = '';
     if (settedMinValue) {
-      emit("resetPrice", getFilterPrice.value.Name, type);
+      emit('resetPrice', getFilterPrice.value.Name, type);
     }
   }
-  if (type === "max") {
+  if (type === 'max') {
     categoryStore.setedFiltersPrice.forEach((el) => {
-      el.split(":").forEach((p, i, arr) => {
-        if (arr[0] === "maxprice") {
+      el.split(':').forEach((p, i, arr) => {
+        if (arr[0] === 'maxprice') {
           settedMaxValue = arr[1];
         }
       });
     });
-    maxPriceVal.value = "";
+    maxPriceVal.value = '';
     if (settedMaxValue) {
-      emit("resetPrice", getFilterPrice.value.Name, type);
+      emit('resetPrice', getFilterPrice.value.Name, type);
     }
   }
 }
 
 function handleFilter(name, event) {
   //
-  emit("handleFilter", {
+  emit('handleFilter', {
     name,
     value: event.target.value,
     isChecked: event.target.checked,
@@ -230,9 +230,9 @@ function handleFilter(name, event) {
 }
 
 function handleAll() {
-  maxPriceVal.value = "";
-  minPriceVal.value = "";
-  emit("cleanAll");
+  maxPriceVal.value = '';
+  minPriceVal.value = '';
+  emit('cleanAll');
 }
 </script>
 

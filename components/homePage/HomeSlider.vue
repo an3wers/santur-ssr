@@ -11,7 +11,7 @@
             <div class="home-slider__banner w-full h-full">
               <NuxtLink target="_blank" :to="slide.url">
                 <img
-                  :src="slide.image"
+                  :src="`/images/sliders/${slide.image}`"
                   alt=""
                   class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
                 />
@@ -40,27 +40,27 @@ const slides = ref([
   {
     id: '1',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/4_pro.jpg',
+    image: '4_pro.jpg',
   },
   {
     id: '2',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/5_seti.jpg',
+    image: '5_seti.jpg',
   },
   {
     id: '3',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/3_fire.jpg',
+    image: '3_fire.jpg',
   },
   {
     id: '4',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/2_about.jpg',
+    image: '2_about.jpg',
   },
   {
     id: '5',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/1_mobile.jpg',
+    image: '1_mobile.jpg',
   },
 ]);
 

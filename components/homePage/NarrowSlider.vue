@@ -10,7 +10,7 @@
           <div class="w-full h-full">
             <a target="_blank" :href="slide.url">
               <img
-                :src="slide.image"
+                :src="`/images/sliders/${slide.image}`"
                 alt=""
                 class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
               />
@@ -49,17 +49,17 @@ const sliders = ref([
   {
     id: '1',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/jakko_santur.jpg',
+    image: 'jakko_santur.jpg',
   },
   {
     id: '2',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/pex_santur.jpg',
+    image: 'pex_santur.jpg',
   },
   {
     id: '3',
     url: 'https://santur.ru',
-    image: '../assets/images/sliders/santur_ros.jpg',
+    image: 'santur_ros.jpg',
   },
 ]);
 

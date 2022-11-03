@@ -83,24 +83,12 @@ export const useHomeStore = defineStore('home', {
       }
     },
     async loadNews() {
+      const { API_ADMIN } = useConfig();
       try {
-        // const response = await $fetch('/api/home/news-home', {
-        //   method: 'GET'
-        // })
-
-        // const response = await axios({
-        //   method: "POST",
-        //   url: "http://10.10.10.77:5168/api/post/fresh_news",
-        // });
-        const response = await $fetch(
-          'http://10.10.10.77:5168/api/post/fresh_news',
-          {
-            method: 'post',
-            credentials: 'include',
-          }
-        );
-
-        // console.log('news', response);
+        const response = await $fetch(`${API_ADMIN}api/post/fresh_news`, {
+          method: 'post',
+          credentials: 'include',
+        });
 
         this.news = response.items || [];
       } catch (error) {

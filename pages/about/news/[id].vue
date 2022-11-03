@@ -5,9 +5,10 @@
       <h1 class="text-center">{{ post?.post_title }}</h1>
       <div class="grid grid-cols-12">
         <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11">
-          <!-- <div v-if="getContent" v-html="getContent"></div> -->
-          <!-- <div v-html="decodeHTMLEntities(getContent)"></div> -->
-          <div v-html="parse(getContent)"></div>
+          <div class="text-gray-500 font-medium mb-2">
+            {{ useDateFormatter(post?.post_date) }}
+          </div>
+          <div v-html="useHTMLDecoding(post?.post_content)"></div>
         </div>
       </div>
     </div>
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import AppPageError from '@/components/AppPageError.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
@@ -42,7 +43,8 @@ async function loadPost(id) {
     if (res.data) {
       post.value = res.data;
       isError.value = false;
-      //   console.log('POST', res);
+    } else {
+      throw new Error('На странице произошла ошибка');
     }
   } catch (error) {
     isError.value = true;
@@ -53,35 +55,10 @@ async function loadPost(id) {
 
 await loadPost(route.params.id);
 
-function decodeHTMLEntities(text) {
-  let textArea = document.createElement('textarea');
-  textArea.innerHTML = text;
-  return textArea.value;
-}
-
-function parse(str) {
-  //.Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&apos;").Replace(">", "&gt;").Replace("<", "&lt;");
-
-  return str
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&');
-}
-
-const getContent = computed(() => {
-  if (post.value?.ID) {
-    let tmp = post.value.post_content.replace(
-      /\\\\r|\\\\n|\\\\t|\\n|\\t|\\r/g,
-      ''
-    );
-    return tmp;
-  } else {
+onMounted(() => {
+  if (!post?.value?.ID) {
     navigateTo({ path: '/404' });
-    return undefined;
   }
-
-  // console.log(tmp);
 });
 
 const breadcrumbs = [{ name: 'Новости', url: '/about/news' }, {}];

@@ -1,5 +1,7 @@
 <template>
-  <div class="flex justify-between py-6 border-t">
+  <div
+    class="flex flex-col space-y-2 md:flex-row md:space-y-0 justify-between py-6 border-t"
+  >
     <div class="flex space-x-2 flex-wrap">
       <!-- disabled="true" -->
       <!-- <app-button
@@ -22,7 +24,7 @@
         :class="[
           p.isActive
             ? 'bg-primary hover:bg-primary-hover text-white'
-            : 'text-primary bg-transparent'
+            : 'text-primary bg-transparent',
         ]"
         class="py-2 text-base px-3 font-medium leading-5 rounded-md border border-transparent"
         @click="onChange(p.p)"
@@ -33,7 +35,10 @@
       </button>
       <div
         class="inline-flex items-center"
-        v-if="categoryStore.pageCount > step * 2 && categoryStore.pageCount - current > 3"
+        v-if="
+          categoryStore.pageCount > step * 2 &&
+          categoryStore.pageCount - current > 3
+        "
       >
         <span class="font-medium text-primary">…</span>
         <button
@@ -60,32 +65,37 @@
         placeholder="Номер страницы"
         inputType="border"
       />
-      <app-button :disabled="setPageViladate" @click="onChange(Number(pageValue))" btnType="secondary">Перейти</app-button>
+      <app-button
+        :disabled="setPageViladate"
+        @click="onChange(Number(pageValue))"
+        btnType="secondary"
+        >Перейти</app-button
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-import AppButton from '@/components/UI/Buttons/AppButton.vue'
-import AppInput from '@/components/UI/Forms/AppInput.vue'
-import { ref, computed, watch } from 'vue'
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import { ref, computed, watch } from 'vue';
 
-import { useCategoryStore } from '@/stores/category'
+import { useCategoryStore } from '@/stores/category';
 
-const categoryStore = useCategoryStore()
+const categoryStore = useCategoryStore();
 
 const props = defineProps({
   // pageCount: {
   //   type: Number
   // },
   current: {
-    type: Number
-  }
-})
+    type: Number,
+  },
+});
 
-const pageValue = ref('')
-const pageStart = 1
-const step = 3
+const pageValue = ref('');
+const pageStart = 1;
+const step = 3;
 
 // const pagesArrFull = ref([])
 
@@ -98,58 +108,58 @@ const step = 3
 // }
 
 const getPagesArrFull = computed(() => {
-  const arr = []
+  const arr = [];
 
   for (let i = pageStart; i <= categoryStore.pageCount; i++) {
     if (i === props.current) {
-    arr.push({ p: i, isActive: true })
-  } else {
-    arr.push({ p: i, isActive: false })
-  }
+      arr.push({ p: i, isActive: true });
+    } else {
+      arr.push({ p: i, isActive: false });
+    }
   }
 
-  return arr
-
-})
+  return arr;
+});
 
 const endItem = computed(() => {
-  const arr = getPagesArrFull.value.slice()
-  return arr.pop()
-})
+  const arr = getPagesArrFull.value.slice();
+  return arr.pop();
+});
 
 const startItem = computed(() => {
-  const arr = getPagesArrFull.value.slice()
-  return arr.shift()
-})
+  const arr = getPagesArrFull.value.slice();
+  return arr.shift();
+});
 
 const pagesArr = computed(() => {
   if (props.current - step < 0 || props.current - step === 0) {
-    return getPagesArrFull.value.slice(0, step * 2)
+    return getPagesArrFull.value.slice(0, step * 2);
   } else {
     return getPagesArrFull.value.slice(
       props.current - 1 - step,
       props.current + step
-    )
+    );
   }
-})
+});
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
 function onChange(p) {
-  getPagesArrFull.value.forEach(el => {
+  getPagesArrFull.value.forEach((el) => {
     if (el.p === p) {
-      el.isActive = true
+      el.isActive = true;
     } else {
-      el.isActive = false
+      el.isActive = false;
     }
-  })
-  pageValue.value = ''
-  emit('change', p)
+  });
+  pageValue.value = '';
+  emit('change', p);
 }
 
 const setPageViladate = computed(() => {
-  return pageValue.value.length > 0 && pageValue.value <= categoryStore.pageCount ? false : true
-})
-
-
+  return pageValue.value.length > 0 &&
+    pageValue.value <= categoryStore.pageCount
+    ? false
+    : true;
+});
 </script>

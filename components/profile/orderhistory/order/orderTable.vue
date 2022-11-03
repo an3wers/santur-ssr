@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between space-x-2 items-center">
       <div class="font-bold text-2xl">Товары</div>
       <div class="relative w-64">
         <input

@@ -1,7 +1,9 @@
 <template>
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 xl:col-span-9 space-y-6">
-      <div class="flex justify-between items-start space-x-6">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start space-y-4 sm:space-y-0 space-x-0 sm:space-x-4"
+      >
         <div class="grow">
           <h1 class="mb-2">
             Заказ {{ id }} <span v-if="code">/ {{ code }}</span>
@@ -9,11 +11,19 @@
           <span class="text-gray-500">{{ date }}</span>
         </div>
         <div class="inline-flex items-center">
-          <Popper hover arrow :content="statusHistory">
-            <info-icon-24 color="#9ca3af" class="cursor-pointer mr-2" />
+          <Popper
+            hover
+            arrow
+            :content="statusHistory"
+            class="order-2 sm:order-1"
+          >
+            <info-icon-24
+              color="#9ca3af"
+              class="cursor-pointer ml-2 mr-0 sm:mr-2 sm:ml-0"
+            />
           </Popper>
           <span
-            class="inline-flex space-x-1 border border-transparent text-white rounded-md font-semibold py-1.5 px-2.5 text-base"
+            class="inline-flex space-x-1 order-1 sm:order-2 border border-transparent text-white rounded-md font-semibold py-1.5 px-2.5 text-base"
             :style="{ backgroundColor: statusColor }"
             >{{ status }}</span
           >
@@ -22,24 +32,31 @@
       </div>
     </div>
     <div class="col-span-12 xl:col-span-3 space-y-6">
-      <div class="flex justify-end space-x-3">
-        <app-button @click="editOrder(id)" :disabled="!editAvailable || cartStore.cartId" btnType="secondary">
+      <div class="flex justify-start md:justify-end space-x-2">
+        <app-button
+          @click="editOrder(id)"
+          :disabled="!editAvailable || cartStore.cartId"
+          btnType="secondary"
+        >
           <btn-spinner v-if="isEditing" />
           Изменить
-          </app-button
+        </app-button>
+        <app-button
+          @click="$emit('onCancel', id)"
+          :disabled="!deleteAvailable"
+          btnType="secondary"
         >
-        <app-button @click="$emit('onCancel', id)" :disabled="!deleteAvailable" btnType="secondary">
           <btn-spinner v-if="isOrderCanceling" />
           Отменить
-          </app-button
-        >
-
-        <Menu as="div" class="relative inline-block text-left">
-          <MenuButton
-            class="inline-flex items-center text-center justify-center rounded-md disabled:opacity-75 py-2 text-base px-3 leading-5 bg-blue-100 border border-transparent hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-600"
+        </app-button>
+        <div class="relative">
+          <app-button-icon
+            @click="moreMenuHandler"
+            btnType="secondary"
+            :class="`nav__link-${indexSubmenu}`"
           >
             <more-horize-24 color="#1f2937" />
-          </MenuButton>
+          </app-button-icon>
           <transition
             enter-active-class="transition ease-out duration-100"
             enter-from-class="transform opacity-0 scale-95"
@@ -48,113 +65,115 @@
             leave-from-class="transform opacity-100 scale-100"
             leave-to-class="transform opacity-0 scale-95"
           >
-            <MenuItems
-              class="origin-top-right absolute z-10 right-0 mt-2 w-48 py-2 px-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            <SubMenu
+              v-if="menuMoreIsopen"
+              :idx="indexSubmenu"
+              position="right"
+              isOpen="menuMoreIsopen"
+              @closeSubmenu="onClose"
             >
-              <MenuItem v-slot="{ active }">
+              <div class="nav__item">
                 <button
-                  @click="$emit('onPrintPage')"
-                  class="flex text-left w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md"
-                  :class="[
-                    active ? 'bg-slate-100 text-primary' : 'text-gray-900'
-                  ]"
+                  @click="printHandler"
+                  class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
                 >
-                  <!-- Content -->
                   Печать
                 </button>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
                 <button
-                  class="flex text-left w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md"
-                  :class="[
-                    active ? 'bg-slate-100 text-primary' : 'text-gray-900'
-                  ]"
+                  class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
                 >
-                  <!-- Content -->
                   Скачать (xlsx)
                 </button>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
                 <button
-                @click="$emit('onCopy', id)"
-                  class="flex text-left w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md"
-                  :class="[
-                    active ? 'bg-slate-100 text-primary' : 'text-gray-900'
-                  ]"
+                  @click="$emit('onCopy', id)"
+                  class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
                 >
-                  <!-- Content -->
                   Повторить
                 </button>
-              </MenuItem>
-            </MenuItems>
+              </div>
+            </SubMenu>
           </transition>
-        </Menu>
-
-        <!-- <app-button btnType="secondary">
-          </app-button> -->
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import AppButton from '@/components/UI/Buttons/AppButton.vue'
-import MoreHorize24 from '@/components/UI/Icons/MoreHorize_24.vue'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import InfoIcon24 from '@/components/UI/Icons/InfoIcon_24.vue'
-import Popper from 'vue3-popper'
-import { useCartStore } from '@/stores/cart'
-import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue'
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import MoreHorize24 from '@/components/UI/Icons/MoreHorize_24.vue';
+// import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import InfoIcon24 from '@/components/UI/Icons/InfoIcon_24.vue';
+import Popper from 'vue3-popper';
+import { useCartStore } from '@/stores/cart';
+import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
+import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
+import SubMenu from '@/components/UI/DropDown/SubMenu.vue';
 
-const cartStore = useCartStore()
+const cartStore = useCartStore();
+const menuMoreIsopen = ref(false);
+const indexSubmenu = 98;
 
 defineProps({
   id: {
-    type: Number
+    type: Number,
   },
   code: {
     type: String,
-    default: ''
+    default: '',
   },
   status: {
     type: String,
-    default: ''
+    default: '',
   },
   statusColor: {
     type: String,
-    default: ''
+    default: '',
   },
   statusHistory: {
     type: String,
-    default: ''
+    default: '',
   },
   date: {
     type: String,
-    default: ''
+    default: '',
   },
   editAvailable: {
     type: Boolean,
-    default: false
+    default: false,
   },
   deleteAvailable: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isOrderCanceling: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isEditing: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-const emits = defineEmits(['onPrintPage', 'onEditOrder', 'onCancel', 'onCopy'])
+const emits = defineEmits(['onPrintPage', 'onEditOrder', 'onCancel', 'onCopy']);
 
 function editOrder(id) {
   // EditOrd/?id=...
-  emits('onEditOrder', id)
+  emits('onEditOrder', id);
 }
 
+function moreMenuHandler() {
+  menuMoreIsopen.value = !menuMoreIsopen.value;
+}
+
+function onClose() {
+  menuMoreIsopen.value = false;
+}
+
+function printHandler() {
+  onClose();
+
+  emits('onPrintPage');
+}
 </script>

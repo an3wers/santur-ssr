@@ -3,9 +3,10 @@
     <button
       type="button"
       @click="onOpen"
-      class="py-2 px-2 lg:py-1 lg:px-3 relative flex items-center rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 nav__link-99"
+      class="py-2 px-2 lg:py-1 lg:px-3 relative flex items-center rounded-md bg-transparent border border-transparent hover:bg-blue-100 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20"
+      :class="`nav__link-${idx}`"
     >
-      <div class="hidden lg:block text-right nav__link-99">
+      <div class="hidden lg:block text-right" :class="`nav__link-${idx}`">
         <div>Личный кабинет</div>
         <div class="text-xs">{{ authStore.getUserNameForHeader }}</div>
       </div>

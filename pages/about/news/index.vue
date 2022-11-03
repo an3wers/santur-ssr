@@ -67,10 +67,8 @@ const setNewsParams = {
 };
 
 async function loadNews(page) {
-  const urls = [`${API_ADMIN}api/post/news`, `${API_ADMIN}api/post/news`];
-
   try {
-    const res = await $fetch(urls[1], {
+    const res = await $fetch(`${API_ADMIN}api/post/news`, {
       method: 'post',
       credentials: 'include',
       body: { page: page, search: '', ...setNewsParams },

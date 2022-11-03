@@ -1,7 +1,7 @@
 <template>
   <div
     id="dropdown-submenu"
-    class="nav__sub-menu absolute bg-slate-50 py-4 px-1 space-y-1 w-52 lg:w-72 rounded-lg shadow-lg right-0 z-20 border border-gray-50"
+    class="nav__sub-menu absolute bg-slate-50 py-4 px-1 space-y-1 w-56 lg:w-72 rounded-lg shadow-lg right-0 z-20 border border-gray-50"
     :class="`${position}-0`"
   >
     <slot name="header"></slot>
@@ -31,8 +31,10 @@ const closeIfClickedOutside = (e) => {
     !e.target.parentElement.matches(`.nav__link-${props.idx}`) &&
     !e.target.matches('.nav__sub-menu')
   ) {
-    emits('closeSubmenu');
-    window.removeEventListener('click', closeIfClickedOutside);
+    if (props.isOpen) {
+      emits('closeSubmenu');
+      window.removeEventListener('click', closeIfClickedOutside);
+    }
   }
 };
 

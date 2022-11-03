@@ -159,3 +159,16 @@ export const useDateFormatter = (
 
   // return date;
 };
+
+export const useHTMLDecoding = (string) => {
+  let tmp = '';
+  if (string) {
+    tmp = string
+      .replace(/\\\\r|\\\\n|\\\\t|\\n|\\t|\\r/g, '')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&');
+  }
+  return tmp;
+};
