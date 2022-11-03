@@ -30,11 +30,11 @@ export default defineNuxtConfig({
       },
     },
     transpile: ['vue3-popper', 'vue3-carousel'],
-    babel: {
-      presets() {
-        return [['@nuxt/babel-preset-app']];
-      },
-    },
+    // babel: {
+    //   presets() {
+    //     return [['@nuxt/babel-preset-app']];
+    //   },
+    // },
   },
   vite: {
     resolve: {
