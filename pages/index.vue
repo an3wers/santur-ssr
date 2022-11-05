@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-if="homeIsLoaded" class="home-page -mt-5"> -->
   <div class="home-page -mt-5">
     <div class="home-page -mt-5">
       <!-- <home-body /> -->
@@ -8,25 +7,27 @@
           <div>
             <home-slider />
             <AppLoader v-if="!homeIsLoaded" />
-            <template v-else>
+            <!-- <template v-else> -->
+            <ClientOnly>
               <features />
-              <popular-categories />
+              <popular-categories v-if="homeIsLoaded" />
               <narrow-slider />
-            </template>
+            </ClientOnly>
+            <!-- </template> -->
           </div>
         </div>
       </div>
       <div class="section pt-16">
         <div class="container">
-          <sale-products v-if="homeIsLoaded" />
-          <!-- <bottom-banner /> -->
-          <news v-if="homeStore.news.length" />
+          <ClientOnly>
+            <sale-products />
+            <!-- <bottom-banner /> -->
+            <news v-if="homeStore.news.length" />
+          </ClientOnly>
         </div>
       </div>
     </div>
   </div>
-  <!-- <PageLoader v-else /> -->
-  <!-- <AppLoader v-else /> -->
 </template>
 
 <script setup>
@@ -61,5 +62,8 @@ async function loadHomePage() {
   await homeStore.loadSales();
   homeIsLoaded.value = true;
 }
-loadHomePage();
+
+if (process.client) {
+  loadHomePage();
+}
 </script>

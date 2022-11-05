@@ -64,18 +64,16 @@ const cartStore = useCartStore();
 async function loadState() {
   await authStore.setUser();
   await catalogStore.loadCatalog();
-
-  if (process.client) {
-    await profileStore.getFavorities();
-    await profileStore.loadProfile();
-    await cartStore.getCart();
-    await cartStore.getShortCart();
-  }
-  // isLoaded.value = true;
 }
 
-await loadState();
+loadState();
 
+if (process.client) {
+  await profileStore.getFavorities();
+  await profileStore.loadProfile();
+  await cartStore.getCart();
+  await cartStore.getShortCart();
+}
 const nuxtApp = useNuxtApp();
 
 nuxtApp.hook('page:start', () => {
