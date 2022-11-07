@@ -13,11 +13,13 @@
               class="hidden md:inline-block"
               src="~/assets/images/logo-santur.svg"
               alt="logo"
+              width="260"
             />
             <img
               class="inline-block md:hidden w-12"
               src="~/assets/images/logo_santur_mini.svg"
               alt="logo-mini"
+              width="48"
             />
           </NuxtLink>
         </div>

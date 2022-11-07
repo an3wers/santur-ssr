@@ -204,12 +204,14 @@
               ><img
                 src="~/assets/images/mobile/app-store-badge-santur.svg"
                 alt=""
+                width="144"
             /></NuxtLink>
             <NuxtLink
               to="https://play.google.com/store/apps/details?id=ru.santur.ucskapp"
               ><img
                 src="~/assets/images/mobile/android-badge-santur.svg"
                 alt=""
+                width="162"
             /></NuxtLink>
           </div>
           <div class="order-1">
