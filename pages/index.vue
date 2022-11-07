@@ -1,5 +1,6 @@
 <template>
   <div class="home-page -mt-5">
+    <PageLoader v-if="!homeIsLoaded" />
     <div class="home-page -mt-5">
       <!-- <home-body /> -->
       <div class="section_grey pt-8 pb-16 bg-slate-150">
@@ -7,12 +8,11 @@
           <div>
             <home-slider />
             <!-- <template v-else> -->
-            <AppLoader v-if="!homeIsLoaded" />
             <ClientOnly>
               <features />
+              <popular-categories />
+              <narrow-slider />
             </ClientOnly>
-            <popular-categories />
-            <narrow-slider />
 
             <!-- </template> -->
           </div>
@@ -20,9 +20,9 @@
       </div>
       <div class="section pt-16">
         <div class="container">
-          <!-- <ClientOnly> -->
-          <sale-products />
-          <!-- </ClientOnly> -->
+          <ClientOnly>
+            <sale-products />
+          </ClientOnly>
           <!-- <bottom-banner /> -->
           <news v-if="homeStore.news.length" />
         </div>
@@ -39,7 +39,7 @@ import SaleProducts from '@/components/homePage/SaleProducts.vue';
 import BottomBanner from '@/components/homePage/BottomBanner.vue';
 import News from '@/components/homePage/News.vue';
 import Features from '@/components/homePage/Features.vue';
-// import PageLoader from '@/components/loaders/PageLoader.vue';
+import PageLoader from '@/components/loaders/PageLoader.vue';
 import AppLoader from '@/components/loaders/AppLoader.vue';
 
 import { useHomeStore } from '@/stores/home';
@@ -55,11 +55,14 @@ useHead({
 const homeIsLoaded = ref(false);
 const homeStore = useHomeStore();
 
-// if (process.client) {
-await homeStore.loadPopularCategory();
-await homeStore.loadSales();
-homeIsLoaded.value = true;
-// }
+if (process.client) {
+  await homeStore.loadPopularCategory();
+  await homeStore.loadSales();
+}
+
+onMounted(() => {
+  homeIsLoaded.value = true;
+});
 
 // async function loadHomePage() {
 //   // await homeStore.loadTopSlider();
