@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['@/assets/scss/main.scss'],
-  ssr: false,
+  ssr: true,
   modules: ['@pinia/nuxt'],
   build: {
     postcss: {
