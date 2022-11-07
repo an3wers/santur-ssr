@@ -10,9 +10,10 @@
             <!-- <template v-else> -->
             <ClientOnly>
               <features />
-              <popular-categories v-if="homeIsLoaded" />
+              <popular-categories />
               <narrow-slider />
             </ClientOnly>
+
             <!-- </template> -->
           </div>
         </div>
@@ -21,9 +22,9 @@
         <div class="container">
           <ClientOnly>
             <sale-products />
-            <!-- <bottom-banner /> -->
-            <news v-if="homeStore.news.length" />
           </ClientOnly>
+          <!-- <bottom-banner /> -->
+          <news v-if="homeStore.news.length" />
         </div>
       </div>
     </div>
@@ -54,16 +55,22 @@ useHead({
 const homeIsLoaded = ref(false);
 const homeStore = useHomeStore();
 
-async function loadHomePage() {
-  // await homeStore.loadTopSlider();
-  // await homeStore.loadNarrowSlider();
-  // await homeStore.loadNews();
+if (process.client) {
+  homeIsLoaded.value = true;
   await homeStore.loadPopularCategory();
   await homeStore.loadSales();
-  homeIsLoaded.value = true;
 }
 
-if (process.client) {
-  loadHomePage();
-}
+// async function loadHomePage() {
+//   // await homeStore.loadTopSlider();
+//   // await homeStore.loadNarrowSlider();
+//   // await homeStore.loadNews();
+//   homeIsLoaded.value = true;
+// }
+
+// // await loadHomePage();
+
+// if (process.client) {
+//   await loadHomePage();
+// }
 </script>

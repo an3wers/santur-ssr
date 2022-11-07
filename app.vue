@@ -60,13 +60,8 @@ const cartStore = useCartStore();
 // const orderStore = useOrderStore();
 
 // const isLoaded = ref(false);
-
-async function loadState() {
-  await authStore.setUser();
-  await catalogStore.loadCatalog();
-}
-
-loadState();
+await authStore.setUser();
+await catalogStore.loadCatalog();
 
 if (process.client) {
   await profileStore.getFavorities();
