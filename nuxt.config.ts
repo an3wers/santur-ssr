@@ -18,6 +18,8 @@ export default defineNuxtConfig({
       },
     },
   },
+  css: ['@/assets/scss/main.scss'],
+  ssr: false,
   modules: ['@pinia/nuxt'],
   build: {
     postcss: {
@@ -41,5 +43,4 @@ export default defineNuxtConfig({
       dedupe: ['vue'],
     },
   },
-  css: ['@/assets/scss/main.scss'],
 });
