@@ -6,13 +6,13 @@
         <div class="container">
           <div>
             <home-slider />
-            <AppLoader v-if="!homeIsLoaded" />
             <!-- <template v-else> -->
+            <AppLoader v-if="!homeIsLoaded" />
             <ClientOnly>
               <features />
-              <popular-categories />
-              <narrow-slider />
             </ClientOnly>
+            <popular-categories />
+            <narrow-slider />
 
             <!-- </template> -->
           </div>
@@ -20,9 +20,9 @@
       </div>
       <div class="section pt-16">
         <div class="container">
-          <ClientOnly>
-            <sale-products />
-          </ClientOnly>
+          <!-- <ClientOnly> -->
+          <sale-products />
+          <!-- </ClientOnly> -->
           <!-- <bottom-banner /> -->
           <news v-if="homeStore.news.length" />
         </div>
@@ -55,11 +55,11 @@ useHead({
 const homeIsLoaded = ref(false);
 const homeStore = useHomeStore();
 
-if (process.client) {
-  homeIsLoaded.value = true;
-  await homeStore.loadPopularCategory();
-  await homeStore.loadSales();
-}
+// if (process.client) {
+await homeStore.loadPopularCategory();
+await homeStore.loadSales();
+homeIsLoaded.value = true;
+// }
 
 // async function loadHomePage() {
 //   // await homeStore.loadTopSlider();
