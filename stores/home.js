@@ -48,7 +48,7 @@ export const useHomeStore = defineStore('home', {
     },
     async loadPopularCategory() {
       try {
-        const response = await useCustomFetch('apissz/GetRecomendTKs/?top=12');
+        const response = await useCustomFetch('apissz/GetRecomendTKs/?top=8');
         if (response.success) {
           this.popularCategory = response.data;
         }
