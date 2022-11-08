@@ -2,7 +2,7 @@
   <div>
     <button
       @click="updateState(id)"
-      class="flex justify-between items-center w-full p-4 bg-slate-150"
+      class="flex text-left space-x-2 justify-between items-center w-full p-4 bg-slate-150"
     >
       <!-- title -->
       <slot name="title" />

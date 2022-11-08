@@ -25,7 +25,7 @@
           <AccordionWrapper default="ac1">
             <AccordionItem id="ac1">
               <template #title
-                ><div class="text-xl font-medium">
+                ><div class="text-base md:text-lg font-medium">
                   Маршруты по области
                 </div></template
               >
@@ -38,7 +38,7 @@
             </AccordionItem>
             <AccordionItem id="ac2">
               <template #title
-                ><div class="text-xl font-medium">
+                ><div class="text-base md:text-lg font-medium">
                   Северный маршрут
                 </div></template
               >
@@ -56,7 +56,7 @@
             </AccordionItem>
             <AccordionItem id="ac3">
               <template #title>
-                <div class="text-xl font-medium">Самовывоз</div>
+                <div class="text-base md:text-lg font-medium">Самовывоз</div>
               </template>
               <template #content>
                 <p>
@@ -67,7 +67,9 @@
             </AccordionItem>
             <AccordionItem id="ac4">
               <template #title>
-                <div class="text-xl font-medium">Доставка на объект</div>
+                <div class="text-base md:text-lg font-medium">
+                  Доставка на объект
+                </div>
               </template>
               <template #content>
                 <p>
@@ -78,7 +80,9 @@
             </AccordionItem>
             <AccordionItem id="ac5">
               <template #title>
-                <div class="text-xl font-medium">Доставка по городу</div>
+                <div class="text-base md:text-lg font-medium">
+                  Доставка по городу
+                </div>
               </template>
               <template #content>
                 <p>Доставка собственным автотранспортом по Екатеринбургу</p>
@@ -86,7 +90,7 @@
             </AccordionItem>
             <AccordionItem id="ac6">
               <template #title>
-                <div class="text-xl font-medium">
+                <div class="text-base md:text-lg font-medium">
                   Транзитные поставки от поставщика
                 </div>
               </template>

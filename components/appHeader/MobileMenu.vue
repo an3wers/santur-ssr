@@ -47,6 +47,11 @@ const route = useRoute();
 
 function menuHandler() {
   isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
 }
 
 const getMenu = computed(() => {
@@ -55,5 +60,8 @@ const getMenu = computed(() => {
 
 watch(route, () => {
   isOpen.value = false;
+  if (process.client) {
+    document.body.classList.remove('modal-open');
+  }
 });
 </script>
