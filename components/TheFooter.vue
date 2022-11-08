@@ -85,27 +85,42 @@
             <span class="font-semibold mb-4 block">Наши ресурсы</span>
             <ul class="text-sm space-y-2">
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://msantehnik.ru"
                   >Мастер-Сантехник</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://forum.santur.ru"
                   >Инженерный форум</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://fire.santur.ru"
                   >Пожарное оборудование</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://pro.santur.ru"
                   >Собственное производство</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://seti.santur.ru"
                   >Наружные сети</NuxtLink
                 >
               </li>
@@ -117,27 +132,33 @@
             <span class="font-semibold mb-4 block">О компании</span>
             <ul class="text-sm space-y-2">
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink class="no-underline text-gray-700" to="/about/company"
                   >Сантехкомплект-Урал</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/about/company-managers"
                   >Менеджмент</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/about/objects-category"
                   >Объекты комплектации</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/about/informaciya-dlya-postavshhikov"
                   >Информация для поставщиков</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink class="no-underline text-gray-700" to="/about/vacancy"
                   >Вакансии</NuxtLink
                 >
               </li>
@@ -159,17 +180,22 @@
             <span class="font-semibold mb-4 block">Сервис и услуги</span>
             <ul class="text-sm space-y-2">
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/services/delivery"
                   >Доставка</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://pro.santur.ru"
                   >Собственное производство</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink class="no-underline text-gray-700" to="/clients/claim"
                   >Прием рекламаций</NuxtLink
                 >
               </li>
@@ -184,7 +210,7 @@
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="#"
+                <NuxtLink class="no-underline text-gray-700" to="!#"
                   >Наши бренды</NuxtLink
                 >
               </li>
@@ -200,6 +226,7 @@
             class="flex flex-col md:flex-row items-center space-x-0 space-y-2 md:space-y-0 md:space-x-4 order-2"
           >
             <NuxtLink
+              target="_blank"
               to="https://apps.apple.com/ru/app/%D1%81%D0%B0%D0%BD%D1%82%D0%B5%D1%85%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%82-%D1%83%D1%80%D0%B0%D0%BB/id1577478673"
               ><img
                 src="~/assets/images/mobile/app-store-badge-santur.svg"
@@ -207,6 +234,7 @@
                 width="144"
             /></NuxtLink>
             <NuxtLink
+              target="_blank"
               to="https://play.google.com/store/apps/details?id=ru.santur.ucskapp"
               ><img
                 src="~/assets/images/mobile/android-badge-santur.svg"

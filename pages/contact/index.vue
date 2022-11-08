@@ -58,6 +58,21 @@
               </div>
             </div>
           </div>
+          <!-- Информер -->
+          <app-informer type="warning">
+            <div class="text-sm">
+              <p class="last:mb-0">
+                Офис и база ООО «УЦСК» Сантехкомплект-Урал» работает только с
+                юридическими лицами.
+              </p>
+              <p class="last:mb-0">
+                Для физических лиц действует сеть розничных магазинов
+                «Мастер-Сантехник», ближайший магазин по адресу: ул. Сулимова,
+                23
+              </p>
+            </div>
+          </app-informer>
+          <!-- Информер -->
           <!-- Пункт выдачи -->
 
           <div>
@@ -195,8 +210,8 @@
             <li>к/с 30101810500000000674</li>
             <li>ОКВЭД 53.51.21 ОКПО 99340356 ОКАТО 65401385000</li>
           </ul>
-          <p>Управляющий компанией Федорцев Виталий Викторович</p>
-          <p>Главный бухгалтер Вохмякова Анна Юрьевна</p>
+          <p>Управляющий компанией: Федорцев Виталий Викторович</p>
+          <p>Главный бухгалтер: Вохмякова Анна Юрьевна</p>
           <!-- # Контент -->
         </template>
       </app-modal>
@@ -207,6 +222,7 @@
 <script setup>
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AppModal from '@/components/modal/AppModal.vue';
+import AppInformer from '@/components/AppInformer.vue';
 
 const breadcrumbs = [{ name: 'Контакты', url: '/contact' }];
 
