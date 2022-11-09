@@ -12,31 +12,32 @@
         architecto ea reiciendis.</slot
       >
     </div>
-    <close-icon-20
-      @click="close"
-      color="#ffffff"
-      aria-label="Close"
-      role="button"
-      class="mt-[3px] shrink-0 cursor-pointer"
-    />
+    <button type="button" @click="close">
+      <close-icon-20
+        color="#ffffff"
+        aria-label="Close"
+        role="button"
+        class="mt-[3px] shrink-0 cursor-pointer"
+      />
+    </button>
   </div>
 </template>
 
 <script setup>
-import CloseIcon20 from "@/components/UI/Icons/CloseIcon_20.vue";
+import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
 
-import { useAppMessage } from "@/stores/appMessage";
+import { useAppMessage } from '@/stores/appMessage';
 
 const appMessageStore = useAppMessage();
 
 defineProps({
   icon: {
     type: String,
-    default: "info",
+    default: 'info',
   },
   type: {
     type: String,
-    default: "info",
+    default: 'info',
   },
 });
 const msgIcon = {
@@ -47,14 +48,14 @@ const msgIcon = {
     '<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" height="24" width="24"><path d="M1 21 12 2l11 19Zm10-6h2v-5h-2Zm1 3q.425 0 .713-.288Q13 17.425 13 17t-.287-.712Q12.425 16 12 16t-.712.288Q11 16.575 11 17t.288.712Q11.575 18 12 18Z"/></svg>',
   success:
     '<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" height="24" width="24"><path d="m10.6 16.6 7.05-7.05-1.4-1.4-5.65 5.65-2.85-2.85-1.4 1.4ZM12 22q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Z"/></svg>',
-  none: "",
+  none: '',
 };
 
 const msgType = {
-  info: "bg-gray-700",
-  error: "bg-red-500",
-  warning: "bg-orange-400",
-  success: "bg-green-500",
+  info: 'bg-gray-700',
+  error: 'bg-red-500',
+  warning: 'bg-orange-400',
+  success: 'bg-green-500',
 };
 
 // const msgIcon = {
