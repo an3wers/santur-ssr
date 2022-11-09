@@ -32,6 +32,10 @@ import AppInformer from '@/components/AppInformer.vue';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { onMounted, ref } from 'vue';
 
+useHead({
+  title: 'Обратная связь',
+});
+
 const pageIsLoaded = ref(false);
 
 onMounted(() => {

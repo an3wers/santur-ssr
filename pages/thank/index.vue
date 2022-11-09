@@ -38,6 +38,11 @@
 import { useCartStore } from '@/stores/cart';
 import { useRouter, useRoute } from 'vue-router';
 import { computed } from 'vue';
+
+useHead({
+  title: 'Заказ успешно оформлен',
+});
+
 // const router = useRouter();
 const route = useRoute();
 

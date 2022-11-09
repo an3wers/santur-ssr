@@ -21,6 +21,8 @@ import OfficeList from '@/components/profile/office/OfficeList.vue';
 import { useAuthStore } from '@/stores/auth';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 
+useHead('Филиал Сантехкомплект-Урал');
+
 const authStore = useAuthStore();
 const profileStore = useProfileStore();
 

@@ -70,6 +70,10 @@ import AppInformer from '@/components/AppInformer.vue';
 import { useAppMessage } from '@/stores/appMessage';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 
+useHead({
+  title: 'Корзина',
+});
+
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const cartIsLoaded = ref(false);

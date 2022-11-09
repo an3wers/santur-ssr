@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <Head>
+      <Title>Заказ: {{ order?.id }}</Title>
+    </Head>
     <client-only>
       <div class="order-wrap" v-if="orderIsLoaded">
         <div class="pb-4 pt-1">

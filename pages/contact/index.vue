@@ -224,6 +224,10 @@ import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AppModal from '@/components/modal/AppModal.vue';
 import AppInformer from '@/components/AppInformer.vue';
 
+useHead({
+  title: 'Контакты и реквизиты',
+});
+
 const breadcrumbs = [{ name: 'Контакты', url: '/contact' }];
 
 const isOpenModal = ref(false);

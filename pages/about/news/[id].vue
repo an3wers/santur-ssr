@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <Head>
+      <Title>{{ post?.post_title }}</Title>
+      <Meta name="description" :content="post?.post_description" />
+    </Head>
     <div class="post-wrapper" v-if="postIsLoaded && !isError">
       <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
       <h1 class="text-center">{{ post?.post_title }}</h1>

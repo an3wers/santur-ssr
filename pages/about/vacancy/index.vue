@@ -219,8 +219,12 @@ import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AccordionWrapper from '@/components/UI/Accordion/AccordionWrapper.vue';
 import AccordionItem from '@/components/UI/Accordion/AccordionItem.vue';
 
+const pageDescr =
+  'Сантехкомплект-Урал в топ-20 компаний из Екатеринбурга в списке лучших работодателей страны. Наша компания уделяет, большое внимание развитию персонала. У наших сотрудников есть возможность участвовать в проектном управлении компании, возможность карьерного и профессионального роста, внутреннего и внешнего обучения.';
+
 useHead({
   title: 'Вакансии в компании',
+  meta: [{ name: 'description', content: pageDescr }],
 });
 
 const vacancy = ref([]);

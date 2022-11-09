@@ -245,4 +245,13 @@
 <script setup>
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 const breadcrumbs = [{ name: 'О компании', url: '/about/company' }];
+
+const pageTitle = 'О компании';
+const pageDesc =
+  'Компания «Сантехкомплект-Урал» основана в 1995 году, как самостоятельная часть холдинга «Сантехкомплект». Уже более 26 лет «Сантехкомплект-Урал» обеспечивает комплексные поставки инженерной сантехники и является крупнейшим в УрФО логистическим центром оборудования для систем тепло-, холодо-, водоснабжения и водоотведения.';
+
+useHead({
+  title: pageTitle,
+  meta: [{ name: 'description', content: pageDesc }],
+});
 </script>

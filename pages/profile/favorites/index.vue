@@ -23,6 +23,10 @@ import { useProfileStore } from '@/stores/profile';
 import FavoritiesList from '@/components/profile/favorities/FavoritiesList.vue';
 import FavoritiesEmptyState from '@/components/profile/favorities/FavoritiesEmptyState.vue';
 
+useHead({
+  title: 'Избранные товары',
+});
+
 const profileStore = useProfileStore();
 
 const pageIsLoaded = ref(false);

@@ -17,12 +17,13 @@ export const useCustomFetch = async (url, method = 'GET', params = {}) => {
     });
     return response._data;
   } else if (process.client) {
-    const response = await $fetch.raw(url, {
+    const response = await $fetch(url, {
       method: method,
       baseURL: API_BASE_URL,
       credentials: 'include',
       params: params,
     });
-    return response._data;
+    // return response._data; if $fetch.raw
+    return response;
   }
 };

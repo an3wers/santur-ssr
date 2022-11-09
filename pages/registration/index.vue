@@ -22,4 +22,8 @@
 <script setup>
 import RegistrationForm from '@/components/forms/RegistrationForm.vue';
 import AppGoBack from '@/components/AppGoBack.vue';
+
+useHead({
+  title: 'Регистрация',
+});
 </script>

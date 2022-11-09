@@ -22,5 +22,9 @@
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import ClaimForm from '@/components/clients/ClaimForm.vue';
 
+useHead({
+  title: 'Прием рекламаций',
+});
+
 const breadcrumbs = [{ name: 'Прием рекламаций', url: '/clients/claim' }];
 </script>

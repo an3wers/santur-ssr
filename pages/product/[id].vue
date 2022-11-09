@@ -1,6 +1,13 @@
 <template>
   <!-- <div v-if="productIsLoaded" class="product-page"> -->
   <div class="product-page">
+    <Head>
+      <Title>{{ product?.name }}</Title>
+      <Meta
+        name="description"
+        :content="`${product?.name} купить по выгодной цене в интернет-магазине Сантехкомплект-Урал в Екатеринбурге и Нижнем Тагиле`"
+      />
+    </Head>
     <div class="container">
       <app-breadcrumbs
         v-if="!Object.keys($route.query).length"
@@ -63,9 +70,8 @@
           </div>
         </div>
         <div class="col-start-1 sm:col-start-7 lg:col-start-9 col-end-13">
-          <div class="flex-col space-y-6">
+          <div v-if="product?.price > 0" class="flex-col space-y-6">
             <!-- Если не авторизован -->
-
             <app-informer type="primary" v-if="!authStore.user.id">
               <p>
                 <a @click.prevent="handleSignIn" href="#">Войдите</a> в профиль
@@ -81,7 +87,6 @@
             <div class="flex justify-between items-end">
               <!-- Выбор количества и добавление в избранные -->
               <!-- TODO: Выбор количества вынести в компонент -->
-
               <div>
                 <span class="inline-block text-sm text-gray-500 mb-1"
                   >Выбрать количество</span
@@ -205,6 +210,11 @@
               }}</span>
             </div>
           </div>
+          <div v-else>
+            <AppInformer type="info">
+              <div>Товар временно недоступен</div>
+            </AppInformer>
+          </div>
         </div>
       </div>
 
@@ -249,24 +259,28 @@ import PageLoader from '@/components/loaders/PageLoader.vue';
 import { useCartStore } from '@/stores/cart';
 import { useAppMessage } from '@/stores/appMessage';
 
-const productIsLoaded = ref(false);
+// const productIsLoaded = ref(false);
 
 const authStore = useAuthStore();
 const catalogStore = useCatalogStore();
 const route = useRoute();
 const productId = route.params.id;
 const cartStore = useCartStore();
-
 const profileStore = useProfileStore();
 const appMessageStore = useAppMessage();
-
 const product = ref({});
 const characteristics = ref([]);
 const MAXPRODUCT_COUNT = 10000;
-
 const isAddedCart = ref(false);
-
 const isBtnSpinner = ref(false);
+
+// const getTitle = computed(() => {
+//   return product.name || '';
+// });
+
+// useHead({
+//   title: getTitle,
+// });
 
 const getIsAddedCart = computed(() => {
   return isAddedCart.value;
@@ -300,7 +314,7 @@ const tabMenuSections = ref([
   { name: 'Документы', alias: 'documents', enable: false },
 ]);
 
-await setProduct();
+// await setProduct();
 
 const timer = ref(true);
 
@@ -441,12 +455,14 @@ async function loadCharacteristics(id) {
     console.log(error);
   }
 }
+await loadProduct(productId);
+await loadCharacteristics(productId);
 
-async function setProduct() {
-  await loadProduct(productId);
-  await loadCharacteristics(productId);
-  productIsLoaded.value = true;
-}
+// async function setProduct() {
+//   await loadProduct(productId);
+//   await loadCharacteristics(productId);
+//   productIsLoaded.value = true;
+// }
 
 // Делаю хлебные крошки
 const getBreadcrumbsProduct = computed(() => {

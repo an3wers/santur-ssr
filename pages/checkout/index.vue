@@ -48,6 +48,10 @@ import CheckoutPersonInfo from '@/components/checkout/CheckoutPersonInfo.vue';
 import CheckoutEmptyState from '@/components/checkout/CheckoutEmptyState.vue';
 import { useAppMessage } from '@/stores/appMessage';
 
+useHead({
+  title: 'Оформление заказа',
+});
+
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const checkoutIsLoaded = ref(false);

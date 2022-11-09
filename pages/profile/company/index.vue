@@ -25,6 +25,10 @@ import { useAuthStore } from '@/stores/auth';
 import { useProfileStore } from '@/stores/profile';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 
+useHead({
+  title: 'Мои компании',
+});
+
 const authStore = useAuthStore();
 const profileStore = useProfileStore();
 

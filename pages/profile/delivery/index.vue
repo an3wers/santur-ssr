@@ -17,6 +17,10 @@ import ProfileEmptyState from '@/components/profile/ProfileEmptyState.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useProfileStore } from '@/stores/profile';
 
+useHead({
+  title: 'Доставки',
+});
+
 const authStore = useAuthStore();
 const profileStore = useProfileStore();
 

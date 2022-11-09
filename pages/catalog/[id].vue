@@ -1,6 +1,13 @@
 <template>
   <!-- <div v-if="categoryIsLoaded" class="category-page"> -->
   <div class="category-page">
+    <Head>
+      <Title>{{ getCatalogTitle }}</Title>
+      <Meta
+        name="description"
+        :content="`${getCatalogTitle}, продажа сантехники оптом в Екатеринбурге и Нижнем Тагиле`"
+      />
+    </Head>
     <div class="container">
       <app-breadcrumbs :breadcrumbs="getBreadcrumbs" />
       <div class="inline-flex space-x-2">

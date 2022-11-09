@@ -12,4 +12,8 @@
 
 <script setup>
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
+
+useHead({
+  title: 'Страница не найдена',
+});
 </script>

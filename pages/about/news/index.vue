@@ -40,6 +40,10 @@ import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import { useAppMessage } from '@/stores/appMessage';
 
+useHead({
+  title: 'Новости компании',
+});
+
 const { API_ADMIN } = useConfig();
 const appMessageStore = useAppMessage();
 const news = ref([]);

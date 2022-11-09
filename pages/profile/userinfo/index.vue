@@ -38,6 +38,10 @@ import ChangePasswordModal from '@/components/profile/userInfo/ChangePasswordMod
 import { useAppMessage } from '@/stores/appMessage';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 
+useHead({
+  title: 'Данные профиля',
+});
+
 const appMessage = useAppMessage();
 const authStore = useAuthStore();
 const profileStore = useProfileStore();

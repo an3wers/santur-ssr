@@ -39,9 +39,9 @@ import OrderEditBar from '@/components/profile/orderhistory/order/orderEditBar.v
 import { useOrderStore } from '@/stores/order';
 
 const titleTail =
-  'Сантехкомплект-Урал — продажа сантехники оптов в Екатеринбурге и Нижнем Тагиле';
+  'Сантехкомплект-Урал — инженерная сантехника в Екатеринбурге и Нижнем Тагиле';
 const defaultTitle =
-  'Сантехкомплект-Урал — продажа сантехники оптов в Екатеринбурге и Нижнем Тагиле';
+  'Сантехкомплект-Урал — продажа сантехники оптом в Екатеринбурге и Нижнем Тагиле';
 
 useHead({
   titleTemplate: (title) => {

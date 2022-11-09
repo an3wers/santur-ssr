@@ -69,6 +69,10 @@ import { useMainStore } from '@/stores/main';
 import { useAppMessage } from '@/stores/appMessage';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 
+useHead({
+  title: 'Поиск товаров',
+});
+
 const route = useRoute();
 // const router = useRouter();
 const categoryStore = useCategoryStore();

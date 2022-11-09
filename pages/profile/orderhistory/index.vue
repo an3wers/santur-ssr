@@ -78,6 +78,10 @@ import AppModal from '@/components/modal/AppModal.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 import orderProductsList from '@/components/profile/orderhistory/orderProductsList.vue';
 
+useHead({
+  title: 'История заказов',
+});
+
 const { API_BASE_URL } = useConfig();
 const selectedTimeRange = ref('all');
 
