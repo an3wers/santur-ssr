@@ -13,7 +13,7 @@
     >
       <div
         v-if="isOpen"
-        class="mobile-menu__sudebar fixed right-0 top-0 bottom-0 left-0 bg-slate-50 py-6 z-20"
+        class="mobile-menu__sudebar overflow-y-auto fixed right-0 top-0 bottom-0 left-0 bg-slate-50 py-6 z-20"
       >
         <div class="container">
           <div class="flex justify-end">
@@ -49,8 +49,10 @@ function menuHandler() {
   isOpen.value = !isOpen.value;
   if (isOpen.value) {
     document.body.classList.add('modal-open');
+    document.getElementById('__nuxt').classList.add('overlay');
   } else {
     document.body.classList.remove('modal-open');
+    document.getElementById('__nuxt').classList.remove('overlay');
   }
 }
 
@@ -62,6 +64,7 @@ watch(route, () => {
   isOpen.value = false;
   if (process.client) {
     document.body.classList.remove('modal-open');
+    document.getElementById('__nuxt').classList.remove('overlay');
   }
 });
 </script>

@@ -18,6 +18,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (document.body.classList.contains('modal-open')) {
       document.body.classList.remove('modal-open');
     }
+    if (document.getElementById('__nuxt').classList.contains('overlay')) {
+      document.getElementById('__nuxt').classList.remove('overlay');
+    }
   }
   if (mainStore.searchValueStore && !to.query.search) {
     mainStore.searchValueStore = '';

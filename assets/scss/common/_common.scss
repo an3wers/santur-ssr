@@ -84,8 +84,9 @@ body.modal-open {
   overflow-y: hidden;
 }
 
-.container {
-  // min-width: 1024px;
+#__nuxt.overlay {
+  position: relative;
+  overflow-y: hidden;
 }
 
 .img-responsive {
