@@ -2,7 +2,7 @@
   <div>
     <button
       @click="updateState(id)"
-      class="flex text-left space-x-2 justify-between items-center w-full p-4 bg-slate-150"
+      class="flex text-left space-x-2 justify-between items-center w-full p-4 md:p-5 bg-slate-150"
     >
       <!-- title -->
       <slot name="title" />
@@ -11,7 +11,7 @@
       </span>
     </button>
 
-    <div class="p-4" v-show="stateAccordion === id">
+    <div class="p-4 md:p-5" v-show="stateAccordion === id">
       <!-- content -->
       <slot name="content" />
     </div>

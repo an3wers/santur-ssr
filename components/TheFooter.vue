@@ -172,6 +172,13 @@
                   >Контакты</NuxtLink
                 >
               </li>
+              <li>
+                <NuxtLink
+                  to="/profile/feedback"
+                  class="no-underline text-gray-700"
+                  >Обратная связь</NuxtLink
+                >
+              </li>
             </ul>
           </div>
         </div>
