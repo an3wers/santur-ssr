@@ -79,9 +79,94 @@ const managers = [
     position: 'Директор филиала Сантехкомплект-Тагил',
   },
   {
+    name: 'Рыков Никита Николаевич',
+    image: '/images/managers/men_8.jpg',
+    position: 'Коммерческий директор',
+  },
+  {
+    name: 'Таушканова Ирина Сергеевна',
+    image: '/images/managers/men_9.jpg',
+    position: 'Директор по развитию',
+  },
+  {
+    name: 'Артемов Павел Валерьевич',
+    image: '/images/managers/men_10.jpg',
+    position: 'Директор департамента «Регионы»',
+  },
+  {
+    name: 'Румянцев Егор Олегович',
+    image: '/images/managers/men_11.jpg',
+    position: 'Руководитель департамента операционных продаж',
+  },
+  {
     name: 'Зарубина Ксения Владимировна',
     image: '/images/managers/men_7.jpg',
-    position: 'Руководитель отдела продаж «Эксплуатация и реконструкция» ',
+    position: 'Руководитель отдела продаж «Эксплуатация и реконструкция»',
+  },
+  {
+    name: 'Ахметшин Раиль Фаилович',
+    image: '/images/managers/men_12.jpg',
+    position: 'Руководитель отдела продаж «Наружные сети»',
+  },
+  {
+    name: 'Студитский Сергей Викторович',
+    image: '/images/managers/men_13.jpg',
+    position: 'Руководитель отдела продаж «Строительство»',
+  },
+  {
+    name: 'Мальков Сергей Александрович',
+    image: '/images/managers/men_14.jpg',
+    position: 'Технический директор',
+  },
+  {
+    name: 'Журавлев Алексей Сергеевич',
+    image: '/images/managers/men_15.jpg',
+    position: 'Директор по развитию IT',
+  },
+  {
+    name: 'Данилов Евгений Сергеевич',
+    image: '/images/managers/men_16.jpg',
+    position: 'Руководитель отдела закупок',
+  },
+  {
+    name: 'Поляков Владислав Николаевич',
+    image: '/images/managers/men_17.jpg',
+    position: 'Руководитель отдела продаж «Магазины»',
+  },
+  {
+    name: 'Сараев Антон Александрович',
+    image: '/images/managers/men_18.jpg',
+    position: 'Руководитель службы технической поддержки',
+  },
+  {
+    name: 'Зарубин Максим Геннадьевич',
+    image: '/images/managers/men_19.jpg',
+    position: 'Руководитель отдела продаж «Строительство-развитие»',
+  },
+  {
+    name: 'Малышева Наталья Владимировна',
+    image: '/images/managers/men_20.jpg',
+    position: 'Руководитель отдела маркетинга',
+  },
+  {
+    name: 'Соколова Алена Владимировна',
+    image: '/images/managers/men_21.jpg',
+    position: 'Руководитель юридического отдела',
+  },
+  {
+    name: 'Душамбин Денис Ринатович',
+    image: '/images/managers/men_22.jpg',
+    position: 'Руководитель складов хранения',
+  },
+  {
+    name: 'Костик Сергей Владимирович',
+    image: '/images/managers/men_23.jpg',
+    position: 'Руководитель транспортно-логистического отдела',
+  },
+  {
+    name: 'Кейсер Игорь Романович',
+    image: '/images/managers/men_24.jpg',
+    position: 'Руководитель отдела по защите ресурсов',
   },
 ];
 </script>

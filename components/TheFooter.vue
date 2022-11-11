@@ -144,9 +144,7 @@
                 >
               </li>
               <li>
-                <NuxtLink
-                  class="no-underline text-gray-700"
-                  to="/about/objects-category"
+                <NuxtLink class="no-underline text-gray-700" to="/about/objects"
                   >Объекты комплектации</NuxtLink
                 >
               </li>

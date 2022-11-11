@@ -34,7 +34,7 @@ export const useMainMenu = () => {
         },
         {
           name: 'Объекты комплектации',
-          url: '/about/objects-category',
+          url: '/about/objects',
         },
         {
           name: 'Вакансии',
