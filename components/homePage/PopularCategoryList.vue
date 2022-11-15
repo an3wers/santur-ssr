@@ -8,11 +8,11 @@
       :key="cat.tk_id"
       class="pop-category-card no-underline text-gray-900 hover:text-gray-900"
       ><div class="rounded-2xl shadow-lg bg-white h-full">
-        <div class="flex justify-between space-x-4 items-center px-5 py-6">
+        <div class="flex justify-between space-x-2 items-center px-5 py-6">
           <div class="pop-category-card__title font-medium">
             {{ cat.name }}
           </div>
-          <div class="pop-category-card__image-block">
+          <div class="pop-category-card__image-block shrink-0">
             <img
               class="object-contain w-full h-full"
               :src="cat.imgpath"

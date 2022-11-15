@@ -65,7 +65,7 @@ export const useMainMenu = () => {
       url: '#',
       child: [
         {
-          name: 'Дилерские сертификаты',
+          name: 'Наши бренды',
           url: '/clients/brands',
         },
         {

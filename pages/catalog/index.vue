@@ -13,7 +13,7 @@
 import { useRoute } from 'vue-router';
 import CatalogList from '@/components/catalog/catalogList.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
-import { useCatalogStore } from '@/stores/catalog';
+// import { useCatalogStore } from '@/stores/catalog';
 const route = useRoute();
 const title = 'Каталог';
 

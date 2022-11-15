@@ -46,6 +46,7 @@ export const useCategoryStore = defineStore('category', {
       }
 
       try {
+        mainStore.pageError = false;
         const resp = await fetch(
           `${API_BASE_URL}apissz/setgoodsearch/${params}`,
           request
@@ -67,6 +68,7 @@ export const useCategoryStore = defineStore('category', {
     async loadProducts(page) {
       const mainStore = useMainStore();
       try {
+        mainStore.pageError = false;
         const response = await useCustomFetch(
           `apissz/getGoodList/?page=${page}`
         );
@@ -242,6 +244,7 @@ export const useCategoryStore = defineStore('category', {
     async setSort(value) {
       const mainStore = useMainStore();
       try {
+        mainStore.pageError = false;
         const response = await useCustomFetch(
           `apissz/setorderby/?orderby=${value}`
         );
@@ -254,6 +257,7 @@ export const useCategoryStore = defineStore('category', {
     async setInCash(value) {
       const mainStore = useMainStore();
       try {
+        mainStore.pageError = false;
         const response = await useCustomFetch(
           `apissz/SetIncash/?incash=${value}`
         );
