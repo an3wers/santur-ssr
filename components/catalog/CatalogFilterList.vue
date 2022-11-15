@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col divide-y divide-slate-300 space-y-4 px-4 py-6 bg-slate-100 rounded-lg category-filter"
+    class="flex flex-col divide-y divide-slate-300 space-y-4 px-0 py-0 lg:px-4 lg:py-6 bg-transparent lg:bg-slate-100 rounded-none lg:rounded-lg category-filter"
   >
     <div class="flex justify-between items-baseline">
       <div class="text-2xl font-bold">Фильтры</div>
@@ -18,7 +18,7 @@
       <div class="flex space-x-2">
         <!-- Переделать на стандартные инпуты -->
 
-        <div class="relative">
+        <div class="relative w-full">
           <!-- @input="onChangeMinLimitPrice($event.target.value)" -->
           <input
             v-model="minPriceVal"
@@ -36,7 +36,7 @@
           /> -->
         </div>
 
-        <div class="relative">
+        <div class="relative w-full">
           <!-- @input="onChangeMaxLimitPrice($event.target.value)" -->
           <input
             v-model="maxPriceVal"
@@ -69,7 +69,7 @@
       <div
         v-if="catalogStore.displaySelectedFilterBtn"
         @click="catalogStore.handleDisplaySelectedFilterBtn"
-        class="fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 2xl:w-80 filter-float-btn z-10 text-white font-semibold"
+        class="hidden lg:fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 2xl:w-80 filter-float-btn z-10 text-white font-semibold"
       >
         Товаров найдено: {{ categoryStore.productCount }} шт.
       </div>

@@ -1,5 +1,7 @@
 <template>
-  <div class="product-preview flex space-x-4 pt-4 first:pt-0">
+  <div
+    class="product-preview flex flex-col sm:flex-row space-y-2 sm:space-y-0 space-x-0 sm:space-x-4 pt-4 first:pt-0"
+  >
     <div class="product-preview__image shrink-0 w-24 h-24">
       <img
         :src="product.imgpath"

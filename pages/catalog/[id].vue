@@ -21,24 +21,37 @@
 
       <app-page-error v-if="mainStore.pageError" />
 
-      <div
-        v-else
-        class="grid grid-cols-12 gap-6 min-w-[1024px] overflow-x-auto"
-      >
-        <div class="col-span-4 xl:col-span-3">
+      <div v-else class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 lg:col-span-4 xl:col-span-3">
           <div v-if="getIsTn">
             <catalog-subcategory :subcategory="getSubcatgory" />
           </div>
-          <catalog-filter-list
-            @handleFilter="handleFilter"
-            @cleanAll="handleCleanAll"
-            @changeMaxLimitPrice="handleChangeMaxLimitPrice"
-            @changeMinLimitPrice="handleChangeMinLimitPrice"
-            @resetPrice="handleResetPrice"
-            :filters="categoryStore.categoryFilters"
-          />
+          <div class="flex lg:hidden">
+            <app-button
+              @click="isMobileFilters = !isMobileFilters"
+              btnType="outline"
+              >Фильтры
+              <span
+                v-if="
+                  categoryStore.setedFilters.length ||
+                  categoryStore.setedFiltersPrice.length
+                "
+                class="ml-2 rounded-full w-2 h-2 bg-primary"
+              ></span>
+            </app-button>
+          </div>
+          <div class="hidden lg:block">
+            <catalog-filter-list
+              @handleFilter="handleFilter"
+              @cleanAll="handleCleanAll"
+              @changeMaxLimitPrice="handleChangeMaxLimitPrice"
+              @changeMinLimitPrice="handleChangeMinLimitPrice"
+              @resetPrice="handleResetPrice"
+              :filters="categoryStore.categoryFilters"
+            />
+          </div>
         </div>
-        <div class="col-span-8 xl:col-span-9 relative">
+        <div class="col-span-12 lg:col-span-8 xl:col-span-9 relative">
           <page-loader v-if="!categoryIsUpdated" />
 
           <div>
@@ -70,6 +83,61 @@
         </div>
       </div>
     </div>
+    <transition
+      enter-active-class="transition ease-out duration-100"
+      enter-from-class="transform opacity-0 scale-95"
+      enter-to-class="transform opacity-100 scale-100"
+      leave-active-class="transition ease-in duration-75"
+      leave-from-class="transform opacity-100 scale-100"
+      leave-to-class="transform opacity-0 scale-95"
+    >
+      <div
+        v-if="isMobileFilters"
+        class="overflow-y-auto fixed right-0 top-0 bottom-0 left-0 bg-slate-50 py-6 z-20"
+      >
+        <div class="container relative">
+          <div class="flex justify-end">
+            <app-button-icon
+              @click="isMobileFilters = !isMobileFilters"
+              btnType="light"
+            >
+              <close-icon-24 />
+            </app-button-icon>
+          </div>
+          <div class="pt-2 pb-14">
+            <catalog-filter-list
+              @handleFilter="handleFilter"
+              @cleanAll="handleCleanAll"
+              @changeMaxLimitPrice="handleChangeMaxLimitPrice"
+              @changeMinLimitPrice="handleChangeMinLimitPrice"
+              @resetPrice="handleResetPrice"
+              :filters="categoryStore.categoryFilters"
+            />
+            <div class="fixed left-0 right-0 bottom-5 z-30 text-center">
+              <div class="container">
+                <button
+                  :disabled="!categoryIsUpdated"
+                  class="w-full items-center text-center justify-center rounded-md disabled:bg-[#5E9FDF] bg-primary border border-transparent hover:bg-primary-hover focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-white py-2.5 text-lg px-4"
+                  @click="isMobileFilters = !isMobileFilters"
+                >
+                  <btn-spinner v-if="!categoryIsUpdated" />
+                  Показать
+                  {{ categoryStore.productCount }}
+                  {{
+                    useNounEnding(
+                      categoryStore.productCount,
+                      'товар',
+                      'товара',
+                      'товаров'
+                    )
+                  }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
   <!-- <page-loader v-else /> -->
 </template>
@@ -80,7 +148,7 @@ import CatalogProductList from '@/components/catalog/CatalogProductList.vue';
 import CatalogFilterList from '@/components/catalog/CatalogFilterList.vue';
 import CatalogSubcategory from '@/components/catalog/CatalogSubcategory.vue';
 import { useRoute, useRouter } from 'vue-router';
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useCatalogStore } from '@/stores/catalog';
 import { useCategoryStore } from '@/stores/category';
 import { useMainStore } from '@/stores/main';
@@ -90,9 +158,15 @@ import CatalogProductChips from '@/components/catalog/CatalogProductChips.vue';
 import CatalogSort from '@/components/catalog/CatalogSort.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
 import { useAppMessage } from '@/stores/appMessage';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import CloseIcon24 from '@/components/UI/Icons/CloseIcon_24.vue';
+import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
+import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 
 const categoryIsLoaded = ref(false);
 const categoryIsUpdated = ref(true);
+
+const isMobileFilters = ref(false);
 
 const route = useRoute();
 const router = useRouter();

@@ -19,13 +19,13 @@
     </div>
 
     <div
-      class="category-filter__body overflow-y-auto max-h-80 pr-4 flex flex-col space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200 scrollbar-thumb-rounded-md"
+      class="category-filter__body overflow-y-auto max-h-80 flex flex-col space-y-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200 scrollbar-thumb-rounded-md"
     >
       <label
         v-for="item in filteredFilterItems"
         :key="item.Name"
-        :class="{ 'opacity-50': !!!item.QtyRecords }"
-        class="inline-flex items-start"
+        :class="{ 'opacity-50': !item.QtyRecords }"
+        class="inline-flex items-start pl-1 pr-2 py-1"
       >
         <input
           type="checkbox"
@@ -47,31 +47,33 @@
 </template>
 
 <script setup>
-import AppCheckbox from '@/components/UI/Forms/AppCheckbox.vue'
-import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue'
-import { ref, computed } from 'vue'
+import AppCheckbox from '@/components/UI/Forms/AppCheckbox.vue';
+import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
+import { ref, computed } from 'vue';
 
 // На этом этапе мне нужно передать props chekced, это значит объект filter должен иметь свойство isChecked
 const props = defineProps({
   filter: {
     type: Object,
-    defaults: {}
-  }
-})
+    defaults: {},
+  },
+});
 
-const inputFilterValue = ref('')
+const inputFilterValue = ref('');
 
-const emit = defineEmits(['setFilter'])
+const emit = defineEmits(['setFilter']);
 
 const filteredFilterItems = computed(() => {
-  return props.filter.Items.filter(el => el.Name.toLowerCase().includes(inputFilterValue.value.toLowerCase()))
-})
+  return props.filter.Items.filter((el) =>
+    el.Name.toLowerCase().includes(inputFilterValue.value.toLowerCase())
+  );
+});
 
 function cleanInputFilterValue() {
-  inputFilterValue.value = ''
+  inputFilterValue.value = '';
 }
 
 function checkboxClick(filter, event) {
-  emit('setFilter', filter, event)
+  emit('setFilter', filter, event);
 }
 </script>

@@ -4,7 +4,7 @@
     :class="position === 'center' ? 'justify-center' : ''"
     aria-label="Breadcrumb"
   >
-    <ol class="inline-flex mb-4 items-center space-x-3 relative">
+    <ol class="inline-flex mb-4 items-center space-x-3 relative flex-wrap">
       <!-- Статичный первый элемент -->
       <li class="inline-flex items-center">
         <NuxtLink
