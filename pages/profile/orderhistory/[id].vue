@@ -50,6 +50,7 @@
               :commentMoney="order.comment_money"
               :orderIsConfirming="orderIsConfirming"
             />
+            <!-- товары -->
             <order-table :items="order.items" />
           </div>
           <div class="col-span-12 xl:col-span-3 space-y-6">
@@ -177,7 +178,7 @@ async function ordEdit(id) {
     isEditing.value = true;
     const res = await useCustomFetch(`apissz/EditOrd/?id=${id}`);
 
-    console.log('ordEdit', res);
+    // console.log('ordEdit', res);
 
     if (res.success) {
       orderStore.setEditOrder({ id, code: order.value.code });

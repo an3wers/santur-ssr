@@ -63,14 +63,12 @@ export const useCartStore = defineStore('cart', {
         if (response.success) {
           return response.data;
         } else {
-          throw new Error('При очищении корзины произошла ошибка');
+          throw new Error(
+            response.message || 'При очищении корзины произошла ошибка'
+          );
         }
       } catch (error) {
-        appMessageStore.openWithTimer(
-          'error',
-          'При очищении корзины произошла ошибка',
-          'error'
-        );
+        appMessageStore.openWithTimer('error', error.message, 'error');
 
         return error;
       }
@@ -80,7 +78,6 @@ export const useCartStore = defineStore('cart', {
       try {
         const response = await useCustomFetch('apissz/GetCart');
         if (response.success) {
-          // console.log('getCart', response.data)
           this.cartId = response.data.id;
           this.cartCount = response.data.qtyitems;
           this.cartSum = response.data.summs;
@@ -88,10 +85,9 @@ export const useCartStore = defineStore('cart', {
           this.cartItems = response.data.items;
           this.cartWeight = response.data.weight;
           this.cartContract = response.data.dg;
-          // console.log("Корзина", response.data);
           return response.data;
         } else {
-          throw new Error('Error cart');
+          throw new Error(response.message || 'Cart error');
         }
       } catch (error) {
         return error;
@@ -101,15 +97,12 @@ export const useCartStore = defineStore('cart', {
       try {
         const response = await useCustomFetch('apissz/GetCartShortInfo');
         if (response.success) {
-          console.log('getShortCart', response.data);
-          // this.cart = response.data
           this.cartCount = response.data.qtyitems;
           this.cartSum = response.data.summs;
           this.cartSumRaw = response.data.summ;
           this.cartState = response.data.state;
-          // console.log('Получение маленькой корзины: ', response.data)
         } else {
-          throw new Error('Error cart');
+          throw new Error(response.message || 'Cart error');
         }
       } catch (error) {
         console.log(error.message);
@@ -117,7 +110,6 @@ export const useCartStore = defineStore('cart', {
     },
     async changeCount(product, count) {
       const appMessageStore = useAppMessage();
-      // ChangeCartItem/?gcode=...&qty=...
 
       try {
         const response = await useCustomFetch(
@@ -141,7 +133,6 @@ export const useCartStore = defineStore('cart', {
         const response = await useCustomFetch(
           `apissz/SelectDg/?dgCode=${code}`
         );
-        // console.log(response); // ok
 
         if (response.success) {
           return response;

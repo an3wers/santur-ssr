@@ -13,7 +13,11 @@
         <AppButton btnSize="xs" @click="closeHandler(id)" btnType="outline"
           >Отменить изменеия</AppButton
         >
-        <AppButton btnSize="xs" @click="saveHandler" btnType="outline"
+        <AppButton
+          btnSize="xs"
+          :disabled="!isSave"
+          @click="saveHandler"
+          btnType="outline"
           >Сохранить заказ</AppButton
         >
       </div>
@@ -22,10 +26,12 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { useCartStore } from '@/stores/cart';
 import { useAppMessage } from '@/stores/appMessage';
+import { useOrderStore } from '@/stores/order';
 
 defineProps({
   id: {
@@ -33,13 +39,19 @@ defineProps({
   },
 });
 
+const orderStore = useOrderStore();
 const router = useRouter();
 const cartStore = useCartStore();
 const appMessageStore = useAppMessage();
-
+const route = useRoute();
 function saveHandler() {
   router.push({ path: '/checkout' });
 }
+
+const isSave = computed(() => {
+  // console.log(route.path);
+  return route?.name !== 'checkout';
+});
 
 async function closeHandler(id) {
   // Чищю корзину и делаю редирект в заказ
@@ -52,6 +64,7 @@ async function closeHandler(id) {
       'error'
     );
   } else {
+    orderStore.cleanEditOrder();
     router.push({ path: `/profile/orderhistory/${id}` });
     await cartStore.getCart();
   }

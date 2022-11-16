@@ -113,7 +113,7 @@
           btnType="light"
           btnSize="xs"
           aria-label="Уменьшить"
-          class="absolute left-2"
+          class="absolute left-1"
           @click="changeValueHandler('remove', product.code)"
         >
           <remove-icon-20 />
@@ -135,7 +135,7 @@
           btnType="light"
           btnSize="xs"
           aria-label="Добавить"
-          class="absolute right-2"
+          class="absolute right-1"
           @click="changeValueHandler('add', product.code)"
         >
           <plus-icon-20 />
@@ -157,9 +157,6 @@ import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 import PlusIcon20 from '@/components/UI/Icons/PlusIcon_20.vue';
 import RemoveIcon20 from '@/components/UI/Icons/RemoveIcon_20.vue';
 import BookmarkIconFill20 from '@/components/UI/Icons/BookmarkIconFill_20.vue';
-// import { useToFixedNumber, setCountProduct } from "@/utils/helpers";
-// import { useCustomFetch } from "@/utils/fetch";
-
 import { useProfileStore } from '@/stores/profile';
 import { useCartStore } from '@/stores/cart';
 import { useCategoryStore } from '@/stores/category';
@@ -199,7 +196,7 @@ async function addCartHandler() {
     props.product.code,
     props.product.salekrat
   );
-  if (res instanceof Error || res == undefined) {
+  if (res instanceof Error) {
     console.log('Error', res);
     // Сделать Message
   } else {
@@ -240,7 +237,7 @@ async function changeValueHandler(param, product) {
         productAmountInCart.value
       );
 
-      if (res instanceof Error || res == undefined) {
+      if (res instanceof Error) {
         console.log('Error', res);
       } else {
         await cartStore.getShortCart();
@@ -248,7 +245,7 @@ async function changeValueHandler(param, product) {
       }
     } else if (productAmountInCart.value == 0) {
       const res = await cartStore.removeFromCart(product);
-      if (res instanceof Error || res == undefined) {
+      if (res instanceof Error) {
         console.log('Error', res);
       } else {
         await cartStore.getShortCart();
@@ -277,7 +274,7 @@ async function setNewValue() {
         props.product.code,
         productAmountInCart.value
       );
-      if (res instanceof Error || res == undefined) {
+      if (res instanceof Error) {
         console.log('Error', res);
       } else {
         await cartStore.getShortCart();
@@ -285,7 +282,7 @@ async function setNewValue() {
       }
     } else if (productAmountInCart.value == 0) {
       const res = await cartStore.removeFromCart(props.product.code);
-      if (res instanceof Error || res == undefined) {
+      if (res instanceof Error) {
         console.log('Error', res);
       } else {
         await cartStore.getShortCart();

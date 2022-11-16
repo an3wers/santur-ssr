@@ -169,7 +169,7 @@ const categoryIsUpdated = ref(true);
 const isMobileFilters = ref(false);
 
 const route = useRoute();
-const router = useRouter();
+// const router = useRouter();
 
 const catalogStore = useCatalogStore();
 const categoryStore = useCategoryStore();
@@ -385,7 +385,7 @@ async function handleChip(chip) {
   categoryIsUpdated.value = false;
   page.value = 1;
 
-  if (chip.name == 'price') {
+  if (chip.name === 'price') {
     // сбросить фильтр по цене
     // метод remove set price
     await handleResetPrice('Цена', chip.type);
@@ -426,7 +426,6 @@ async function handleChangePage(p) {
 }
 
 // TODO: Рефакторинг этих функций
-
 async function handleChangeMaxLimitPrice(value, name) {
   categoryIsUpdated.value = false;
   page.value = 1;

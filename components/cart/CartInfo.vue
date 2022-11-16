@@ -107,13 +107,15 @@ import { useRouter } from 'vue-router';
 import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
 import AppSelector from '@/components/UI/Forms/AppSelector.vue';
 import { useProfileStore } from '@/stores/profile';
-import { useAppMessage } from '../../stores/appMessage';
+import { useAppMessage } from '@/stores/appMessage';
+import { useOrderStore } from '@/stores/order';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const appMessageStore = useAppMessage();
 const router = useRouter();
+const orderStore = useOrderStore();
 const contarctSelected = ref(
   cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ''
 );
@@ -165,6 +167,7 @@ async function editOrderCancelHandler(id) {
       'error'
     );
   } else {
+    orderStore.cleanEditOrder();
     router.push({ path: `/profile/orderhistory/${id}` });
     await cartStore.getCart();
   }

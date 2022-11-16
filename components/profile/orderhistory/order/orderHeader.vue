@@ -35,7 +35,12 @@
       <div class="flex justify-start md:justify-end space-x-2">
         <app-button
           @click="editOrder(id)"
-          :disabled="!editAvailable || cartStore.cartId"
+          :disabled="
+            !editAvailable ||
+            cartStore.cartId ||
+            isEditing ||
+            orderStore.editOrder.id
+          "
           btnType="secondary"
         >
           <btn-spinner v-if="isEditing" />
@@ -43,7 +48,9 @@
         </app-button>
         <app-button
           @click="$emit('onCancel', id)"
-          :disabled="!deleteAvailable"
+          :disabled="
+            !deleteAvailable || isOrderCanceling || orderStore.editOrder.id
+          "
           btnType="secondary"
         >
           <btn-spinner v-if="isOrderCanceling" />
@@ -85,6 +92,7 @@
                   Скачать (xlsx)
                 </button>
                 <button
+                  :disabled="orderStore.editOrder.id"
                   @click="$emit('onCopy', id)"
                   class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
                 >
@@ -106,11 +114,13 @@ import MoreHorize24 from '@/components/UI/Icons/MoreHorize_24.vue';
 import InfoIcon24 from '@/components/UI/Icons/InfoIcon_24.vue';
 import Popper from 'vue3-popper';
 import { useCartStore } from '@/stores/cart';
+import { useOrderStore } from '@/stores/order';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 import SubMenu from '@/components/UI/DropDown/SubMenu.vue';
 
 const cartStore = useCartStore();
+const orderStore = useOrderStore();
 const menuMoreIsopen = ref(false);
 const indexSubmenu = 98;
 

@@ -22,21 +22,22 @@
 defineProps({
   size: {
     type: String,
-    default: "md", // xs lg xl
+    default: 'md', // xs lg xl
   },
   type: {
     type: String,
-    default: "light",
+    default: 'light',
   },
 });
 
 const spinnerSize = {
-  xs: "w-4 h-4",
-  md: "w-5 h-5",
-  lg: "w-8 h-8",
+  xs: 'w-4 h-4',
+  md: 'w-5 h-5',
+  lg: 'w-8 h-8',
 };
 
 const spinnerType = {
-  light: "text-white",
+  light: 'text-white',
+  dark: 'text-gray-700',
 };
 </script>

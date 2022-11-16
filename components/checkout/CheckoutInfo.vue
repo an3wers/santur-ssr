@@ -71,26 +71,26 @@
     <div class="flex flex-col space-y-3 mt-4">
       <!-- Кнопки -->
       <app-button
-        :disabled="!isConfirm"
+        :disabled="!isConfirm || btnProcessing"
         btnType="primary"
         @click="onSubmit"
         btnSize="lg"
       >
         <btn-spinner v-if="btnProcessing" />
-        {{ cartStore.cartId ? "Сохранить заказ" : "Оформить заказ" }}
+        {{ cartStore.cartId ? 'Сохранить заказ' : 'Оформить заказ' }}
       </app-button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useCartStore } from "@/stores/cart";
-import { useAuthStore } from "@/stores/auth";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import { ref } from "vue";
-import { useProfileStore } from "@/stores/profile";
-import BtnSpinner from "@/components/UI/Spinner/BtnSpinner.vue";
-import AppSpinnerMedium from "@/components/loaders/AppSpinnerMedium.vue";
+import { useCartStore } from '@/stores/cart';
+import { useAuthStore } from '@/stores/auth';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import { ref } from 'vue';
+import { useProfileStore } from '@/stores/profile';
+import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
+import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();
@@ -109,7 +109,7 @@ defineProps({
 });
 
 const contarctSelected = ref(
-  cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ""
+  cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ''
 );
 
 async function contractHandler(val) {
@@ -118,7 +118,7 @@ async function contractHandler(val) {
   const res = await cartStore.changeContractInCart(val);
 
   if (res instanceof Error) {
-    appMessageStore.open("error", res.message, "error");
+    appMessageStore.open('error', res.message, 'error');
   } else {
     // await profileStore.loadProfile();
     await cartStore.getCart();
@@ -130,9 +130,9 @@ async function contractHandler(val) {
   // await cartStore.changeContractInCart(value)
 }
 
-const emit = defineEmits(["onClick"]);
+const emit = defineEmits(['onClick']);
 
 function onSubmit() {
-  emit("onClick");
+  emit('onClick');
 }
 </script>

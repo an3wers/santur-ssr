@@ -47,6 +47,7 @@ import AppGoBack from '@/components/AppGoBack.vue';
 import CheckoutPersonInfo from '@/components/checkout/CheckoutPersonInfo.vue';
 import CheckoutEmptyState from '@/components/checkout/CheckoutEmptyState.vue';
 import { useAppMessage } from '@/stores/appMessage';
+import { useOrderStore } from '@/stores/order';
 
 useHead({
   title: 'Оформление заказа',
@@ -57,7 +58,7 @@ const authStore = useAuthStore();
 const checkoutIsLoaded = ref(false);
 const appMessageStore = useAppMessage();
 const router = useRouter();
-
+const orderStore = useOrderStore();
 const btnProcessing = ref(false);
 
 const getMethod = ref('self');
@@ -121,6 +122,7 @@ async function orderSubmitHandler() {
   } else {
     // console.log(res);
     if (cartStore.cartId) {
+      orderStore.cleanEditOrder();
       await cartStore.getCart();
       btnProcessing.value = false;
       router.push({ path: `/profile/orderhistory/${res}` });

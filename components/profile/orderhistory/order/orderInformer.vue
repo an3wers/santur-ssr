@@ -1,56 +1,61 @@
 <template>
   <app-informer type="warning" icon="info">
     <div>
-      <p v-if="statusDescr">{{statusDescr}}</p>
-      <p v-if="commentGood">{{commentGood}}</p>
-      <p v-if="commentMoney">{{commentMoney}}</p>
-      <p v-if="commentChange">{{commentChange}}</p>
+      <p v-if="statusDescr">{{ statusDescr }}</p>
+      <p v-if="commentGood">{{ commentGood }}</p>
+      <p v-if="commentMoney">{{ commentMoney }}</p>
+      <p v-if="commentChange">{{ commentChange }}</p>
     </div>
-    <app-button :disabled="!nextstepAvailable" @click="$emit('onConfirmOrder', id)" btnType="primary" btnSize="md">
+    <app-button
+      :disabled="!nextstepAvailable || orderIsConfirming"
+      @click="$emit('onConfirmOrder', id)"
+      btnType="primary"
+      btnSize="md"
+    >
       <btn-spinner v-if="orderIsConfirming" />
-      {{nextstepTitle}}
+      {{ nextstepTitle }}
     </app-button>
   </app-informer>
 </template>
 
 <script setup>
-import AppInformer from '@/components/AppInformer.vue'
-import AppButton from '@/components/UI/Buttons/AppButton.vue'
-import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue'
+import AppInformer from '@/components/AppInformer.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
 
 defineProps({
   id: {
-    type: Number
+    type: Number,
   },
   nextstepAvailable: {
     type: Boolean,
-    default: false
+    default: false,
   },
   nextstepTitle: {
     type: String,
-    default: ''
+    default: '',
   },
   statusDescr: {
     type: String,
-    default: ''
+    default: '',
   },
   commentChange: {
     type: String,
-    default: ''
+    default: '',
   },
   commentGood: {
     type: String,
-    default: ''
+    default: '',
   },
   commentMoney: {
     type: String,
-    default: ''
+    default: '',
   },
   orderIsConfirming: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-defineEmits(['onConfirmOrder'])
+defineEmits(['onConfirmOrder']);
 </script>

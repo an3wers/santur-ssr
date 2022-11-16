@@ -96,7 +96,7 @@
                     :disabled="!isRemoveBtnCount"
                     @click="changeCountHandler('remove')"
                     class="absolute left-3 disabled:opacity-50"
-                    aria-label="Уменьшить количество"
+                    aria-label="Уменьшить"
                   >
                     <remove-icon-24 />
                   </button>
@@ -115,7 +115,7 @@
                   <button
                     :disabled="!isAddBtnCount"
                     class="disabled:opacity-50 absolute right-3"
-                    aria-label="Добавить количество"
+                    aria-label="Добавить"
                     @click="changeCountHandler('add')"
                   >
                     <plus-icon-24 />
@@ -393,7 +393,7 @@ async function setProductValue() {
           product.value.code,
           selectedValue.value
         );
-        if (res instanceof Error || res == undefined) {
+        if (res instanceof Error) {
           console.log('Error: ', res);
         } else {
           isBtnSpinner.value = true;
@@ -404,7 +404,7 @@ async function setProductValue() {
       } else if (selectedValue.value == 0) {
         // Удлаить из корзины
         const res = await cartStore.removeFromCart(product.value.code);
-        if (res instanceof Error || res == undefined) {
+        if (res instanceof Error) {
           console.log('Error', res);
         } else {
           await cartStore.getShortCart();

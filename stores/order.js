@@ -1,22 +1,28 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useOrderStore = defineStore('order', {
   state: () => {
     return {
-        editOrder: {
-            id: 0,
-            code: ''
-        }
-    }
+      editOrder: {
+        id: 0,
+        code: '',
+      },
+    };
   },
-  getters: {
-
-  },
+  getters: {},
   actions: {
     setEditOrder(order) {
-        console.log(order)
-        this.editOrder.id = order.id
-        this.editOrder.code = order.code
-    }
-  }
-}) 
+      // console.log(order)
+      this.editOrder.id = order.id;
+      this.editOrder.code = order.code;
+    },
+    cleanEditOrder() {
+      this.$patch({
+        editOrder: {
+          id: 0,
+          code: '',
+        },
+      });
+    },
+  },
+});
