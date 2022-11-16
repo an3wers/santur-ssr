@@ -2,8 +2,6 @@ import { defineStore } from 'pinia';
 import { useCartStore } from './cart';
 import { useProfileStore } from './profile';
 import { useAppMessage } from './appMessage';
-// import { useCustomFetch } from '@/utils/fetch'
-// import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
@@ -16,7 +14,7 @@ export const useAuthStore = defineStore('auth', {
       },
       modalAuthIsOpen: false,
       sessionCookie: '',
-      userCookie: '', //localStorage.getItem('usrcookie') || '',
+      userCookie: '',
     };
   },
   getters: {
@@ -52,7 +50,6 @@ export const useAuthStore = defineStore('auth', {
           this.user.name = response.data.name;
           this.user.phone = response.data.phone;
           this.sessionCookie = response.data.sid;
-          // console.log('getiam', response.data);
         }
       } catch (error) {
         console.log(error);
@@ -84,7 +81,7 @@ export const useAuthStore = defineStore('auth', {
         } else {
           throw new Error(
             response.message || 'При авторизации произошла ошибка'
-          ); // обработка ощибки
+          );
         }
       } catch (error) {
         appMessageStore.open('error', error.message, 'error');
@@ -93,29 +90,10 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async logout() {
-      // const cartStore = useCartStore();
-      // const profileStore = useProfileStore();
-      // const appMessageStore = useAppMessage();
-      // ??
-      // const router = useRouter()
-
       try {
         const response = await useCustomFetch('apiauth/logout');
         if (response.success) {
           return response.data;
-
-          // if(path.includes('profile') || path.includes('checkout')) {
-
-          //   // navigateTo('/')
-          //   router.push('/')
-
-          // }
-
-          // await this.setUser()
-          // await cartStore.getCart()
-          // await profileStore.loadProfile()
-          // await profileStore.getFavorities()
-          // appMessageStore.openWithTimer('info', 'Вы вышли из профиля', 'info')
         } else {
           throw new Error(
             response.message || 'При выходе из профиля произошла ошибка'
@@ -123,7 +101,6 @@ export const useAuthStore = defineStore('auth', {
         }
       } catch (error) {
         return error;
-        // appMessageStore.open('error', error.message, 'error')
       }
     },
   },

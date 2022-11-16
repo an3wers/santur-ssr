@@ -1,0 +1,12 @@
+User-Agent: *
+Disallow: /profile/
+Disallow: /search
+Disallow: /thank
+Disallow: /nuxt
+Disallow: /apissz/
+Disallow: /apiauth/
+Disallow: */?
+Disallow: */*?
+Allow: /*/*.js             
+Allow: /*/*.css
+host: https://santur.ru

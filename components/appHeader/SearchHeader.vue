@@ -1,14 +1,14 @@
 <template>
   <div class="header__search grow relative">
     <form @submit.prevent="searchRequestSubmit" class="relative">
-      <!-- :value="$route.query.search || mainStore.searchValueStore" -->
       <input
+        ref="searchField"
         :value="mainStore.searchValueStore"
         @input="searchHandler($event.target.value)"
+        @focus="inputFocusHandler"
         class="pl-2 pr-6 py-2 lg:pl-4 lg:pr-10 lg:py-2.5 text-base lg:text-lg leading-5 w-full rounded-md border form-input bg-transparent border-gray-300 focus:border-primary focus:ring focus:ring-blue-200 focus:ring-opacity-50 disabled:bg-gray-100 disabled:text-gray-500"
         type="text"
         placeholder="Найти товары"
-        @focus="inputFocusHandler"
       />
       <!-- @blur="inputBlurHandler" -->
       <span
@@ -33,7 +33,8 @@
     <!-- search results -->
     <div
       v-if="mainStore.searchResultStore.length && isResultSearch"
-      class="absolute р-44 bg-white w-full shadow-lg px-2 py-6 z-10 rounded-b-lg"
+      ref="searchResultContainer"
+      class="search-result absolute р-44 bg-white w-full shadow-lg px-2 py-6 z-10 rounded-b-lg"
     >
       <ul
         class="min-h-16 max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200 scrollbar-thumb-rounded-md"
@@ -52,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import SearchIcon24 from '@/components/UI/Icons/SearchIcon_24.vue';
 import SearchIcon20 from '@/components/UI/Icons/SearchIcon_20.vue';
@@ -70,6 +71,8 @@ const appMessage = useAppMessage();
 mainStore.searchValueStore = route?.query?.search || '';
 
 const isResultSearch = ref(false);
+const searchResultContainer = ref(null);
+const searchField = ref(null);
 
 const isClearBtn = computed(() => {
   return route?.query?.search || mainStore.searchValueStore || '';
@@ -86,15 +89,29 @@ function clearSearchHandler() {
   mainStore.searchResultStore = [];
 }
 
-// function inputBlurHandler() {
-//   const tmr = setTimeout(() => {
-//     // isResultSearch.value = false;
-//     clearTimeout(tmr);
-//   }, 100);
-// }
-
 watch(route, () => {
   isResultSearch.value = false;
+});
+
+const hideResult = (e) => {
+  if (searchResultContainer.value && searchField.value) {
+    if (
+      !searchResultContainer.value.contains(e.target) &&
+      !searchField.value.contains(e.target)
+    ) {
+      isResultSearch.value = false;
+      window.removeEventListener('click', hideResult);
+    }
+  }
+};
+
+watch(isResultSearch, (newVal, oldVal) => {
+  if (newVal) {
+    window.addEventListener('click', hideResult);
+  }
+  if (!newVal) {
+    window.removeEventListener('click', hideResult);
+  }
 });
 
 function inputFocusHandler() {
@@ -103,15 +120,18 @@ function inputFocusHandler() {
   }
 }
 
+onMounted(() => {
+  if (isResultSearch.value) {
+    window.addEventListener('click', (e) => {
+      console.log(e.target);
+    });
+  }
+});
+
 const timer = ref(true);
 
 function searchHandler(value) {
-  mainStore.searchValueStore = value.trim();
-
-  /*
-    Если произвольный запрос, то роутинг на страницу search
-    Роутинг в категорию
-  */
+  mainStore.searchValueStore = value;
 
   if (mainStore.searchValueStore) {
     isResultSearch.value = true;
@@ -130,7 +150,7 @@ function searchHandler(value) {
         if (res.success) {
           mainStore.searchResultStore = res.data;
         } else {
-          throw new Error(res.message || 'При поиски произошла ошибка');
+          throw new Error(res.message || 'При поиске произошла ошибка');
         }
       } catch (error) {
         // console.log(error);
