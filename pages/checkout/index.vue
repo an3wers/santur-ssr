@@ -77,6 +77,7 @@ if (process.client) {
 }
 
 async function loadCart() {
+  checkoutIsLoaded.value = false;
   const res = await cartStore.getCart();
   if (res instanceof Error) {
     // TODO: Обработать ошибку
@@ -131,13 +132,5 @@ async function orderSubmitHandler() {
       router.push({ path: '/thank', query: { order: res } });
     }
   }
-
-  // console.log(
-  //   'ЗАКАЗ:',
-  //   getMethod.value,
-  //   deliveryAddress.value,
-  //   orderComment.value,
-  //   payMethod.value
-  // )
 }
 </script>

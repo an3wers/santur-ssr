@@ -43,7 +43,7 @@
           "
           btnType="secondary"
         >
-          <btn-spinner v-if="isEditing" />
+          <btn-spinner type="dark" v-if="isEditing" />
           Изменить
         </app-button>
         <app-button
@@ -53,7 +53,7 @@
           "
           btnType="secondary"
         >
-          <btn-spinner v-if="isOrderCanceling" />
+          <btn-spinner type="dark" v-if="isOrderCanceling" />
           Отменить
         </app-button>
         <div class="relative">
