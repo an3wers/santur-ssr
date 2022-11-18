@@ -179,5 +179,27 @@ export const useProfileStore = defineStore('profile', {
         console.log(error.message);
       }
     },
+    async sendForgotPass(email) {
+      const appMessageStore = useAppMessage();
+      try {
+        const response = await useCustomFetch(`apissz/LoginFogot/?u=${email}`);
+        console.log(response);
+        if (response.success) {
+          appMessageStore.open(
+            'success',
+            response.data || `Забытый пароль отправлен на почту ${email}`,
+            'success'
+          );
+          return response.data;
+        } else {
+          throw new Error(
+            response.message || 'При отправке пароля произошла ошибка'
+          );
+        }
+      } catch (error) {
+        appMessageStore.open('error', error.message, 'error');
+        return error;
+      }
+    },
   },
 });

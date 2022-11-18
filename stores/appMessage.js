@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useAppMessage = defineStore('appMessage', {
   state: () => {
@@ -6,32 +6,32 @@ export const useAppMessage = defineStore('appMessage', {
       isShow: false,
       message: '',
       type: 'info',
-      icon: 'info'
-    }
+      icon: 'info',
+    };
   },
   getters: {},
   actions: {
-    open(type='info', message, icon='info') {
-      this.isShow = true
-      this.type = type
-      this.message = message
-      this.icon = icon
+    open(type = 'info', message, icon = 'info') {
+      this.isShow = true;
+      this.type = type;
+      this.message = message;
+      this.icon = icon;
     },
 
     openWithTimer(type, message, icon) {
-      this.open(type, message, icon)
+      this.open(type, message, icon);
       const timeout = setTimeout(() => {
-        this.close()
-        clearTimeout(timeout)
-      }, 8000)
+        this.close();
+        clearTimeout(timeout);
+      }, 16000);
     },
 
     close() {
       // deafult state
-      this.isShow = false
-      this.message = ''
-      this.type = 'info'
-      this.icon = 'info'
-    }
-  }
-})
+      this.isShow = false;
+      this.message = '';
+      this.type = 'info';
+      this.icon = 'info';
+    },
+  },
+});

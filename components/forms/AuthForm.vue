@@ -32,10 +32,10 @@
         <div v-if="errorPsw && metaPsw.touched" class="text-sm text-red-500">
           {{ errorPsw }}
         </div>
-        <div>
+        <div class="text-right">
           <app-button
-            class="-ml-3"
-            @click="rememberPassword"
+            class=""
+            @click="handleRememberPassword"
             btnType="link"
             btnSize="md"
             >Забыли пароль?</app-button
@@ -80,17 +80,17 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import AppInput from "@/components/UI/Forms/AppInput.vue";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
+import { ref, computed } from 'vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
 
-import { useAuthStore } from "@/stores/auth";
-import { useAppMessage } from "@/stores/appMessage";
-import { useCartStore } from "@/stores/cart";
-import { useProfileStore } from "@/stores/profile";
+import { useAuthStore } from '@/stores/auth';
+import { useAppMessage } from '@/stores/appMessage';
+import { useCartStore } from '@/stores/cart';
+import { useProfileStore } from '@/stores/profile';
 
-import { useField, useForm } from "vee-validate";
-import * as yup from "yup";
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
 
 const authStore = useAuthStore();
 const appMessageStore = useAppMessage();
@@ -101,17 +101,19 @@ const authIsProcess = ref(false);
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
 
+const emits = defineEmits(['onRememberPass']);
+
 const {
   value: emailU,
   errorMessage: errorEmail,
   handleBlur: blurEmail,
   meta: metaEmail,
 } = useField(
-  "emailU",
+  'emailU',
   yup
     .string()
-    .email("Введите корректный email")
-    .required("Введите ваш email")
+    .email('Введите корректный email')
+    .required('Введите ваш email')
     .trim()
 );
 
@@ -120,7 +122,7 @@ const {
   errorMessage: errorPsw,
   handleBlur: blurPsw,
   meta: metaPsw,
-} = useField("pswU", yup.string().required("Введите пароль").trim());
+} = useField('pswU', yup.string().required('Введите пароль').trim());
 
 const isTooManyAttempts = computed(() => {
   return submitCount.value >= 10;
@@ -139,7 +141,8 @@ const loginHandler = handleSubmit(async (values, { setErrors }) => {
   authIsProcess.value = false;
 });
 
-function rememberPassword() {
-  console.log("Remember password");
+function handleRememberPassword() {
+  // console.log("Remember password");
+  emits('onRememberPass');
 }
 </script>

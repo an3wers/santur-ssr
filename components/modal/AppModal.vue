@@ -1,48 +1,52 @@
 <template>
   <!-- h-modal md:h-full -->
-  <div
-    tabindex="-1"
-    aria-hidden="true"
-    class="modal-area overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 justify-center items-center flex"
-    @mousedown="onClose($event, 'area')"
-  >
-    <!-- h-full md:h-auto-->
-    <div :class="[sizeMap[modalSize]]" class="relative p-4 w-full">
-      <!-- Modal content -->
-      <div class="bg-white rounded-lg shadow">
-        <div class="p-6 space-y-6">
-          <!-- Header -->
-          <div class="flex justify-between items-start">
-            <div class="text-xl font-bold">
-              <slot name="header">Заголовок</slot>
+  <div>
+    <div
+      tabindex="-1"
+      aria-hidden="true"
+      class="modal-area overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 justify-center items-center flex"
+      @mousedown="onClose($event, 'area')"
+    >
+      <!-- h-full md:h-auto-->
+      <div :class="[sizeMap[modalSize]]" class="relative p-4 w-full">
+        <!-- Modal content -->
+        <div class="bg-white rounded-lg shadow">
+          <div class="p-6 space-y-6">
+            <!-- Header -->
+            <div class="flex justify-between items-start">
+              <div class="text-xl font-bold">
+                <slot name="header">Заголовок</slot>
+              </div>
+              <AppButtonIcon
+                btnType="light"
+                @click="onClose($event, 'closeBtn')"
+                class="ml-4 -mt-[6px] modal-close-btn"
+                aria-label="close"
+              >
+                <close-icon-24 color="#111827" />
+              </AppButtonIcon>
             </div>
-            <button
-              @click="onClose($event, 'closeBtn')"
-              class="ml-4 modal-close-btn"
-              aria-label="close"
+            <!-- Body -->
+            <div
+              class="overflow-y-auto app-modal-body scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200"
             >
-              <close-icon-24 color="#111827" />
-            </button>
+              <slot name="body">Содержание модального окна</slot>
+            </div>
           </div>
-          <!-- Body -->
-          <div
-            class="overflow-y-auto app-modal-body scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200"
-          >
-            <slot name="body">Содержание модального окна</slot>
-          </div>
+          <!-- Modal footer -->
         </div>
-        <!-- Modal footer -->
       </div>
     </div>
+    <div
+      modal-backdrop=""
+      class="bg-gray-900 bg-opacity-50 fixed inset-0 z-40"
+    ></div>
   </div>
-  <div
-    modal-backdrop=""
-    class="bg-gray-900 bg-opacity-50 fixed inset-0 z-40"
-  ></div>
 </template>
 
 <script setup>
 import CloseIcon24 from '@/components/UI/Icons/CloseIcon_24.vue';
+import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 
 defineProps({
   modalSize: {

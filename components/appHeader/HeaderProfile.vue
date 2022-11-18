@@ -30,7 +30,7 @@
         @closeSubmenu="onClose"
         :idx="idx"
         position="right"
-        isOpen="profileMenuIsOpen"
+        :isOpen="profileMenuIsOpen"
       >
         <div
           v-for="(item, index) in getDropdownMenu"

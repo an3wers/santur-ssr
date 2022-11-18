@@ -97,13 +97,33 @@
         modalSize="lg"
         v-if="authStore.getIsOpenAuthModal"
       >
-        <template #header> Войти в профиль </template>
+        <template #header>
+          <span v-if="!isRememberPassMode">Войти в профиль</span>
+          <div v-else class="flex items-start space-x-2">
+            <AppButtonIcon
+              @click="rememberPassToggle"
+              class="-mt-[6px]"
+              btnType="light"
+            >
+              <arrow-back-24 />
+            </AppButtonIcon>
+            <span>Напомнить пароль</span>
+          </div>
+        </template>
         <template #body>
-          <p class="mb-4">
-            Или <NuxtLink to="/registration">зарегистрируйтесь</NuxtLink>, если
-            аккаунта еще нет.
-          </p>
-          <auth-form />
+          <div v-if="!isRememberPassMode">
+            <p class="mb-4">
+              Или <NuxtLink to="/registration">зарегистрируйтесь</NuxtLink>,
+              если аккаунта еще нет.
+            </p>
+            <auth-form @onRememberPass="rememberPassToggle" />
+          </div>
+          <div v-else>
+            <RememberPasswordModal
+              @rememberPassword="remeberPasswordHandler"
+              controlSize="lg"
+            />
+          </div>
         </template>
       </app-modal>
     </Teleport>
@@ -111,13 +131,13 @@
 </template>
 
 <script setup>
-// import { ref, computed, onMounted } from "vue";
+import { ref } from 'vue';
 // import { useRouter, useRoute } from 'vue-router';
 import NavHeader from '@/components/appHeader/NavigationHeader.vue';
 import ContactsHeader from '@/components/appHeader/ContactsHeader.vue';
 import CatalogHeader from '@/components/appHeader/CatalogHeader.vue';
 import SearchHeader from '@/components/appHeader/SearchHeader.vue';
-import AppButtonLarge from '@/components/UI/Buttons/AppButtonLarge.vue';
+// import AppButtonLarge from '@/components/UI/Buttons/AppButtonLarge.vue';
 import CatalogDropdown from '@/components/appHeader/CatalogDropdown.vue';
 import CartIcon24 from '@/components/UI/Icons/CartIcon_24.vue';
 import AuthForm from '@/components/forms/AuthForm.vue';
@@ -128,6 +148,9 @@ import { useAuthStore } from '@/stores/auth';
 import HeaderProfile from '@/components/appHeader/HeaderProfile.vue';
 import MobileMenu from '@/components/appHeader/MobileMenu.vue';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
+import ArrowBack24 from '@/components/UI/Icons/ArrowBack_24.vue';
+import RememberPasswordModal from '@/components/profile/userInfo/RememberPasswordModal.vue';
 
 const authStore = useAuthStore();
 const cartStore = useCartStore();
@@ -135,7 +158,19 @@ const catalogStore = useCatalogStore();
 // const router = useRouter();
 // const route = useRoute();
 
+const isRememberPassMode = ref(false);
+
 function closeAuthModalHandler() {
   authStore.closeAuthModal();
+}
+
+function rememberPassToggle() {
+  // console.log('toggle');
+  isRememberPassMode.value = !isRememberPassMode.value;
+}
+
+function remeberPasswordHandler(email) {
+  // console.log(email);
+  rememberPassToggle();
 }
 </script>

@@ -2,7 +2,10 @@
   <div class="userinfo-wrap">
     <ProfilePageWrapper title="Данные профиля">
       <div v-if="authStore.user.id && profileStore.profile.name !== 'Гость'">
-        <user-info-card @changePassword="toggleModalChangePassword" />
+        <user-info-card
+          @changePassword="toggleModalChangePassword"
+          @rememberPassword="rememberPasswordToggle"
+        />
       </div>
 
       <!-- empty state -->
@@ -11,6 +14,7 @@
       <Teleport to="body">
         <app-modal
           modalSize="md"
+          key="change-modal"
           @close="toggleModalChangePassword"
           v-if="isOpenChangePasswordModal"
         >
@@ -18,6 +22,20 @@
           <template #body>
             <!-- Компонент изменения пароля -->
             <change-password-modal @changePassword="changePaswordHandler" />
+          </template>
+        </app-modal>
+        <app-modal
+          modalSize="md"
+          key="remember-modal"
+          v-if="isOpenRememberPasswordModal"
+          @close="rememberPasswordToggle"
+        >
+          <template #header>Напомнить пароль</template>
+          <template #body>
+            <RememberPasswordModal
+              @rememberPassword="remeberPasswordHandler"
+              controlSize="md"
+            ></RememberPasswordModal>
           </template>
         </app-modal>
       </Teleport>
@@ -37,6 +55,7 @@ import AppModal from '@/components/modal/AppModal.vue';
 import ChangePasswordModal from '@/components/profile/userInfo/ChangePasswordModal.vue';
 import { useAppMessage } from '@/stores/appMessage';
 import PageLoader from '@/components/loaders/PageLoader.vue';
+import RememberPasswordModal from '@/components/profile/userInfo/RememberPasswordModal.vue';
 
 useHead({
   title: 'Данные профиля',
@@ -53,6 +72,7 @@ onMounted(() => {
 });
 
 const isOpenChangePasswordModal = ref(false);
+const isOpenRememberPasswordModal = ref(false);
 
 function toggleModalChangePassword() {
   isOpenChangePasswordModal.value = !isOpenChangePasswordModal.value;
@@ -67,5 +87,13 @@ async function changePaswordHandler(values) {
     appMessage.openWithTimer('success', 'Пароль успешно изменен', 'success');
     isOpenChangePasswordModal.value = false;
   }
+}
+
+function rememberPasswordToggle() {
+  isOpenRememberPasswordModal.value = !isOpenRememberPasswordModal.value;
+}
+
+function remeberPasswordHandler() {
+  console.log(123);
 }
 </script>

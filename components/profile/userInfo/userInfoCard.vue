@@ -12,10 +12,10 @@
       </div>
       <div class="input-group space-y-2">
         <label for="userPhone">Телефон</label>
+        <!-- v-mask="'+# (###) ###-##-##'" -->
         <app-input
           type="tel"
           v-model.trim="phone"
-          v-mask="'+# (###) ###-##-##'"
           placeholder="Ваш телефон"
           inputType="border"
           inputSize="md"
@@ -45,7 +45,9 @@
           <app-button @click="onChangePassword" btnType="link" btnSize="xs"
             >Изменить</app-button
           >
-          <app-button btnType="link" btnSize="xs">Напомнить</app-button>
+          <app-button @click="onRememberPassword" btnType="link" btnSize="xs"
+            >Напомнить</app-button
+          >
         </div>
       </div>
     </div>
@@ -86,7 +88,7 @@ const psw = ref('123864343');
 
 const errorMessage = ref(null);
 
-const emit = defineEmits(['changePassword']);
+const emits = defineEmits(['changePassword', 'rememberPassword']);
 
 const getIsBtnChangeProfile = computed(() => {
   return (
@@ -98,7 +100,10 @@ const getIsBtnChangeProfile = computed(() => {
 });
 
 function onChangePassword() {
-  emit('changePassword');
+  emits('changePassword');
+}
+function onRememberPassword() {
+  emits('rememberPassword');
 }
 
 async function changeProfileHandler() {
