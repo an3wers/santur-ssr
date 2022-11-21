@@ -41,9 +41,13 @@
               </div>
             </button-group>
           </button-group-wrapper>
-          <app-button :disabled="!isDocumentHandler" type="submit"
-            >Получить документы</app-button
+          <app-button
+            :disabled="!isDocumentHandler || getDocumentsProcess"
+            type="submit"
           >
+            <BtnSpinner v-if="getDocumentsProcess" />
+            Получить документы
+          </app-button>
         </form>
       </div>
       <div class="py-4 first:pt-0 last:pb-0">
@@ -67,9 +71,13 @@
               />
             </div>
           </div>
-          <app-button :disabled="!isActsHandler" type="submit"
-            >Получить акт сверки</app-button
+          <app-button
+            :disabled="!isActsHandler || getActsProcess"
+            type="submit"
           >
+            <BtnSpinner v-if="getActsProcess" />
+            Получить акт сверки
+          </app-button>
         </form>
       </div>
     </div>
@@ -82,6 +90,13 @@ import AppInput from '@/components/UI/Forms/AppInput.vue';
 import buttonGroupWrapper from '@/components/UI/buttonGroup/buttonGroupWrapper.vue';
 import buttonGroup from '@/components/UI/buttonGroup/buttonGroup.vue';
 import { ref, reactive, computed } from 'vue';
+import { useProfileStore } from '@/stores/profile';
+import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
+
+const { getComapnytDocuments, getCompanyActs } = useProfileStore();
+
+const getDocumentsProcess = ref(false);
+const getActsProcess = ref(false);
 
 const documentRequestMethods = ref([
   { title: 'За период', isSelectet: true },
@@ -111,29 +126,53 @@ const acts = reactive({
 
 const isDocumentHandler = computed(() => {
   if (documentRequestMethods.value[0].isSelectet) {
-    return documents.rangeStart && documents.rangeEnd;
+    return (
+      documents.rangeStart &&
+      documents.rangeEnd &&
+      new Date(documents.rangeStart) <= new Date(documents.rangeEnd)
+    );
   } else {
     return documents.number;
   }
 });
 
 const isActsHandler = computed(() => {
-  return acts.rangeStart && acts.rangeEnd;
+  return (
+    acts.rangeStart &&
+    acts.rangeEnd &&
+    new Date(acts.rangeStart) <= new Date(acts.rangeEnd)
+  );
 });
 
-function documentRequestHandler() {
+async function documentRequestHandler() {
+  getDocumentsProcess.value = true;
   if (documentRequestMethods.value[0].isSelectet) {
-    // console.log('За период', documents.rangeStart, documents.rangeEnd)
+    const leftDate = useDate(new Date(documents.rangeStart));
+    const rightDate = useDate(new Date(documents.rangeEnd));
+    await getComapnytDocuments(leftDate, rightDate);
+
+    // console.log('За период', leftDate, rightDate);
     documents.rangeStart = '';
     documents.rangeEnd = '';
   } else {
-    // console.log('По номеру заказа или счета', documents.number)
+    // console.log('По номеру заказа или счета', documents.number);
+    const tmpStr = documents.number.replace(/\s/g, '');
+    await getComapnytDocuments('', '', tmpStr);
     documents.number = '';
   }
+  getDocumentsProcess.value = false;
 }
 
-function actsRequestHandler() {
+async function actsRequestHandler() {
   // console.log('Акт сверки', acts.rangeStart, acts.rangeEnd)
+  getActsProcess.value = true;
+  const leftDate = useDate(new Date(acts.rangeStart));
+  const rightDate = useDate(new Date(acts.rangeEnd));
+
+  await getCompanyActs(leftDate, rightDate);
+
+  getActsProcess.value = false;
+
   acts.rangeStart = '';
   acts.rangeEnd = '';
 }

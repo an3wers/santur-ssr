@@ -74,6 +74,9 @@ export const useProfileStore = defineStore('profile', {
         if (response.success) {
           this.profile = response.data;
           this.isLoaded = true;
+          if (this.profile.email) {
+            await this.checkUsersForActivate();
+          }
         } else {
           throw new Error('При загрузке профиля произошла ошибка');
         }
@@ -199,6 +202,64 @@ export const useProfileStore = defineStore('profile', {
       } catch (error) {
         appMessageStore.open('error', error.message, 'error');
         return error;
+      }
+    },
+    async getComapnytDocuments(leftDate, rightDate, numbers) {
+      // GetUPDs/?docs=...&leftDate=...&rightDate=...
+      // docs - это может быть список либо номеров либо кодов заказов через запятую
+      const { open: setMessage, openWithTimer: setMessageWithTimer } =
+        useAppMessage();
+      try {
+        let response;
+        if (numbers) {
+          response = await useCustomFetch(`apissz/GetUPDs/?docs=${numbers}`);
+        } else {
+          response = await useCustomFetch(
+            `apissz/GetUPDs/?leftDate=${leftDate}&rightDate=${rightDate}`
+          );
+        }
+
+        if (response.success) {
+          setMessageWithTimer('success', response.data, 'success');
+        } else {
+          throw new Error(
+            response.message || 'При загрузке документов произошла ошибка'
+          );
+        }
+
+        // console.log('getComapnytDocuments', response);
+      } catch (error) {
+        setMessage('error', error.message, 'error');
+        // console.log(error);
+      }
+    },
+    async getCompanyActs(leftDate, rightDate) {
+      const { open: setMessage, openWithTimer: setMessageWithTimer } =
+        useAppMessage();
+      try {
+        const response = await useCustomFetch(
+          `apissz/GetAkts/?leftDate=${leftDate}&rightDate=${rightDate}`
+        );
+
+        // console.log(response);
+
+        if (response.success) {
+          setMessageWithTimer('success', response.data, 'success');
+        } else {
+          throw new Error(
+            response.message || 'При загрузке документов произошла ошибка'
+          );
+        }
+      } catch (error) {
+        setMessage('error', error.message, 'error');
+      }
+    },
+    async checkUsersForActivate() {
+      try {
+        const response = await useCustomFetch('apissz/GetListForActivate');
+        console.log(response);
+      } catch (error) {
+        console.log(error);
       }
     },
   },
