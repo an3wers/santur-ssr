@@ -1,11 +1,9 @@
 <template>
-  <!--  @change="$emit('update:modelValue', $event.target.value)" -->
-  <!-- TODO: Сделать новый компонент через slot -->
   <select
     class="w-full rounded-md border form-select disabled:text-gray-500"
     :class="[typeMap[inputType], sizeMap[inputSize]]"
-    v-model="selected"
-    @change="$emit('onChange', $event.target.value)"
+    :value="modelValue"
+    @change="$emit('update:modelValue', $event.target.value)"
   >
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.text }}
@@ -17,25 +15,26 @@
 defineProps({
   options: {
     type: Array,
-    default: []
+    default: [],
   },
-  selected: {
-    type: String
+  modelValue: {
+    type: String,
+    default: '',
   },
   inputType: {
     type: String,
-    default: 'solid' // border
+    default: 'solid', // border
   },
   inputSize: {
     type: String,
-    default: 'md' // lg, sm
+    default: 'md', // lg, sm
   },
   defaultValue: {
-    type: String
-  }
-})
+    type: String,
+  },
+});
 
-defineEmits(['onChange'])
+defineEmits(['update:modelValue']);
 
 const typeMap = {
   solid:
@@ -45,12 +44,12 @@ const typeMap = {
   'solid-error':
     'bg-red-100 border-transparent focus:border-red-400 focus:bg-white focus:ring focus:ring-red-200 focus:ring-opacity-50',
   'border-error':
-    'bg-transparent border-red-400 focus:border-red-400 focus:ring focus:ring-red-200 focus:ring-opacity-50'
-}
+    'bg-transparent border-red-400 focus:border-red-400 focus:ring focus:ring-red-200 focus:ring-opacity-50',
+};
 
 const sizeMap = {
   md: 'py-2 text-base px-3 leading-5',
   lg: 'py-2.5 text-lg px-4',
-  xs: 'py-1.5 text-sm px-2.5'
-}
+  xs: 'py-1.5 text-sm px-2.5',
+};
 </script>

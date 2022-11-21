@@ -51,11 +51,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import AppInput from "@/components/UI/Forms/AppInput.vue";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import { useField, useForm } from "vee-validate";
-import * as yup from "yup";
+// TODO: Этот компонент пока не используется, но нужно перейти на него, по ошибке сделан дублирующий
+import { ref, computed } from 'vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
 
@@ -65,11 +66,11 @@ const {
   errorMessage: errorEmailRem,
   meta: metaEmailRem,
 } = useField(
-  "emailRem",
+  'emailRem',
   yup
     .string()
-    .email("Введите корректный email")
-    .required("Введите ваш email")
+    .email('Введите корректный email')
+    .required('Введите ваш email')
     .trim()
 );
 
@@ -78,7 +79,7 @@ const isBtnActive = computed(() => {
 });
 
 const onRemember = handleSubmit((values, { resetForm }) => {
-  console.log("Восстановление пароля", values);
+  console.log('Восстановление пароля', values);
   resetForm();
 });
 </script>

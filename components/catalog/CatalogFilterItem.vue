@@ -36,8 +36,7 @@
           class="-mb-1 rounded border-gray-400 text-primary focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-500 focus:ring-opacity-20 bg-transparent"
         />
         <span class="ml-2 -mt-1"
-          >{{ item.Name }}
-          <span class="ml-1 text-sm text-gray-400"
+          >{{ item.Name }}&nbsp;<span class="ml-1 text-sm text-gray-400"
             >({{ item.QtyRecords }})</span
           ></span
         >

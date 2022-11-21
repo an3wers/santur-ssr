@@ -105,7 +105,7 @@ import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
-import AppSelector from '@/components/UI/Forms/AppSelector.vue';
+// import AppSelector from '@/components/UI/Forms/AppSelector.vue';
 import { useProfileStore } from '@/stores/profile';
 import { useAppMessage } from '@/stores/appMessage';
 import { useOrderStore } from '@/stores/order';

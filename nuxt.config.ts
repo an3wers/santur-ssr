@@ -18,25 +18,32 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ['@/assets/scss/main.scss'],
   ssr: true,
   modules: ['@pinia/nuxt'],
+  css: ['~/assets/scss/main.scss'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+      'postcss-preset-env': {},
+    },
+  },
   build: {
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {},
-          'postcss-preset-env': {},
-        },
-      },
-    },
+    // postcss: {
+    //   postcssOptions: {
+    //     plugins: {
+    //       tailwindcss: {},
+    //       autoprefixer: {},
+    //       'postcss-preset-env': {},
+    //     },
+    //   },
+    // },
     transpile: ['vue3-popper', 'vue3-carousel'],
-    babel: {
-      presets() {
-        return [['@nuxt/babel-preset-app']];
-      },
-    },
+    // babel: {
+    //   presets() {
+    //     return [['@nuxt/babel-preset-app']];
+    //   },
+    // },
   },
   vite: {
     resolve: {

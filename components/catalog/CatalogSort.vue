@@ -4,10 +4,16 @@
   >
     <div class="w-full sm:w-60">
       <!-- Селектор -->
-      <app-selector
+      <!-- <app-selector
         inputType="border"
         @onChange="handleChangeSelect"
         :selected="orderBy"
+        :options="options"
+      /> -->
+      <app-selector
+        inputType="border"
+        @change="handleChangeSelect"
+        v-model="orderBy"
         :options="options"
       />
     </div>
@@ -80,12 +86,8 @@ function handleChangeCheckbox(event) {
 }
 
 // Сортировка
-function handleChangeSelect(value) {
-  // console.log('Селектор', value)
-  emit('changeSort', value);
+function handleChangeSelect() {
+  // console.log('Селектор', orderBy.value);
+  emit('changeSort', orderBy.value);
 }
-
-// function testHandleChangeCheckbox(event) {
-//   console.log('Тест', event.target.checked)
-// }
 </script>
