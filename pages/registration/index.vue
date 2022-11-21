@@ -8,7 +8,7 @@
           <!-- Кнопка назад -->
           <app-go-back />
           <div class="w-full bg-white rounded-2xl py-8 px-6 shadow-md">
-            <div class="text-2xl font-bold">Зарегистрироваться</div>
+            <h1 class="text-2xl font-bold !mb-0">Зарегистрироваться</h1>
             <div class="pt-8">
               <registration-form />
             </div>

@@ -19,7 +19,7 @@
       <div class="text-xl mb-4 font-medium">Ваши данные</div>
       <div class="grid grid-cols-2 gap-x-4 gap-y-4">
         <div class="input-group space-y-2 col-span-2">
-          <label>ФИО</label>
+          <label>Фамилия и Имя</label>
           <app-input
             type="text"
             inputSize="md"

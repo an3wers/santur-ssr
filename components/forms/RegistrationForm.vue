@@ -32,6 +32,27 @@
         </div>
       </div>
       <div class="input-block space-y-2">
+        <label for="">Телефон</label>
+        <app-input
+          type="tel"
+          v-model.trim="phoneR"
+          @blur="blurPhone"
+          :inputType="
+            errorPhone && metaPhone.touched ? 'border-error' : 'border'
+          "
+          inputSize="lg"
+        />
+        <div
+          v-if="errorPhone && metaPhone.touched"
+          class="text-sm text-red-500"
+        >
+          {{ errorPhone }}
+        </div>
+        <div v-if="!errorPhone" class="text-sm text-gray-500">
+          Например: +7 (912) 345-67-89
+        </div>
+      </div>
+      <div class="input-block space-y-2">
         <label for="">ИНН компании</label>
         <app-input
           type="number"
@@ -62,10 +83,22 @@
           {{ errorCompany }}
         </div>
       </div>
+      <div class="input-block space-y-2">
+        <label for="">Выбрать филиал Сантехкомплект</label>
+        <app-selector-slots
+          inputSize="lg"
+          inputType="border"
+          v-model="selectedFilial"
+        >
+          <option v-for="item in flilials" :key="item.id" :value="item.id">
+            {{ item.name }}
+          </option>
+        </app-selector-slots>
+      </div>
       <div class="text-left">
         <app-button
           class="mt-4"
-          :disabled="!registrIsActive || isSubmitting"
+          :disabled="!registrIsActive || isSubmitting || registerProcessing"
           type="submit"
           btnSize="lg"
         >
@@ -98,19 +131,29 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import AppInput from "@/components/UI/Forms/AppInput.vue";
-import AppButton from "@/components/UI/Buttons/AppButton.vue";
-import { useField, useForm } from "vee-validate";
-import * as yup from "yup";
+import { ref, computed } from 'vue';
+import AppInput from '@/components/UI/Forms/AppInput.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppSelectorSlots from '@/components/UI/Forms/AppSelectorSlots.vue';
+import { useField, useForm } from 'vee-validate';
+import { useAppMessage } from '@/stores/appMessage';
+import * as yup from 'yup';
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
 
 const registerProcessing = ref(false);
-
+const { open: setMessage, openWithTimer: setMessageWithTimer } =
+  useAppMessage();
 const MIN_LENGTH_VALUE = 4;
 const MIN_LENGTH_INN = 10;
 const MAX_LENGTH_INN = 12;
+
+const selectedFilial = ref('100000');
+
+const flilials = [
+  { name: 'Сантехкомплект-Урал, Екатеринбург', id: '100000' },
+  { name: 'Сантехкомплект-Тагил, Нижний Тагил', id: '100002' },
+];
 
 const {
   value: nameR,
@@ -118,10 +161,10 @@ const {
   handleBlur: blurName,
   meta: metaName,
 } = useField(
-  "nameR",
+  'nameR',
   yup
     .string()
-    .required("Введите ваше имя")
+    .required('Введите ваше имя')
     .min(MIN_LENGTH_VALUE, `Минимальная длина поля ${MIN_LENGTH_VALUE} символа`)
     .trim()
 );
@@ -132,11 +175,11 @@ const {
   handleBlur: blurEmail,
   meta: metaEmail,
 } = useField(
-  "emailR",
+  'emailR',
   yup
     .string()
-    .email("Введите корректный email")
-    .required("Введите ваш email")
+    .email('Введите корректный email')
+    .required('Введите ваш email')
     .trim()
 );
 
@@ -146,10 +189,10 @@ const {
   handleBlur: blurInn,
   meta: metaInn,
 } = useField(
-  "innR",
+  'innR',
   yup
     .string()
-    .required("Введите ИНН компании")
+    .required('Введите ИНН компании')
     .min(MIN_LENGTH_INN, `Минимальная длина поля ${MIN_LENGTH_INN} символов`)
     .max(MAX_LENGTH_INN, `Максимальная длина поля ${MAX_LENGTH_INN} символов`)
     .trim()
@@ -161,20 +204,48 @@ const {
   handleBlur: blurCompany,
   meta: metaCompany,
 } = useField(
-  "companyR",
+  'companyR',
   yup
     .string()
-    .required("Введите название компании")
+    .required('Введите название компании')
     .min(MIN_LENGTH_VALUE, `Минимальная длина поля ${MIN_LENGTH_VALUE} символа`)
     .trim()
 );
+
+const {
+  value: phoneR,
+  errorMessage: errorPhone,
+  handleBlur: blurPhone,
+  meta: metaPhone,
+} = useField('phoneR', yup.string().trim());
 
 const registrIsActive = computed(() => {
   return nameR.value && emailR.value && innR.value && companyR.value;
 });
 
-const onRegister = handleSubmit((values, { resetForm }) => {
-  console.log("Форма регистрации", values);
-  resetForm();
+const onRegister = handleSubmit(async (values, { resetForm }) => {
+  const { nameR, companyR, innR, phoneR, emailR } = values;
+
+  try {
+    registerProcessing.value = true;
+    const response = await useCustomFetch(
+      `apissz/AccountReg/?name=${nameR}&companyname=${companyR}&phone=${phoneR}&email=${emailR}&inn=${innR}&ownerid=${selectedFilial.value}`
+    );
+    console.log('Форма регистрации', response);
+    if (response.success) {
+      setMessageWithTimer('success', 'Вы успешно зарегистрированы', 'success');
+
+      // TODO: редирект на страницу профиля или ??
+      resetForm();
+      selectedFilial.value = '100000';
+    } else {
+      throw new Error(response.message || 'При регистрации произошла ошибка');
+    }
+  } catch (error) {
+    setMessage('error', error.message, 'error');
+    // console.log(error);
+  } finally {
+    registerProcessing.value = false;
+  }
 });
 </script>
