@@ -10,7 +10,7 @@
           <div class="w-full h-full">
             <a target="_blank" :href="slide.url">
               <img
-                :src="`/images/sliders/${slide.image}`"
+                :src="`/images/banners/${slide.image}`"
                 alt=""
                 class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
               />
@@ -44,22 +44,32 @@ import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
 import { ref } from 'vue';
 
 // const { getNarrowBanner } = useHomeStore()
-
+// 1504 х 220 px
 const sliders = ref([
   {
     id: '1',
     url: 'https://santur.ru',
-    image: 'jakko_santur.jpg',
+    image: 'bottom_1.jpg',
   },
   {
     id: '2',
     url: 'https://santur.ru',
-    image: 'pex_santur.jpg',
+    image: 'bottom_2.jpg',
   },
   {
     id: '3',
     url: 'https://santur.ru',
-    image: 'santur_ros.jpg',
+    image: 'bottom_3.jpg',
+  },
+  {
+    id: '4',
+    url: 'https://santur.ru',
+    image: 'bottom_4.jpg',
+  },
+  {
+    id: '5',
+    url: 'https://santur.ru',
+    image: 'bottom_5.jpg',
   },
 ]);
 
@@ -71,9 +81,9 @@ const settings = {
 };
 
 const breakpoints = {
-  768: {
-    itemsToShow: 1.3,
-    snapAlign: 'start',
-  },
+  // 768: {
+  //   itemsToShow: 1.3,
+  //   snapAlign: 'start',
+  // },
 };
 </script>

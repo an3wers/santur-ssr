@@ -98,7 +98,7 @@
       <div class="text-left">
         <app-button
           class="mt-4"
-          :disabled="!registrIsActive || isSubmitting || registerProcessing"
+          :disabled="!registrIsActive || registerProcessing"
           type="submit"
           btnSize="lg"
         >
@@ -138,8 +138,13 @@ import AppSelectorSlots from '@/components/UI/Forms/AppSelectorSlots.vue';
 import { useField, useForm } from 'vee-validate';
 import { useAppMessage } from '@/stores/appMessage';
 import * as yup from 'yup';
+import { useAuthStore } from '@/stores/auth';
+import { useProfileStore } from '@/stores/profile';
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
+
+const { setUser } = useAuthStore();
+const { loadProfile } = useProfileStore();
 
 const registerProcessing = ref(false);
 const { open: setMessage, openWithTimer: setMessageWithTimer } =
@@ -235,9 +240,11 @@ const onRegister = handleSubmit(async (values, { resetForm }) => {
     if (response.success) {
       setMessageWithTimer('success', 'Вы успешно зарегистрированы', 'success');
 
-      // TODO: редирект на страницу профиля или ??
-      resetForm();
-      selectedFilial.value = '100000';
+      await setUser();
+      await loadProfile();
+      navigateTo('/profile/userinfo');
+      // resetForm();
+      // selectedFilial.value = '100000';
     } else {
       throw new Error(response.message || 'При регистрации произошла ошибка');
     }

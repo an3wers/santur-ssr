@@ -219,6 +219,8 @@
                   >Наши бренды</NuxtLink
                 >
               </li>
+              <!-- for test -->
+              <!-- <li><button @click="getAIm">get iam</button></li> -->
             </ul>
           </div>
         </div>
@@ -279,14 +281,14 @@
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 import { useAppMessage } from '@/stores/appMessage';
 import { useCartStore } from '@/stores/cart';
-// import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth';
 import WhatsappIcon_24 from '@/components/UI/Icons/WhatsappIcon_24.vue';
 
 const currenYear = new Date().getFullYear();
 
 const appMessage = useAppMessage();
 const cartStore = useCartStore();
-// const authStore = useAuthStore();
+const authStore = useAuthStore();
 
 async function checkSession(param) {
   const response = await useCustomFetch(`apiauth/${param}`);
@@ -303,5 +305,9 @@ async function checkCart() {
 
 function openMessage() {
   appMessage.openWithTimer('info', 'На странице произошла ошибка', 'info');
+}
+
+async function getAIm() {
+  await authStore.setUser();
 }
 </script>

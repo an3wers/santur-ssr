@@ -50,6 +50,7 @@ export const useAuthStore = defineStore('auth', {
           this.user.name = response.data.name;
           this.user.phone = response.data.phone;
           this.sessionCookie = response.data.sid;
+          // console.log(response);
         }
       } catch (error) {
         console.log(error);

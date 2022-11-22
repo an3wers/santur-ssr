@@ -6,6 +6,7 @@
       <div class="section_grey pt-8 pb-16 bg-slate-150">
         <div class="container">
           <div>
+            <!-- TODO: информер для активации пользователей для авторизованных -->
             <home-slider />
             <!-- <template v-else> -->
             <ClientOnly>

@@ -11,7 +11,7 @@
             <div class="home-slider__banner w-full h-full">
               <NuxtLink target="_blank" :to="slide.url">
                 <img
-                  :src="`/images/sliders/${slide.image}`"
+                  :src="`/images/banners/${slide.image}`"
                   alt=""
                   class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
                 />
@@ -35,32 +35,32 @@ import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
 // import 'vue3-carousel/dist/carousel.css';
 
 // const { getSlider } = useHomeStore()
-
+// 1504 х 400 px
 const slides = ref([
   {
     id: '1',
     url: 'https://santur.ru',
-    image: '4_pro.jpg',
+    image: 'top_1.jpg',
   },
   {
     id: '2',
     url: 'https://santur.ru',
-    image: '5_seti.jpg',
+    image: 'top_2.jpg',
   },
   {
     id: '3',
     url: 'https://santur.ru',
-    image: '3_fire.jpg',
+    image: 'top_3.jpg',
   },
   {
     id: '4',
     url: 'https://santur.ru',
-    image: '2_about.jpg',
+    image: 'top_4.jpg',
   },
   {
     id: '5',
     url: 'https://santur.ru',
-    image: '1_mobile.jpg',
+    image: 'top_5.jpg',
   },
 ]);
 

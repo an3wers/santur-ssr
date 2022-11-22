@@ -9,6 +9,7 @@ export const useProfileStore = defineStore('profile', {
       isLoaded: false,
       profile: null,
       // ordersForMerge: [],
+      usersForActivate: [],
       menu: [
         {
           name: 'Данные профиля',
@@ -258,8 +259,13 @@ export const useProfileStore = defineStore('profile', {
       try {
         const response = await useCustomFetch('apissz/GetListForActivate');
         console.log(response);
+        if (response.success) {
+          this.usersForActivate = response.data || [];
+        } else {
+          throw new Error(response.message);
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     },
   },

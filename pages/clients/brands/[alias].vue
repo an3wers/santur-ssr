@@ -19,7 +19,7 @@
         class="order-2 lg:order-1 col-span-12 lg:col-span-8 xl:col-span-9 post-wrapper"
       >
         <!-- category -->
-
+        <h2 class="!mt-0">Товарные категории</h2>
         <div
           v-if="brand.categories.length"
           class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
@@ -45,6 +45,9 @@
               </div>
             </NuxtLink>
           </div>
+        </div>
+        <div v-else>
+          <p>Категории не найдены</p>
         </div>
 
         <!-- # category -->
