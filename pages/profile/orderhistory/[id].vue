@@ -115,12 +115,14 @@ const isEditing = ref(false);
 
 // Go back button
 function goToAllOrders() {
-  const currentHistory = router.options.history.state.back;
-  if (currentHistory !== null) {
-    router.back();
-  } else {
-    router.push({ path: '/profile/orderhistory' });
-  }
+  router.push({ path: '/profile/orderhistory' });
+
+  // const currentHistory = router.options.history.state.back;
+  // if (currentHistory !== null) {
+  //   router.back();
+  // } else {
+  //   router.push({ path: '/profile/orderhistory' });
+  // }
 }
 
 async function loadOrder(id) {
