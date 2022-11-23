@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-    <app-informer type="warning">
+    <app-informer type="primary">
       <div>
         <p>
           К вашей компании присоединился новый пользователь. Подтвердите или
@@ -42,8 +42,6 @@
                 >
                   <span class="text-red-500">Отклонить</span>
                 </AppButton>
-                <!-- <NuxtLink :to="user.urlForActivate">Активировать</NuxtLink>
-                <NuxtLink :to="user.urlForBan">Отклонить</NuxtLink> -->
               </div>
             </li>
           </ul>
@@ -66,17 +64,12 @@ const profileStore = useProfileStore();
 const { checkUsersForActivate } = useProfileStore();
 const isModalOpen = ref(false);
 const { usersForActivate } = storeToRefs(profileStore);
-// const router = useRouter();
 
 async function activateHandler(link) {
-  //   console.log(link);
-  //   const myLink = router.resolve({ path: 'https://ya.ru' });
   window.open(link, '_blank');
   await checkUsersForActivate();
-  //   navigateTo('https://ya.ru', { external: true });
 }
 async function disactivateHandler(link) {
-  //   console.log(link);
   window.open(link, '_blank');
   await checkUsersForActivate();
 }

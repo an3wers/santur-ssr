@@ -6,7 +6,11 @@
       <div class="section_grey pt-8 pb-16 bg-slate-150">
         <div class="container">
           <div>
-            <activate-users v-if="profileStore.usersForActivate.length" />
+            <ClientOnly>
+              <activate-users
+                v-if="profileStore.usersForActivate.length && authStore.user.id"
+              />
+            </ClientOnly>
             <!-- TODO: информер для активации пользователей для авторизованных -->
             <home-slider />
             <!-- <template v-else> -->
@@ -45,11 +49,13 @@ import PageLoader from '@/components/loaders/PageLoader.vue';
 import ActivateUsers from '@/components/homePage/ActivateUsers.vue';
 // import AppLoader from '@/components/loaders/AppLoader.vue';
 import { useProfileStore } from '@/stores/profile';
+import { useAuthStore } from '@/stores/auth';
 
 import { useHomeStore } from '@/stores/home';
 import { ref, onMounted } from 'vue';
 
 const profileStore = useProfileStore();
+const authStore = useAuthStore();
 
 const pageDescr =
   'Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.';
