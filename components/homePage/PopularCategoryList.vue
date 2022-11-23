@@ -4,7 +4,7 @@
   >
     <NuxtLink
       :to="`/catalog/${cat.tk_id}`"
-      v-for="cat in getPopularCategory"
+      v-for="cat in homeStore.getPopularCategory"
       :key="cat.tk_id"
       class="pop-category-card no-underline text-gray-900 hover:text-gray-900"
       ><div class="rounded-2xl shadow-lg bg-white h-full">
@@ -26,8 +26,17 @@
 </template>
 
 <script setup>
-// import {computed} from 'vue'
+import { watch } from 'vue';
 import { useHomeStore } from '@/stores/home';
+import { useAuthStore } from '@/stores/auth';
 
-const { getPopularCategory } = useHomeStore();
+const authStore = useAuthStore();
+const homeStore = useHomeStore();
+
+watch(
+  () => authStore.user.id,
+  () => {
+    homeStore.loadSales();
+  }
+);
 </script>

@@ -144,6 +144,7 @@ async function onClickLogoutHandler() {
     await cartStore.getCart();
     await profileStore.loadProfile();
     await profileStore.getFavorities();
+    await profileStore.checkUsersForActivate();
     appMessageStore.openWithTimer('info', 'Вы вышли из профиля', 'info');
   }
 }

@@ -125,7 +125,7 @@ const { profile } = storeToRefs(profileStore);
 //   cartContract.value || profileStore.profile.subjInfo.dgcode || ''
 // );
 const contarctSelected = ref(
-  cartContract.value || profile.value.subjInfo.dgcode || ''
+  cartContract.value || profile.value?.subjInfo?.dgcode || ''
 );
 
 const getContractSelected = computed(() => {
@@ -138,7 +138,7 @@ watch(
     // console.log('WATCH TO USER ID FROM CART');
     // console.log(cartContract.value, profile.value.subjInfo.dgcode);
     // if (cartStore.cartContract) {
-    contractHandler(profile.value.subjInfo.dgcode || '');
+    contractHandler(profile.value?.subjInfo?.dgcode || '');
     // }
   }
 );

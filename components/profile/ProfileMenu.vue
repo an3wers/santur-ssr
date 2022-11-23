@@ -81,6 +81,7 @@ async function logoutHandler() {
     await profileStore.loadProfile();
     await profileStore.getFavorities();
     await cartStore.getCart();
+    await profileStore.checkUsersForActivate();
   }
 }
 

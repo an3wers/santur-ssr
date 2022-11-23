@@ -6,6 +6,7 @@
       <div class="section_grey pt-8 pb-16 bg-slate-150">
         <div class="container">
           <div>
+            <activate-users v-if="profileStore.usersForActivate.length" />
             <!-- TODO: информер для активации пользователей для авторизованных -->
             <home-slider />
             <!-- <template v-else> -->
@@ -37,14 +38,18 @@ import HomeSlider from '@/components/homePage/HomeSlider.vue';
 import PopularCategories from '@/components/homePage/PopularCategories.vue';
 import NarrowSlider from '@/components/homePage/NarrowSlider.vue';
 import SaleProducts from '@/components/homePage/SaleProducts.vue';
-import BottomBanner from '@/components/homePage/BottomBanner.vue';
+// import BottomBanner from '@/components/homePage/BottomBanner.vue';
 import News from '@/components/homePage/News.vue';
 import Features from '@/components/homePage/Features.vue';
 import PageLoader from '@/components/loaders/PageLoader.vue';
-import AppLoader from '@/components/loaders/AppLoader.vue';
+import ActivateUsers from '@/components/homePage/ActivateUsers.vue';
+// import AppLoader from '@/components/loaders/AppLoader.vue';
+import { useProfileStore } from '@/stores/profile';
 
 import { useHomeStore } from '@/stores/home';
 import { ref, onMounted } from 'vue';
+
+const profileStore = useProfileStore();
 
 const pageDescr =
   'Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.';
