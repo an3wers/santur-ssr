@@ -237,7 +237,7 @@
 </template>
 <script setup>
 import { useRoute } from 'vue-router';
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import { useCatalogStore } from '@/stores/catalog';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
@@ -281,6 +281,14 @@ const isBtnSpinner = ref(false);
 // useHead({
 //   title: getTitle,
 // });
+
+watch(
+  () => authStore.user.id,
+  async () => {
+    console.log('WATCH FOR USER ID');
+    await loadProduct(productId);
+  }
+);
 
 const getIsAddedCart = computed(() => {
   return isAddedCart.value;

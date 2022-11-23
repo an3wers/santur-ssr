@@ -148,7 +148,7 @@ import CatalogProductList from '@/components/catalog/CatalogProductList.vue';
 import CatalogFilterList from '@/components/catalog/CatalogFilterList.vue';
 import CatalogSubcategory from '@/components/catalog/CatalogSubcategory.vue';
 import { useRoute, useRouter } from 'vue-router';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useCatalogStore } from '@/stores/catalog';
 import { useCategoryStore } from '@/stores/category';
 import { useMainStore } from '@/stores/main';
@@ -162,6 +162,7 @@ import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import CloseIcon24 from '@/components/UI/Icons/CloseIcon_24.vue';
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const categoryIsLoaded = ref(false);
 const categoryIsUpdated = ref(true);
@@ -175,8 +176,16 @@ const catalogStore = useCatalogStore();
 const categoryStore = useCategoryStore();
 const mainStore = useMainStore();
 const appMessageStore = useAppMessage();
+const authStore = useAuthStore();
 
 const page = ref(route.query.page ? Number(route.query.page) : 1);
+
+watch(
+  () => authStore.user.id,
+  () => {
+    categoryStore.loadProducts(page.value);
+  }
+);
 
 const currentCat = computed(() => {
   const tmpObj = catalogStore.getProductCatalog.find(

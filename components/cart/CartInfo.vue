@@ -17,7 +17,7 @@
       <label class="font-semibold">Договор</label>
       <select
         class="w-full rounded-md border form-select py-2 text-base px-3 leading-5 bg-white border-transparent focus:border-primary focus:bg-white focus:ring focus:ring-blue-500 focus:ring-opacity-20"
-        :value="contarctSelected"
+        :value="getContractSelected"
         @change="contractHandler($event.target.value)"
       >
         <option
@@ -102,13 +102,14 @@
 import { useCartStore } from '@/stores/cart';
 import { useAuthStore } from '@/stores/auth';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
-import { ref } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
 // import AppSelector from '@/components/UI/Forms/AppSelector.vue';
 import { useProfileStore } from '@/stores/profile';
 import { useAppMessage } from '@/stores/appMessage';
 import { useOrderStore } from '@/stores/order';
+import { storeToRefs } from 'pinia';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();
@@ -116,8 +117,30 @@ const authStore = useAuthStore();
 const appMessageStore = useAppMessage();
 const router = useRouter();
 const orderStore = useOrderStore();
+
+const { cartContract } = storeToRefs(cartStore);
+const { profile } = storeToRefs(profileStore);
+
+// const contarctSelected = ref(
+//   cartContract.value || profileStore.profile.subjInfo.dgcode || ''
+// );
 const contarctSelected = ref(
-  cartStore.cartContract || profileStore.profile.subjInfo.dgcode || ''
+  cartContract.value || profile.value.subjInfo.dgcode || ''
+);
+
+const getContractSelected = computed(() => {
+  return contarctSelected.value;
+});
+
+watch(
+  () => profileStore.profile.email,
+  () => {
+    // console.log('WATCH TO USER ID FROM CART');
+    // console.log(cartContract.value, profile.value.subjInfo.dgcode);
+    // if (cartStore.cartContract) {
+    contractHandler(profile.value.subjInfo.dgcode || '');
+    // }
+  }
 );
 
 async function contractHandler(val) {

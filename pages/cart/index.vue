@@ -59,7 +59,7 @@
 <script setup>
 import AppGoBack from '@/components/AppGoBack.vue';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
-import { ref, computed } from 'vue';
+import { ref, watch } from 'vue';
 import { useCartStore } from '@/stores/cart';
 import { useAuthStore } from '@/stores/auth';
 import CartProductList from '@/components/cart/CartProductList.vue';
@@ -69,15 +69,24 @@ import CartProductFreeForm from '@/components/cart/CartProductFreeForm.vue';
 import AppInformer from '@/components/AppInformer.vue';
 import { useAppMessage } from '@/stores/appMessage';
 import PageLoader from '@/components/loaders/PageLoader.vue';
+import { useProfileStore } from '@/stores/profile';
+import { storeToRefs } from 'pinia';
 
 useHead({
   title: 'Корзина',
 });
 
+// definePageMeta({
+//   middleware: ['auth'],
+// });
+
+const profileStore = useProfileStore();
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const cartIsLoaded = ref(false);
 const { open } = useAppMessage();
+
+const { profile } = storeToRefs(profileStore);
 
 async function loadCart() {
   const res = await cartStore.getCart();
@@ -88,6 +97,14 @@ async function loadCart() {
   }
   cartIsLoaded.value = true;
 }
+
+// watch(
+//   () => authStore.user.id,
+//   async () => {
+//     // console.log(profile.value.subjInfo.dgcode);
+//     // await cartStore.getCart();
+//   }
+// );
 
 loadCart();
 
