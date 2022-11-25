@@ -82,6 +82,7 @@ export const useCartStore = defineStore('cart', {
           this.cartCount = response.data.qtyitems;
           this.cartSum = response.data.summs;
           this.cartSumRaw = response.data.summ;
+          this.cartState = response.data.state;
           this.cartItems = response.data.items;
           this.cartWeight = response.data.weight;
           this.cartContract = response.data.dg;

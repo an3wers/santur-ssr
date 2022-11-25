@@ -199,7 +199,9 @@ const {
 
 const isBtnSubmit = computed(() => {
   if (comment.value) {
-    return comment.value.length >= MIN_LENGTH_COMMENT;
+    return (
+      comment.value.length >= MIN_LENGTH_COMMENT && email.value && name.value
+    );
   }
 });
 
@@ -210,19 +212,6 @@ const isTooManyAttempts = computed(() => {
 
 const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
   const { name, companyName, comment, companyInn, email } = values;
-
-  /*
-
-  SendFeedback
-  authorname
-  subjectname
-  subjectinn
-  phone
-  email
-  descr
-
-
-  */
 
   const data = new FormData();
 

@@ -7,9 +7,16 @@
     <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8 xl:col-span-9">
-        <div class="flex justify-between items-start">
-          <h1>{{ brand?.name }}</h1>
+        <div class="flex justify-between items-start mb-8">
+          <h1 class="!mb-0">{{ brand?.name }}</h1>
           <!-- logo -->
+          <div v-if="brand.logoBigExist" class="w-48 h-20">
+            <img
+              class="object-contain w-full h-full"
+              :src="brand.logoBig"
+              :alt="`logo ${brand.name}`"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -26,11 +33,11 @@
         >
           <div
             v-for="item in brand.categories"
-            :key="item.tk_id"
+            :key="item.id"
             class="rounded-2xl border border-gray-300 h-full"
           >
             <NuxtLink
-              :to="`/catalog/${item.tk_id}?Бренд=${brand.name}`"
+              :to="`/catalog/${item.id}?Бренд=${brand.name}`"
               class="no-underline text-gray-900 flex items-center justify-between space-x-2 px-5 py-4"
             >
               <div class="text-[0.9375rem] font-medium">
@@ -39,7 +46,7 @@
               <div class="shrink-0 w-24 h-24">
                 <img
                   class="object-contain w-full h-full"
-                  :src="item.imgpath"
+                  :src="item.imgUrl"
                   :alt="item.name"
                 />
               </div>

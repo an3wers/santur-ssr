@@ -77,7 +77,7 @@
         btnSize="lg"
       >
         <btn-spinner v-if="btnProcessing" />
-        {{ cartStore.cartId ? 'Сохранить заказ' : 'Оформить заказ' }}
+        {{ cartStore.cartId ? 'Сохранить' : 'Оформить заказ' }}
       </app-button>
     </div>
   </div>
@@ -133,6 +133,7 @@ async function contractHandler(val) {
 const emit = defineEmits(['onClick']);
 
 function onSubmit() {
-  emit('onClick');
+  console.log(cartStore.cartState);
+  emit('onClick', cartStore.cartState == '' ? 'draft' : 'ord');
 }
 </script>

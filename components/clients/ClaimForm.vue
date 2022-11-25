@@ -93,6 +93,15 @@
           </div>
         </div>
         <div class="input-group space-y-2 col-span-2">
+          <label>Сирийный номер ТМЦ</label>
+          <app-textarea
+            v-model="nombersTmc"
+            @blur="blurNombersTmc"
+            inputType="border"
+            rows="2"
+          />
+        </div>
+        <div class="input-group space-y-2 col-span-2">
           <label>Комментарий*</label>
           <app-textarea
             v-model.trim="comment"
@@ -285,6 +294,13 @@ const {
   yup.string().required('Введите ваш комментарий').trim()
 );
 
+const {
+  value: nombersTmc,
+  errorMessage: errorNombersTmc,
+  handleBlur: blurNombersTmc,
+  meta: metaNombersTmc,
+} = useField('nombersTmc', yup.string());
+
 const formFiles = reactive({
   file_one: '',
   file_two: '',
@@ -316,7 +332,7 @@ function uploadFileHandler(event) {
 }
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
-  const { name, phone, company, inn, email, comment } = values;
+  const { name, phone, company, inn, email, comment, nombersTmc } = values;
   const data = new FormData();
 
   data.append('authorname', name);
@@ -324,30 +340,12 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   data.append('subjectinn', inn);
   data.append('phone', phone);
   data.append('email', email);
+  data.append('sngood', nombersTmc);
   data.append('descr', comment);
   data.append('reason', selectedReason.value);
   data.append('file_1', formFiles.file_one);
   data.append('file_2', formFiles.file_two);
   data.append('file_3', formFiles.file_three);
-
-  // selectedReason.value
-
-  /*
-
-  SendClaim
-  поля формы:
-  authorname
-  subjectname
-  subjectinn
-  phone
-  email
-  descr - описание претензии
-  reason - причина обращ
-  file_1
-  file_2
-  file_3
-  
-  */
 
   try {
     formIsSubmiting.value = true;
@@ -356,8 +354,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       credentials: 'include',
       body: data,
     });
-
-    // console.log(res);
 
     if (res.success) {
       // Обнуляем данные

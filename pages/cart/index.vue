@@ -38,7 +38,9 @@
             <!-- product-list -->
             <cart-product-list :products="cartStore.cartItems" />
             <!-- add product free form -->
-            <cart-product-free-form />
+
+            <!-- TODO: Подключить API к форме -->
+            <!-- <cart-product-free-form /> -->
           </div>
         </div>
         <div

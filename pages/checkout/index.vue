@@ -97,13 +97,14 @@ const getOrderIsConfirm = computed(() => {
   }
 });
 
-async function orderSubmitHandler() {
+async function orderSubmitHandler(tip) {
+  debugger;
   btnProcessing.value = true;
   const res = await cartStore.cartConfirm(
     payMethod.value,
     orderComment.value,
     deliveryAddress.value,
-    'ord'
+    tip
   );
 
   if (res instanceof Error) {

@@ -4,7 +4,7 @@
       <div class="space-y-6">
         <app-informer type="primary" icon="info">
           <div>
-            <div class="text-lg font-semibold">Прием рекламаций</div>
+            <div class="text-lg font-bold">Прием рекламаций</div>
             <div>
               У вас претензия или рекламация? Воспользуйтесь сервисом для приема
               рекламаций.
@@ -12,8 +12,7 @@
           </div>
           <app-button
             @click="$router.push({ path: '/clients/claim' })"
-            class="-ml-4"
-            btnType="link"
+            btnType="primary"
             >Подать рекламацию</app-button
           >
         </app-informer>

@@ -296,18 +296,18 @@ async function loadCategory() {
   } else {
     navigateTo({ path: '/404' });
   }
-
+  // Если в фильтрах что-то есть
   if (
     Object.keys(route.query).filter(
       (el) =>
         el !== 'page' && el !== 'price' && el !== 'incash' && el !== 'search'
     ).length
   ) {
-    // Если в фильтрах что-то есть
     await categoryStore.setFilters(route);
-  } else {
-    await categoryStore.cleanAllFilter();
   }
+  // else {
+  //   await categoryStore.cleanAllFilter();
+  // }
 
   if (tmpPrices) {
     let minVal = 0;

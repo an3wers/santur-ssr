@@ -153,16 +153,29 @@ async function confirmOrderHandler(id) {
 
   try {
     orderIsConfirming.value = true;
-    const res = await useCustomFetch(`apissz/ToRealize/?id=${id}`);
+    let res;
+    if (order.value.status_code === 'H') {
+      res = await useCustomFetch(`apissz/OrderActualize/?id=${id}`);
 
-    if (res.success) {
-      console.log(res);
-      await loadOrder(id);
-      appMessageStore.openWithTimer('success', res.message, 'success');
+      if (res.success) {
+        await loadOrder(id);
+        appMessageStore.openWithTimer('success', res.data, 'success');
+      } else {
+        throw new Error(
+          res.message || 'При актуализации заказа произошла ошибка'
+        );
+      }
     } else {
-      throw new Error(
-        res.message || 'При подтверждении заказа произошла ошибка'
-      );
+      res = await useCustomFetch(`apissz/ToRealize/?id=${id}`);
+
+      if (res.success) {
+        await loadOrder(id);
+        appMessageStore.openWithTimer('success', res.message, 'success');
+      } else {
+        throw new Error(
+          res.message || 'При подтверждении заказа произошла ошибка'
+        );
+      }
     }
   } catch (error) {
     appMessageStore.open('error', error.message, 'error');
