@@ -26,6 +26,9 @@ export const useCategoryStore = defineStore('category', {
     getFilterCheckbox(state) {
       return state.categoryFilters.filter((el) => el.IsNumeric === false);
     },
+    getFilterByPrice(state) {
+      return state.categoryFilters.filter((el) => el.IsNumeric === true && el.Name === 'Цена')[0]
+    }
   },
   actions: {
     async setCategory(params) {
@@ -308,13 +311,14 @@ export const useCategoryStore = defineStore('category', {
       // console.log(array)
       const objPrice = array.find((el) => el.Name === 'Цена');
 
-      if (objPrice.MinSelect.length) {
-        tmp.push(`minprice:${objPrice.MinSelect}`);
+      if (objPrice) {
+        if (objPrice.MinSelect.length) {
+          tmp.push(`minprice:${objPrice.MinSelect}`);
+        }
+        if (objPrice.MaxSelect.length) {
+          tmp.push(`maxprice:${objPrice.MaxSelect}`);
+        }
       }
-      if (objPrice.MaxSelect.length) {
-        tmp.push(`maxprice:${objPrice.MaxSelect}`);
-      }
-
       this.setedFiltersPrice = tmp;
     },
   },

@@ -22,7 +22,7 @@
           <!-- @input="onChangeMinLimitPrice($event.target.value)" -->
           <input
             v-model="minPriceVal"
-            :placeholder="`от ${getFilterPrice.MinLimit}`"
+            :placeholder="`от ${categoryStore.getFilterByPrice?.MinLimit || ''}`"
             @blur="onChangeMinLimitPrice($event.target.value)"
             @keypress.enter="$event.target.blur()"
             type="number"
@@ -40,7 +40,7 @@
           <!-- @input="onChangeMaxLimitPrice($event.target.value)" -->
           <input
             v-model="maxPriceVal"
-            :placeholder="`до ${getFilterPrice.MaxLimit}`"
+            :placeholder="`до ${categoryStore.getFilterByPrice?.MaxLimit || ''}`"
             @blur="onChangeMaxLimitPrice($event.target.value)"
             @keypress.enter="$event.target.blur()"
             type="number"
@@ -84,7 +84,7 @@ import AppInput from '@/components/UI/Forms/AppInput.vue';
 import CatalogFilterItem from '@/components/catalog/CatalogFilterItem.vue';
 import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
 
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useCatalogStore } from '@/stores/catalog';
 import { useCategoryStore } from '@/stores/category';
 
@@ -125,8 +125,10 @@ const getFilterPrice = computed(() => {
 });
 
 // TODO Сделать маску для ввода
-const maxPriceVal = ref(getFilterPrice.value.MaxSelect);
-const minPriceVal = ref(getFilterPrice.value.MinSelect);
+// const maxPriceVal = ref(getFilterPrice.value?.MaxSelect || '');
+// const minPriceVal = ref(getFilterPrice.value?.MinSelect || '');
+const maxPriceVal = ref(categoryStore.getFilterByPrice?.MaxSelect || '');
+const minPriceVal = ref(categoryStore.getFilterByPrice?.MinSelect || '');
 
 const getIsCleanValidate = computed(() => {
   return (
@@ -147,7 +149,7 @@ function onChangeMinLimitPrice(value) {
   });
 
   if (minPriceVal.value && minPriceVal.value !== settedMinValue) {
-    emit('changeMinLimitPrice', value, getFilterPrice.value.Name);
+    emit('changeMinLimitPrice', value, categoryStore.getFilterByPrice.Name);
   }
 }
 
@@ -162,12 +164,32 @@ function onChangeMaxLimitPrice(value) {
   });
 
   if (maxPriceVal.value && maxPriceVal.value !== settedMaxValue) {
-    emit('changeMaxLimitPrice', value, getFilterPrice.value.Name);
+    emit('changeMaxLimitPrice', value, categoryStore.getFilterByPrice.Name);
   }
 }
 
-// TODO: разобраться почему отрабатывает два раза
-categoryStore.$subscribe((setedFiltersPrice) => {
+// // TODO: разобраться почему отрабатывает два раза
+// categoryStore.$subscribe((setedFiltersPrice) => {
+//   if (categoryStore.setedFiltersPrice.length !== 0) {
+//     const arr = [];
+//     categoryStore.setedFiltersPrice.forEach((el) => {
+//       const priceArr = el.split(':');
+//       arr.push(priceArr[0]);
+//     });
+
+//     if (!arr.includes('maxprice')) {
+//       maxPriceVal.value = '';
+//     }
+//     if (!arr.includes('minprice')) {
+//       minPriceVal.value = '';
+//     }
+//   } else {
+//     maxPriceVal.value = '';
+//     minPriceVal.value = '';
+//   }
+// });
+
+watch( () => categoryStore.setedFiltersPrice, () => {
   if (categoryStore.setedFiltersPrice.length !== 0) {
     const arr = [];
     categoryStore.setedFiltersPrice.forEach((el) => {
@@ -185,7 +207,7 @@ categoryStore.$subscribe((setedFiltersPrice) => {
     maxPriceVal.value = '';
     minPriceVal.value = '';
   }
-});
+})
 
 // Сброс цен на начальные значения
 function resetLimit(type) {
@@ -202,7 +224,7 @@ function resetLimit(type) {
     });
     minPriceVal.value = '';
     if (settedMinValue) {
-      emit('resetPrice', getFilterPrice.value.Name, type);
+      emit('resetPrice', categoryStore.getFilterByPrice.Name, type);
     }
   }
   if (type === 'max') {
@@ -215,7 +237,7 @@ function resetLimit(type) {
     });
     maxPriceVal.value = '';
     if (settedMaxValue) {
-      emit('resetPrice', getFilterPrice.value.Name, type);
+      emit('resetPrice', categoryStore.getFilterByPrice.Name, type);
     }
   }
 }

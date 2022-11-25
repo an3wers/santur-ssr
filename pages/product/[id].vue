@@ -285,7 +285,7 @@ const isBtnSpinner = ref(false);
 watch(
   () => authStore.user.id,
   async () => {
-    console.log('WATCH FOR USER ID');
+    // console.log('WATCH FOR USER ID');
     await loadProduct(productId);
   }
 );

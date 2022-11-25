@@ -32,16 +32,6 @@
 
     <!-- Информация по заказу -->
     <ul class="list-none divide-y divide-slate-300">
-      <!-- Список -->
-      <!-- 
-                Сумма товаров
-                Скидка (если есть)
-                Количество позиций
-                Вес заказа
-                Вес товаров в наличии
-                Итого
-
-             -->
       <li class="flex justify-between py-3 items-start">
         <span>Товары</span>
         <span class="font-semibold">{{ cartStore.cartSum }} ₽</span>
@@ -133,7 +123,7 @@ async function contractHandler(val) {
 const emit = defineEmits(['onClick']);
 
 function onSubmit() {
-  console.log(cartStore.cartState);
+  // console.log(cartStore.cartState);
   emit('onClick', cartStore.cartState == '' ? 'draft' : 'ord');
 }
 </script>
