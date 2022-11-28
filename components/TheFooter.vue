@@ -12,13 +12,15 @@
             </div>
             <div class="flex space-x-2">
               <NuxtLink
-                to="!#"
+                :to="`https://api.whatsapp.com/send/?phone=${WHATSAPP_SITE}`"
+                target="_blank"
                 class="no-underline py-2 text-base px-2 leading-5 bg-slate-300 border border-transparent hover:bg-slate-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-800 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75"
               >
                 <WhatsappIcon_24 color="#00477B" />
               </NuxtLink>
               <NuxtLink
-                to="!#"
+                :to="SOCIAL_URLS.tg"
+                target="_blank"
                 class="no-underline py-2 text-base px-2 leading-5 bg-slate-300 border border-transparent hover:bg-slate-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-800 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75"
               >
                 <svg
@@ -35,7 +37,8 @@
                 </svg>
               </NuxtLink>
               <NuxtLink
-                to="!#"
+                :to="SOCIAL_URLS.youtube"
+                target="_blank"
                 class="no-underline py-2 text-base px-2 leading-5 bg-slate-300 border border-transparent hover:bg-slate-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-800 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75"
               >
                 <svg
@@ -52,7 +55,8 @@
                 </svg>
               </NuxtLink>
               <NuxtLink
-                to="!#"
+                :to="SOCIAL_URLS.vk"
+                target="_blank"
                 class="no-underline py-2 text-base px-2 leading-5 bg-slate-300 border border-transparent hover:bg-slate-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-800 inline-flex items-center text-center justify-center rounded-md disabled:opacity-75"
               >
                 <svg
@@ -215,12 +219,10 @@
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="!#"
+                <NuxtLink class="no-underline text-gray-700" to="/clients/brands"
                   >Наши бренды</NuxtLink
                 >
               </li>
-              <!-- for test -->
-              <!-- <li><button @click="getAIm">get iam</button></li> -->
             </ul>
           </div>
         </div>
@@ -278,36 +280,37 @@
 
 <script setup>
 // import {ref} from 'vue'
-import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
-import { useAppMessage } from '@/stores/appMessage';
-import { useCartStore } from '@/stores/cart';
-import { useAuthStore } from '@/stores/auth';
+// import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
+// import { useAppMessage } from '@/stores/appMessage';
+// import { useCartStore } from '@/stores/cart';
+// import { useAuthStore } from '@/stores/auth';
 import WhatsappIcon_24 from '@/components/UI/Icons/WhatsappIcon_24.vue';
 
+const { WHATSAPP_SITE, SOCIAL_URLS } = useConfig()
 const currenYear = new Date().getFullYear();
 
-const appMessage = useAppMessage();
-const cartStore = useCartStore();
-const authStore = useAuthStore();
+// const appMessage = useAppMessage();
+// const cartStore = useCartStore();
+// const authStore = useAuthStore();
 
-async function checkSession(param) {
-  const response = await useCustomFetch(`apiauth/${param}`);
-  console.log(`checkSession response: ${param} ${response.data}`);
-}
+// async function checkSession(param) {
+//   const response = await useCustomFetch(`apiauth/${param}`);
+//   console.log(`checkSession response: ${param} ${response.data}`);
+// }
 
-async function checkShortCart() {
-  await cartStore.getShortCart();
-}
+// async function checkShortCart() {
+//   await cartStore.getShortCart();
+// }
 
-async function checkCart() {
-  await cartStore.getCart();
-}
+// async function checkCart() {
+//   await cartStore.getCart();
+// }
 
-function openMessage() {
-  appMessage.openWithTimer('info', 'На странице произошла ошибка', 'info');
-}
+// function openMessage() {
+//   appMessage.openWithTimer('info', 'На странице произошла ошибка', 'info');
+// }
 
-async function getAIm() {
-  await authStore.setUser();
-}
+// async function getAIm() {
+//   await authStore.setUser();
+// }
 </script>

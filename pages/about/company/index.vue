@@ -80,32 +80,45 @@
         </p>
         <div class="my-12">
           <h2 class="text-center">Наши клиенты</h2>
-          <div class="flex flex-wrap justify-center items-stretch my-8">
-            <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
+
+          <div class="grid grid-cols-10 gap-4 items-stretch my-8">
+
+            <div class="col-span-5 lg:col-span-2">
+              <div
+              class="bg-slate-150 p-4 rounded-xl h-full font-medium"
             >
               <span>Застройщики</span>
             </div>
-            <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
+            </div>
+            <div class="col-span-5 lg:col-span-2">
+              <div
+              class="bg-slate-150 p-4 rounded-xl h-full font-medium"
             >
               <span>Монтажные компании</span>
             </div>
-            <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
+            </div>
+            <div class="col-span-5 lg:col-span-2">
+              <div
+              class="bg-slate-150 p-4 rounded-xl h-full font-medium"
             >
               <span>Сфера ЖКХ</span>
             </div>
-            <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mr-3 mb-2 max-w-[240px]"
+            </div>
+            <div class="col-span-5 lg:col-span-2">
+              <div
+              class="bg-slate-150 p-4 rounded-xl  h-full font-medium"
             >
               <span>Промышленные предприятия. АПК региона</span>
             </div>
-            <div
-              class="bg-slate-150 p-4 rounded-xl items-center inline-flex font-medium mb-2 max-w-[240px]"
+            </div>
+            <div class="col-span-5 lg:col-span-2">
+              <div
+              class="bg-slate-150 p-4 rounded-xl h-full font-medium"
             >
               <span>Ритейлеры</span>
             </div>
+            </div>
+
           </div>
           <p>
             Для наших клиентов и партнёров мы ежегодно расширяем количество

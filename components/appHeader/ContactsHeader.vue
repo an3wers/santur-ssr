@@ -21,27 +21,12 @@
         <a
           class="inline-flex items-center text-center justify-center rounded-md disabled:opacity-75 bg-blue-100 border border-transparent hover:bg-blue-200 focus:outline-none focus:ring-slate-500 focus:ring focus:ring-opacity-20 text-gray-800 py-2 text-base px-2 leading-5"
           target="_blank"
-          :href="`https://wa.me/${WHATSAPP_SITE}`"
+          :href="`https://api.whatsapp.com/send/?phone=${WHATSAPP_SITE}`"
         >
           <whatsapp-icon-24 />
         </a>
       </Popper>
     </div>
-
-    <!-- Написать на эл. адрес Написать в WhatsApp  -->
-
-    <!-- <a class="hidden xl:inline-block" target="_blank" :href="`mailto: ${EMAIL_SITE}`">
-      <app-button-regular-icon
-        class="bg-slate-200 rounded-full hover:bg-slate-300 text-gray-600"
-      >
-      </app-button-regular-icon>
-    </a>
-    <a class="hidden xl:inline-block" target="_blank" :href="`https://wa.me/${WHATSAPP_SITE}`">
-      <app-button-regular-icon
-        class="bg-slate-200 rounded-full hover:bg-slate-300 text-gray-600"
-      >
-      </app-button-regular-icon>
-    </a> -->
   </div>
 </template>
 

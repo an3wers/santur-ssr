@@ -28,6 +28,7 @@
         <div v-for="(item, index) in items" :key="index" class="nav__item">
           <NuxtLink
             :to="item.url"
+            :target="item.target"
             class="text-gray-700 no-underline py-2 px-4 rounded-md hover:bg-slate-150 block"
           >
             {{ item.name }}
@@ -39,9 +40,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import ExpandMoreIcon20 from '@/components/UI/Icons/ExpandMoreIcon_20.vue';
-import SubMenu from './SubMenu.vue';
+import SubMenu from '@/components/UI/DropDown/SubMenu.vue';
 
 defineProps({
   items: {

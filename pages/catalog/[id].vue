@@ -47,9 +47,9 @@
               @changeMaxLimitPrice="handleChangeMaxLimitPrice"
               @changeMinLimitPrice="handleChangeMinLimitPrice"
               @resetPrice="handleResetPrice"
-              :filters="categoryStore.categoryFilters"
             />
           </div>
+          <!-- :filters="categoryStore.categoryFilters" -->
         </div>
         <div class="col-span-12 lg:col-span-8 xl:col-span-9 relative">
           <page-loader v-if="!categoryIsUpdated" />
@@ -111,8 +111,8 @@
               @changeMaxLimitPrice="handleChangeMaxLimitPrice"
               @changeMinLimitPrice="handleChangeMinLimitPrice"
               @resetPrice="handleResetPrice"
-              :filters="categoryStore.categoryFilters"
             />
+            <!-- :filters="categoryStore.categoryFilters" -->
             <div class="fixed left-0 right-0 bottom-5 z-30 text-center">
               <div class="container">
                 <button
@@ -126,9 +126,9 @@
                   {{
                     useNounEnding(
                       categoryStore.productCount,
-                      'товар',
-                      'товара',
-                      'товаров'
+                      "товар",
+                      "товара",
+                      "товаров"
                     )
                   }}
                 </button>
@@ -143,26 +143,26 @@
 </template>
 
 <script setup>
-import AppPageError from '@/components/AppPageError.vue';
-import CatalogProductList from '@/components/catalog/CatalogProductList.vue';
-import CatalogFilterList from '@/components/catalog/CatalogFilterList.vue';
-import CatalogSubcategory from '@/components/catalog/CatalogSubcategory.vue';
-import { useRoute, useRouter } from 'vue-router';
-import { ref, computed, watch } from 'vue';
-import { useCatalogStore } from '@/stores/catalog';
-import { useCategoryStore } from '@/stores/category';
-import { useMainStore } from '@/stores/main';
-import ProductListPagination from '@/components/catalog/ProductListPagination.vue';
-import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
-import CatalogProductChips from '@/components/catalog/CatalogProductChips.vue';
-import CatalogSort from '@/components/catalog/CatalogSort.vue';
-import PageLoader from '@/components/loaders/PageLoader.vue';
-import { useAppMessage } from '@/stores/appMessage';
-import AppButton from '@/components/UI/Buttons/AppButton.vue';
-import CloseIcon24 from '@/components/UI/Icons/CloseIcon_24.vue';
-import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
-import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
-import { useAuthStore } from '@/stores/auth';
+import AppPageError from "@/components/AppPageError.vue";
+import CatalogProductList from "@/components/catalog/CatalogProductList.vue";
+import CatalogFilterList from "@/components/catalog/CatalogFilterList.vue";
+import CatalogSubcategory from "@/components/catalog/CatalogSubcategory.vue";
+import { useRoute, useRouter } from "vue-router";
+import { ref, computed, watch } from "vue";
+import { useCatalogStore } from "@/stores/catalog";
+import { useCategoryStore } from "@/stores/category";
+import { useMainStore } from "@/stores/main";
+import ProductListPagination from "@/components/catalog/ProductListPagination.vue";
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import CatalogProductChips from "@/components/catalog/CatalogProductChips.vue";
+import CatalogSort from "@/components/catalog/CatalogSort.vue";
+import PageLoader from "@/components/loaders/PageLoader.vue";
+import { useAppMessage } from "@/stores/appMessage";
+import AppButton from "@/components/UI/Buttons/AppButton.vue";
+import CloseIcon24 from "@/components/UI/Icons/CloseIcon_24.vue";
+import AppButtonIcon from "@/components/UI/Buttons/AppButtonIcon.vue";
+import BtnSpinner from "@/components/UI/Spinner/BtnSpinner.vue";
+import { useAuthStore } from "@/stores/auth";
 
 const categoryIsLoaded = ref(false);
 const categoryIsUpdated = ref(true);
@@ -199,7 +199,7 @@ const currentCat = computed(() => {
 });
 
 const getIsTn = computed(() => {
-  return currentCat.value.vid === 'tn';
+  return currentCat.value?.vid === "tn";
 });
 
 const getSubcatgory = computed(() => {
@@ -212,7 +212,7 @@ const getCatalogTitle = computed(() => {
   if (currentCat.value) {
     return currentCat.value.name;
   } else {
-    return '';
+    return "";
   }
 });
 
@@ -251,7 +251,7 @@ const getParamsUrl = computed(() => {
   }
 
   if (categoryStore.inCash) {
-    queryObj.incash = 'true';
+    queryObj.incash = "true";
   }
 
   if (route.query.search) {
@@ -266,15 +266,15 @@ const getBreadcrumbs = computed(() => {
   // Если направление
   if (currentCat.value.parent_id == 0) {
     return [
-      { name: 'Каталог', url: '/catalog' },
+      { name: "Каталог", url: "/catalog" },
       { name: currentCat.value.name, url: `/catalog/${currentCat.value.id}` },
     ];
   } else {
     return [
-      { name: 'Каталог', url: '/catalog' },
+      { name: "Каталог", url: "/catalog" },
       {
-        name: currentCat.value['parent_name'],
-        url: `/catalog/${currentCat.value['parent_id']}`,
+        name: currentCat.value["parent_name"],
+        url: `/catalog/${currentCat.value["parent_id"]}`,
       },
       { name: currentCat.value.name, url: currentCat.value.id },
     ];
@@ -286,21 +286,20 @@ async function loadCategory() {
 
   // console.log('route.query', route.query)
 
-  const tmpPrices = Object.entries(route.query).find((el) => el[0] === 'price');
-  const tmpIncash = Object.entries(route.query).find(
-    (el) => el[0] === 'incash'
-  );
+  const tmpPrices = Object.entries(route.query).find((el) => el[0] === "price");
+  const tmpIncash =
+    Object.entries(route.query).find((el) => el[0] === "incash") || [];
 
   if (getParams.value) {
     await categoryStore.setCategory(getParams.value);
   } else {
-    navigateTo({ path: '/404' });
+    navigateTo({ path: "/404" });
   }
   // Если в фильтрах что-то есть
   if (
     Object.keys(route.query).filter(
       (el) =>
-        el !== 'page' && el !== 'price' && el !== 'incash' && el !== 'search'
+        el !== "page" && el !== "price" && el !== "incash" && el !== "search"
     ).length
   ) {
     await categoryStore.setFilters(route);
@@ -313,13 +312,13 @@ async function loadCategory() {
     let minVal = 0;
     let maxVal = 0;
 
-    tmpPrices[1].split('_').forEach((el) => {
-      if (el.split(':')[0] === 'minprice') {
-        minVal = el.split(':')[1];
+    tmpPrices[1].split("_").forEach((el) => {
+      if (el.split(":")[0] === "minprice") {
+        minVal = el.split(":")[1];
         // categoryStore.setMinLimit(`?flt=Цена&val=${val}`);
       }
-      if (el.split(':')[0] === 'maxprice') {
-        maxVal = el.split(':')[1];
+      if (el.split(":")[0] === "maxprice") {
+        maxVal = el.split(":")[1];
         // categoryStore.setMaxLimit(`?flt=Цена&val=${val}`);
       }
     });
@@ -332,11 +331,21 @@ async function loadCategory() {
     }
   }
 
-  if (tmpIncash || categoryStore.inCash) {
-    await categoryStore.setInCash('Y');
+  if (!tmpIncash.length) {
+    categoryStore.inCash
+      ? await categoryStore.setInCash("Y")
+      : await categoryStore.setInCash("N");
   } else {
-    await categoryStore.setInCash('N');
+    tmpIncash[1] === "true"
+      ? await categoryStore.setInCash("Y")
+      : await categoryStore.setInCash("N");
   }
+
+  // if (tmpIncash || categoryStore.inCash) {
+  //   await categoryStore.setInCash('Y');
+  // } else {
+  //   await categoryStore.setInCash('N');
+  // }
 
   await categoryStore.loadProducts(page.value);
 
@@ -351,19 +360,19 @@ function pushUrlState(payload) {
   let result = [];
 
   Object.entries(payload).forEach((el, index, arr) => {
-    if (el[0] === 'filter') {
-      result.push(el[1].join('&'));
+    if (el[0] === "filter") {
+      result.push(el[1].join("&"));
     }
-    if (el[0] === 'page') {
+    if (el[0] === "page") {
       result.push(`${el[0]}=${el[1]}`);
     }
-    if (el[0] === 'price') {
-      result.push(`${el[0]}=${el[1].join('_')}`);
+    if (el[0] === "price") {
+      result.push(`${el[0]}=${el[1].join("_")}`);
     }
-    if (el[0] === 'incash') {
+    if (el[0] === "incash") {
       result.push(`${el[0]}=${el[1]}`);
     }
-    if (el[0] === 'search') {
+    if (el[0] === "search") {
       result.push(`${el[0]}=${el[1]}`);
     }
   });
@@ -371,7 +380,7 @@ function pushUrlState(payload) {
   window.history.pushState(
     null,
     document.title,
-    `${window.location.pathname}?${result.join('&')}`
+    `${window.location.pathname}?${result.join("&")}`
   );
 }
 
@@ -394,10 +403,10 @@ async function handleChip(chip) {
   categoryIsUpdated.value = false;
   page.value = 1;
 
-  if (chip.name === 'price') {
+  if (chip.name === "price") {
     // сбросить фильтр по цене
     // метод remove set price
-    await handleResetPrice('Цена', chip.type);
+    await handleResetPrice("Цена", chip.type);
   } else {
     // toggle
     await categoryStore.setFilter(`?flt=${chip.name}&item=${chip.value}`);
@@ -427,7 +436,7 @@ async function handleChangePage(p) {
 
   window.scrollTo({
     top: 0,
-    behavior: 'smooth',
+    behavior: "smooth",
   });
 
   await categoryStore.loadProducts(page.value);
@@ -443,7 +452,7 @@ async function handleChangeMaxLimitPrice(value, name) {
   //   await categoryStore.setMaxLimit(`?flt=${name}&item=${value}`);
 
   if (res instanceof Error) {
-    appMessageStore.open('error', res.message, 'error');
+    appMessageStore.open("error", res.message, "error");
   } else {
     await categoryStore.loadProducts(page.value);
     pushUrlState(getParamsUrl.value);
@@ -459,7 +468,7 @@ async function handleChangeMinLimitPrice(value, name) {
   //   await categoryStore.setMinLimit(`?flt=${name}&item=${value}`);
 
   if (res instanceof Error) {
-    appMessageStore.open('error', res.message, 'error');
+    appMessageStore.open("error", res.message, "error");
   } else {
     await categoryStore.loadProducts(page.value);
     pushUrlState(getParamsUrl.value);
@@ -489,7 +498,7 @@ async function handleChangeSort(value) {
 }
 
 async function handleChangeInCash(value) {
-  const tmp = value ? 'Y' : 'N';
+  const tmp = value ? "Y" : "N";
 
   categoryIsUpdated.value = false;
   page.value = 1;

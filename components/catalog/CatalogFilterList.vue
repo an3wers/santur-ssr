@@ -59,7 +59,7 @@
     <!-- Фильтры чекбоксы -->
     <catalog-filter-item
       @setFilter="handleFilter"
-      v-for="filter in getFiltersCheckbox"
+      v-for="filter in categoryStore.getFilterCheckbox"
       :key="filter.Name"
       :filter="filter"
     />
@@ -91,12 +91,12 @@ import { useCategoryStore } from '@/stores/category';
 const catalogStore = useCatalogStore();
 const categoryStore = useCategoryStore();
 
-const props = defineProps({
-  filters: {
-    type: Array,
-    defaults: [],
-  },
-});
+// const props = defineProps({
+//   filters: {
+//     type: Array,
+//     defaults: [],
+//   },
+// });
 
 // const isResetMin = ref(false)
 // const isResetMax = ref(false)
@@ -114,19 +114,20 @@ const emit = defineEmits([
   'resetPrice',
 ]);
 
-const getFiltersCheckbox = computed(() => {
-  return props.filters.filter((el) => el.IsNumeric === false);
-});
+// const getFiltersCheckbox = computed(() => {
+//   return props.filters.filter((el) => el.IsNumeric === false);
+// });
 
-const getFilterPrice = computed(() => {
-  return props.filters.filter(
-    (el) => el.IsNumeric === true && el.Name === 'Цена'
-  )[0];
-});
+// const getFilterPrice = computed(() => {
+//   return props.filters.filter(
+//     (el) => el.IsNumeric === true && el.Name === 'Цена'
+//   )[0];
+// });
 
-// TODO Сделать маску для ввода
 // const maxPriceVal = ref(getFilterPrice.value?.MaxSelect || '');
 // const minPriceVal = ref(getFilterPrice.value?.MinSelect || '');
+
+// TODO Сделать маску для ввода
 const maxPriceVal = ref(categoryStore.getFilterByPrice?.MaxSelect || '');
 const minPriceVal = ref(categoryStore.getFilterByPrice?.MinSelect || '');
 

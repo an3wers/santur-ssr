@@ -27,7 +27,7 @@ export const useCategoryStore = defineStore('category', {
       return state.categoryFilters.filter((el) => el.IsNumeric === false);
     },
     getFilterByPrice(state) {
-      return state.categoryFilters.filter((el) => el.IsNumeric === true && el.Name === 'Цена')[0]
+      return state.categoryFilters.filter((el) => el.IsNumeric === true && el.Name === 'Цена')[0] || []
     }
   },
   actions: {

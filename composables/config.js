@@ -1,12 +1,17 @@
 export const useConfig = () => {
   return {
-    API_BASE_URL: 'https://isantur.ru/',
+    // API_BASE_URL: 'https://isantur.ru/',
     API_ADMIN: 'http://10.10.10.77:5168/',
-    // API_BASE_URL: 'https://testv.santur.ru/',
+    API_BASE_URL: 'https://testv.santur.ru/',
     // API_ADMIN: 'https://testv.santur.ru/',
     PHONE_SITE: '73432700404',
     EMAIL_SITE: 'santur@santur.ru',
     WHATSAPP_SITE: '79321217497',
+    SOCIAL_URLS: {
+      vk: 'https://vk.com/santehcomplekt_ural',
+      tg: 'https://t.me/santechekb',
+      youtube: 'https://www.youtube.com/channel/UCdcLjll0oT4Oi14rMazkr5g',
+    }
   };
 };
 
@@ -19,26 +24,32 @@ export const useMainMenu = () => {
         {
           name: 'О Сантехкомплект-Урал',
           url: '/about/company',
+          target: '_self'
         },
         {
           name: 'Менеджмент компании',
           url: '/about/company-managers',
+          target: '_self'
         },
         {
           name: 'Информация для поставщиков',
           url: '/about/informaciya-dlya-postavshhikov',
+          target: '_self'
         },
         {
           name: 'Новости компании',
           url: '/about/news',
+          target: '_self'
         },
         {
           name: 'Объекты комплектации',
           url: '/about/objects',
+          target: '_self'
         },
         {
           name: 'Вакансии',
           url: '/about/vacancy',
+          target: '_self'
         },
       ],
     },
@@ -49,10 +60,12 @@ export const useMainMenu = () => {
         {
           name: 'Доставка',
           url: '/services/delivery',
+          target: '_self'
         },
         {
           name: 'Проектирование и производство',
           url: 'https://pro.santur.ru',
+          target: '_blank'
         },
         // {
         //   name: 'Сервис и ремонт котлов',
@@ -67,18 +80,22 @@ export const useMainMenu = () => {
         {
           name: 'Наши бренды',
           url: '/clients/brands',
+          target: '_self'
         },
         {
           name: 'Сотрудничество',
           url: '/clients/cooperation',
+          target: '_self'
         },
         {
           name: 'Отзывы о компании',
           url: '/clients/reviews',
+          target: '_self'
         },
         {
           name: 'Прием рекламаций',
           url: '/clients/claim',
+          target: '_self'
         },
       ],
     },
@@ -89,22 +106,27 @@ export const useMainMenu = () => {
         {
           name: 'Мастер-Сантехник',
           url: 'https://msantehnik.ru',
+          target: '_blank'
         },
         {
           name: 'Инженерный форум',
           url: 'https://forum.santur.ru',
+          target: '_blank'
         },
         {
           name: 'Пожарное оборудование',
           url: 'https://fire.santur.ru',
+          target: '_blank'
         },
         {
           name: 'Собственное производство',
           url: 'https://pro.santur.ru',
+          target: '_blank'
         },
         {
           name: 'Наружные сети',
           url: 'https://seti.santur.ru',
+          target: '_blank'
         },
       ],
     },
@@ -112,6 +134,7 @@ export const useMainMenu = () => {
       name: 'Контакты',
       url: '/contact',
       child: [],
+      target: '_self'
     },
   ];
 };

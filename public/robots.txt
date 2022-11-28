@@ -2,6 +2,9 @@ User-Agent: *
 Disallow: /profile/
 Disallow: /search
 Disallow: /thank
+Disallow: /successactivate
+Disallow: /successban
+Disallow: /failactivate
 Disallow: /nuxt
 Disallow: /apissz/
 Disallow: /apiauth/

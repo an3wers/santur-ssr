@@ -8,8 +8,7 @@
       :index="index"
       :items="item.child"
       :title="item.name"
-    >
-    </DropDown>
+    />
     <div class="nav__item relative">
       <NuxtLink
         class="text-gray-700 no-underline inline-flex justify-center items-center px-2.5 py-2"
