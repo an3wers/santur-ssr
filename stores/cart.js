@@ -156,7 +156,6 @@ export const useCartStore = defineStore('cart', {
         для черновика tip=draft, 
         для прайса tip=price
         */
-        //  debugger
         const response = await fetch(
           `${API_BASE_URL}apissz/CartToOrd/?pay=${payMethod}&cmnt=${comment}&address=${address}&tip=${tip}`,
           {

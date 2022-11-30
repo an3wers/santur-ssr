@@ -47,6 +47,7 @@
               @changeMaxLimitPrice="handleChangeMaxLimitPrice"
               @changeMinLimitPrice="handleChangeMinLimitPrice"
               @resetPrice="handleResetPrice"
+              :isChecking="filterIsChecking"
             />
           </div>
           <!-- :filters="categoryStore.categoryFilters" -->
@@ -111,6 +112,7 @@
               @changeMaxLimitPrice="handleChangeMaxLimitPrice"
               @changeMinLimitPrice="handleChangeMinLimitPrice"
               @resetPrice="handleResetPrice"
+              :isChecking="filterIsChecking"
             />
             <!-- :filters="categoryStore.categoryFilters" -->
             <div class="fixed left-0 right-0 bottom-5 z-30 text-center">
@@ -166,6 +168,7 @@ import { useAuthStore } from "@/stores/auth";
 
 const categoryIsLoaded = ref(false);
 const categoryIsUpdated = ref(true);
+const filterIsChecking = ref(false)
 
 const isMobileFilters = ref(false);
 
@@ -384,7 +387,8 @@ function pushUrlState(payload) {
 
 // Клик на чекбокс
 async function handleFilter(filter) {
-  console.log(filter)
+  // console.log(filter)
+  filterIsChecking.value = true
   categoryIsUpdated.value = false;
   page.value = 1;
 
@@ -397,6 +401,7 @@ async function handleFilter(filter) {
 
   pushUrlState(getParamsUrl.value);
   categoryIsUpdated.value = true;
+  filterIsChecking.value = false
 }
 
 

@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref, inject, computed, watch } from 'vue';
+import { inject } from 'vue';
 import ExpandMoreIcon24 from '@/components/UI/Icons/ExpandMoreIcon_24.vue';
 
 const props = defineProps({

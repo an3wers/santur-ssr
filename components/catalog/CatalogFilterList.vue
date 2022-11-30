@@ -62,6 +62,7 @@
       v-for="filter in categoryStore.getFilterCheckbox"
       :key="filter.Name"
       :filter="filter"
+      :isChecking="isChecking"
     />
 
     <!-- Кнопка "Найдено товаров" -->
@@ -91,12 +92,16 @@ import { useCategoryStore } from '@/stores/category';
 const catalogStore = useCatalogStore();
 const categoryStore = useCategoryStore();
 
-// const props = defineProps({
-//   filters: {
-//     type: Array,
-//     defaults: [],
-//   },
-// });
+const props = defineProps({
+  // filters: {
+  //   type: Array,
+  //   defaults: [],
+  // },
+  isChecking: {
+    type: Boolean,
+    default: false
+  }
+});
 
 // const isResetMin = ref(false)
 // const isResetMax = ref(false)

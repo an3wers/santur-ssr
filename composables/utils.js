@@ -135,7 +135,6 @@ export const useDateFormatter = (
   date,
   options = { day: 'numeric', month: 'long', year: 'numeric' }
 ) => {
-  // debugger;
   const myDate = date.split('.');
 
   // console.log(myDate);

@@ -98,7 +98,6 @@ const getOrderIsConfirm = computed(() => {
 });
 
 async function orderSubmitHandler(tip) {
-  debugger;
   btnProcessing.value = true;
   const res = await cartStore.cartConfirm(
     payMethod.value,

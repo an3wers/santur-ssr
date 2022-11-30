@@ -31,11 +31,11 @@
           type="checkbox"
           :value="item.Name"
           :checked="item.isChecked"
-          :disabled="!item.QtyRecords"
+          :disabled="!item.QtyRecords || isChecking"
           @change="checkboxClick(filter.Name, $event)"
-          class="-mb-1 rounded border-gray-400 text-primary focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-500 focus:ring-opacity-20 bg-transparent"
+          class="-mb-1 rounded border-gray-400 text-primary focus:border-blue-500 focus:ring focus:ring-offset-0 focus:ring-blue-500 focus:ring-opacity-20 bg-transparent disabled:opacity-70"
         />
-        <span class="ml-2 -mt-1"
+        <span class="ml-2 -mt-1" :class="isChecking ? 'opacity-70' : ''"
           >{{ item.Name }}&nbsp;<span class="ml-1 text-sm text-gray-400"
             >({{ item.QtyRecords }})</span
           ></span
@@ -46,9 +46,9 @@
 </template>
 
 <script setup>
-import AppCheckbox from '@/components/UI/Forms/AppCheckbox.vue';
-import CloseIcon20 from '@/components/UI/Icons/CloseIcon_20.vue';
-import { ref, computed } from 'vue';
+import AppCheckbox from "@/components/UI/Forms/AppCheckbox.vue";
+import CloseIcon20 from "@/components/UI/Icons/CloseIcon_20.vue";
+import { ref, computed } from "vue";
 
 // На этом этапе мне нужно передать props chekced, это значит объект filter должен иметь свойство isChecked
 const props = defineProps({
@@ -56,11 +56,14 @@ const props = defineProps({
     type: Object,
     defaults: {},
   },
+  isChecking: {
+    type: Boolean,
+  },
 });
 
-const inputFilterValue = ref('');
+const inputFilterValue = ref("");
 
-const emit = defineEmits(['setFilter']);
+const emit = defineEmits(["setFilter"]);
 
 const filteredFilterItems = computed(() => {
   return props.filter.Items.filter((el) =>
@@ -69,13 +72,12 @@ const filteredFilterItems = computed(() => {
 });
 
 function cleanInputFilterValue() {
-  inputFilterValue.value = '';
+  inputFilterValue.value = "";
 }
 
 function checkboxClick(filter, event) {
-
   // Сдесь нужно сделсть логику по установки фильтра, так как если ошибка нужно снимать прочеканый фильтр
 
-  emit('setFilter', filter, event);
+  emit("setFilter", filter, event);
 }
 </script>

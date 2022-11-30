@@ -81,8 +81,13 @@
                   <div v-html="useHTMLDecoding(item.post_title)"></div>
                 </div>
               </template>
-              <template v-if="singleVacancy" #content>
-                <div v-html="useHTMLDecoding(singleVacancy.post_content)"></div>
+              <template #content>
+                <div v-if="singleIsLoading">
+                  <AppLoader />
+                </div>
+                <div v-else v-html="useHTMLDecoding(singleVacancy?.post_content)">
+                  
+                </div>
               </template>
             </AccordionItem>
             <!-- <AccordionItem id="v1">
@@ -234,6 +239,7 @@ import { ref } from "vue";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
 import AccordionWrapper from "@/components/UI/Accordion/AccordionWrapper.vue";
 import AccordionItem from "@/components/UI/Accordion/AccordionItem.vue";
+import AppLoader from "@/components/loaders/AppLoader.vue";
 
 const pageDescr =
   "Сантехкомплект-Урал в топ-20 компаний из Екатеринбурга в списке лучших работодателей страны. Наша компания уделяет, большое внимание развитию персонала. У наших сотрудников есть возможность участвовать в проектном управлении компании, возможность карьерного и профессионального роста, внутреннего и внешнего обучения.";
@@ -271,7 +277,6 @@ async function fetchVacancy() {
 await fetchVacancy();
 
 async function accordionItemHandler(id) {
-  debugger;
   if (id) {
     if (singleVacancy.value && singleVacancy.value.ID === id) {
       return undefined;
