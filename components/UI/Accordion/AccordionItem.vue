@@ -24,7 +24,7 @@ import ExpandMoreIcon24 from '@/components/UI/Icons/ExpandMoreIcon_24.vue';
 
 const props = defineProps({
   id: {
-    type: String,
+    type: [String, Number],
     default: '',
   },
 });

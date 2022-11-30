@@ -182,6 +182,7 @@ export const useCategoryStore = defineStore('category', {
             response.data.filters
           );
           this.updateSetedFilters(response.data.filters);
+          this.updateSetedFilterPrice(response.data.filters)
         }
       } catch (error) {
         console.log(error);
@@ -270,6 +271,7 @@ export const useCategoryStore = defineStore('category', {
           this.categoryFilters = this.addIsCheckedToFilters(
             response.data.filters
           );
+          this.updateSetedFilters(response.data.filters)
           this.updateSetedFilterPrice(response.data.filters);
         }
       } catch (error) {
@@ -281,15 +283,26 @@ export const useCategoryStore = defineStore('category', {
     // utils for filters
     addIsCheckedToFilters(filters) {
       return filters.map((el) => {
-        if (el.IsNumeric) {
-          return el;
-        }
-        const arrSelected = el.Selected.split(';');
 
-        for (let i of el.Items) {
-          i.isChecked = arrSelected.includes(i.Name);
+        if (!el.IsNumeric) {
+          let arrSelected = []
+          if (el.Selected) {
+            arrSelected = el.Selected.split(';');
+          }
+          el.Items = el.Items.map((i) => {
+            return { ...i, isChecked: arrSelected.includes(i.Name) }
+          })
         }
-        return el;
+        return el
+        // if (el.IsNumeric) {
+        //   return el;
+        // }
+        // const arrSelected = el.Selected.split(';');
+
+        // for (let i of el.Items) {
+        //   i.isChecked = arrSelected.includes(i.Name);
+        // }
+        // return el;
       });
     },
 

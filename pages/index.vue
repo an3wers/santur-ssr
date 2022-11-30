@@ -11,7 +11,6 @@
                 v-if="profileStore.usersForActivate.length && authStore.user.id"
               />
             </ClientOnly>
-            <!-- TODO: информер для активации пользователей для авторизованных -->
             <home-slider />
             <!-- <template v-else> -->
             <ClientOnly>
@@ -38,30 +37,30 @@
 </template>
 
 <script setup>
-import HomeSlider from '@/components/homePage/HomeSlider.vue';
-import PopularCategories from '@/components/homePage/PopularCategories.vue';
-import NarrowSlider from '@/components/homePage/NarrowSlider.vue';
-import SaleProducts from '@/components/homePage/SaleProducts.vue';
+import HomeSlider from "@/components/homePage/HomeSlider.vue";
+import PopularCategories from "@/components/homePage/PopularCategories.vue";
+import NarrowSlider from "@/components/homePage/NarrowSlider.vue";
+import SaleProducts from "@/components/homePage/SaleProducts.vue";
 // import BottomBanner from '@/components/homePage/BottomBanner.vue';
-import News from '@/components/homePage/News.vue';
-import Features from '@/components/homePage/Features.vue';
-import PageLoader from '@/components/loaders/PageLoader.vue';
-import ActivateUsers from '@/components/homePage/ActivateUsers.vue';
+import News from "@/components/homePage/News.vue";
+import Features from "@/components/homePage/Features.vue";
+import PageLoader from "@/components/loaders/PageLoader.vue";
+import ActivateUsers from "@/components/homePage/ActivateUsers.vue";
 // import AppLoader from '@/components/loaders/AppLoader.vue';
-import { useProfileStore } from '@/stores/profile';
-import { useAuthStore } from '@/stores/auth';
+import { useProfileStore } from "@/stores/profile";
+import { useAuthStore } from "@/stores/auth";
 
-import { useHomeStore } from '@/stores/home';
-import { ref, onMounted } from 'vue';
+import { useHomeStore } from "@/stores/home";
+import { ref, onMounted } from "vue";
 
 const profileStore = useProfileStore();
 const authStore = useAuthStore();
 
 const pageDescr =
-  'Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.';
+  "Сантехкомплект-Урал - инженерное оборудование от отечественных и зарубежных производителей. Полностью комплектуем строительные объекты: жилые комплексы, промышленные объекты, ижс, коммерческая застройка.";
 
 useHead({
-  meta: [{ name: 'description', content: pageDescr }],
+  meta: [{ name: "description", content: pageDescr }],
 });
 
 const homeIsLoaded = ref(false);
@@ -76,10 +75,11 @@ onMounted(() => {
   homeIsLoaded.value = true;
 });
 
+await homeStore.loadNews();
+
 // async function loadHomePage() {
 //   // await homeStore.loadTopSlider();
 //   // await homeStore.loadNarrowSlider();
-//   // await homeStore.loadNews();
 //   homeIsLoaded.value = true;
 // }
 

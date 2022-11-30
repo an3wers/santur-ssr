@@ -37,7 +37,7 @@
             class="rounded-2xl border border-gray-300 h-full"
           >
             <NuxtLink
-              :to="`/catalog/${item.id}?Бренд=${brand.name}`"
+              :to="`/catalog/${item.id}?Бренд=${brand.name}&incash=false`"
               class="no-underline text-gray-900 flex items-center justify-between space-x-2 px-5 py-4"
             >
               <div class="text-[0.9375rem] font-medium">
@@ -88,7 +88,7 @@ import { useAppMessage } from '@/stores/appMessage';
 import FileIcon24 from '@/components/UI/Icons/FileIcon_24.vue';
 
 const brand = ref(null);
-const { open: setError, openWithTimer } = useAppMessage();
+const { open: setError } = useAppMessage();
 const route = useRoute();
 
 async function fetchBrand(alias) {

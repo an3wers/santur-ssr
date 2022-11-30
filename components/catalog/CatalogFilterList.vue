@@ -69,7 +69,7 @@
       <div
         v-if="catalogStore.displaySelectedFilterBtn"
         @click="catalogStore.handleDisplaySelectedFilterBtn"
-        class="hidden lg:fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 2xl:w-80 filter-float-btn z-10 text-white font-semibold"
+        class="hidden lg:block fixed bottom-8 cursor-pointer py-2.5 px-4 bg-gray-700 border border-transparent rounded-md shadow-md text-center w-72 xl:w-64 2xl:w-80 filter-float-btn z-10 text-white font-semibold"
       >
         Товаров найдено: {{ categoryStore.productCount }} шт.
       </div>

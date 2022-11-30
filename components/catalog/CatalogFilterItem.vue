@@ -73,6 +73,9 @@ function cleanInputFilterValue() {
 }
 
 function checkboxClick(filter, event) {
+
+  // Сдесь нужно сделсть логику по установки фильтра, так как если ошибка нужно снимать прочеканый фильтр
+
   emit('setFilter', filter, event);
 }
 </script>

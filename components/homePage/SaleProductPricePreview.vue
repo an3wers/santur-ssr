@@ -3,9 +3,9 @@
     class="carousel__item sale-products-list__product product-body flex flex-col space-y-1"
   >
     <div
-      class="block w-full min-h-40 p-4 aspect-square overflow-hidden relative"
+      class="block w-full max-h-[240px] p-4 aspect-square overflow-hidden relative"
     >
-      <NuxtLink :to="`/product/${product.code}`" class="product-body__img-link">
+      <NuxtLink :to="`/product/${product.code}`"  class="product-body__img-link">
         <img
           class="object-contain w-full h-full"
           :src="product.imgpath"
@@ -111,7 +111,7 @@
 <script setup>
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
-import { ref, computed, watch } from 'vue';
+import { ref, watch } from 'vue';
 import BookmarkIcon20 from '@/components/UI/Icons/BookmarkIcon_20.vue';
 import BookmarkIconFill20 from '@/components/UI/Icons/BookmarkIconFill_20.vue';
 import Popper from 'vue3-popper';

@@ -295,6 +295,18 @@ async function loadCategory() {
   } else {
     navigateTo({ path: "/404" });
   }
+
+  // Устанавливаем параметр в наличии
+  if (!tmpIncash.length) {
+    categoryStore.inCash
+      ? await categoryStore.setInCash("Y")
+      : await categoryStore.setInCash("N");
+  } else {
+    tmpIncash[1] === "true"
+      ? await categoryStore.setInCash("Y")
+      : await categoryStore.setInCash("N");
+  }
+
   // Если в фильтрах что-то есть
   if (
     Object.keys(route.query).filter(
@@ -304,6 +316,8 @@ async function loadCategory() {
   ) {
     await categoryStore.setFilters(route);
   }
+
+  // Чистка всех установленных фильтров
   // else {
   //   await categoryStore.cleanAllFilter();
   // }
@@ -330,22 +344,6 @@ async function loadCategory() {
       await categoryStore.setMaxLimit(`?flt=Цена&val=${maxVal}`);
     }
   }
-
-  if (!tmpIncash.length) {
-    categoryStore.inCash
-      ? await categoryStore.setInCash("Y")
-      : await categoryStore.setInCash("N");
-  } else {
-    tmpIncash[1] === "true"
-      ? await categoryStore.setInCash("Y")
-      : await categoryStore.setInCash("N");
-  }
-
-  // if (tmpIncash || categoryStore.inCash) {
-  //   await categoryStore.setInCash('Y');
-  // } else {
-  //   await categoryStore.setInCash('N');
-  // }
 
   await categoryStore.loadProducts(page.value);
 
@@ -386,6 +384,7 @@ function pushUrlState(payload) {
 
 // Клик на чекбокс
 async function handleFilter(filter) {
+  console.log(filter)
   categoryIsUpdated.value = false;
   page.value = 1;
 
@@ -395,9 +394,11 @@ async function handleFilter(filter) {
   if (filter.isChecked) {
     catalogStore.setDisplaySelectedFilterBtn();
   }
+
   pushUrlState(getParamsUrl.value);
   categoryIsUpdated.value = true;
 }
+
 
 async function handleChip(chip) {
   categoryIsUpdated.value = false;
@@ -509,4 +510,5 @@ async function handleChangeInCash(value) {
   pushUrlState(getParamsUrl.value);
   categoryIsUpdated.value = true;
 }
+
 </script>

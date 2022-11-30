@@ -15,15 +15,15 @@
           @mouseenter="featureHandler(item.id)"
           class="p-6 h-full rounded-2xl border flex flex-col space-y-4"
         >
-          <div class="w-12 h-12">
+          <div class="w-8 h-8 md:w-12 md:h-12">
             <img
               class="w-full h-full object-contain"
               :src="`/images/features/${item.iconPath}`"
               :alt="item.title"
             />
           </div>
-          <div class="text-xl font-bold">{{ item.title }}</div>
-          <div class="grow leading-relaxed">{{ item.text }}</div>
+          <div class="text-lg ms:text-xl font-bold">{{ item.title }}</div>
+          <div class="grow leading-snug md:leading-relaxed text-sm md:text-base">{{ item.text }}</div>
           <div class="flex justify-end">
             <NuxtLink
               :class="[!item.isActive && 'opacity-0']"

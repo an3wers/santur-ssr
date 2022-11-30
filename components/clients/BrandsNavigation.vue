@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-1 mb-8 pb-4 lg:pb-0 overflow-y-auto">
+  <div class="space-y-1 mb-8 px-1 pt-1 pb-2 lg:pb-1 overflow-y-auto">
     <div class="flex space-x-1 min-w-[760px]">
       <button
         @click="handleChar(all.name, null)"

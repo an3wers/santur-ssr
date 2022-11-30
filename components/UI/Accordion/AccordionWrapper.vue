@@ -14,6 +14,8 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['itemHandler'])
+
 const stateAccordion = ref('');
 stateAccordion.value = props.default;
 
@@ -24,6 +26,7 @@ function updateState(id) {
   } else {
     stateAccordion.value = '';
   }
+  emits('itemHandler', stateAccordion.value)
 }
 
 provide('activeItem', { stateAccordion, updateState });

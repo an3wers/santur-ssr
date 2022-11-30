@@ -6,7 +6,7 @@
         :key="news.ID"
         class="news-list__body flex-col"
       >
-        <div class="mb-2">
+        <div class="mb-1">
           {{ useDateFormatter(news.post_date) }}
         </div>
         <NuxtLink
