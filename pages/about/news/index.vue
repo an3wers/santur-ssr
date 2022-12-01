@@ -73,12 +73,12 @@ const setNewsParams = {
 async function loadNews(page) {
   isError.value = false;
   try {
-    const res = await $fetch(`${API_ADMIN}api/post/news`, {
+    const res = await $fetch('post/news', {
+      baseURL: API_ADMIN,
       method: 'post',
       credentials: 'include',
       body: { page: page, search: '', ...setNewsParams },
     });
-    console.log("Все новости", res)
     news.value = res.items;
     countPages.value = res.all_pages_count;
     if (appMessageStore.isShow) {

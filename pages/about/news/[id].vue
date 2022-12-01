@@ -38,7 +38,8 @@ async function loadPost(id) {
   try {
     postIsLoaded.value = false;
     // https://localhost:7168/api/post/detail {"ID":4}
-    const res = await $fetch(`${API_ADMIN}api/post/detail`, {
+    const res = await $fetch('post/detail', {
+      baseURL: API_ADMIN,
       method: 'post',
       credentials: 'include',
       body: { ID: id },

@@ -50,4 +50,7 @@ export default defineNuxtConfig({
       dedupe: ['vue'],
     },
   },
+  // nitro: {
+  //   // devProxy: {    '/api/post': 'http://localhost:3000',    '/api/post': { target: 'https://example.com', changeOrigin: true }  }
+  // }
 });

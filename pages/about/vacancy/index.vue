@@ -259,7 +259,8 @@ const breadcrumbs = [{ name: "Вакансии", url: "/about/vacancy" }];
 
 async function fetchVacancy() {
   try {
-    const response = await $fetch(`${API_ADMIN}api/post/vakansii`, {
+    const response = await $fetch('post/vakansii', {
+      baseURL: API_ADMIN,
       method: "post",
       credentials: "include",
     });
@@ -289,7 +290,8 @@ async function accordionItemHandler(id) {
 async function fetchSingleVacancy(id) {
   singleIsLoading.value = true;
   try {
-    const response = await $fetch(`${API_ADMIN}api/post/detail`, {
+    const response = await $fetch('/post/detail', {
+      baseURL: API_ADMIN,
       method: "post",
       credentials: "include",
       body: {
