@@ -5,25 +5,25 @@
       <h1 class="text-center">Сотрудникам компании</h1>
       <div class="grid grid-cols-12">
         <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11">
-          <div class="grid grid-cols-3 gap-1 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-8">
             <NuxtLink
               to="https://fort.santur.ru:10443"
               target="_blank"
-              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline h-24"
+              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline h-14 md:h-24"
               >Войти в VPN-портал</NuxtLink
             >
 
             <NuxtLink
               to="https://mail.santur.ru"
               target="_blank"
-              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline"
+              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline h-14 md:h-24"
               >Войти в почту</NuxtLink
             >
 
             <NuxtLink
               to="https://mail.santur.ru"
               target="_blank"
-              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline"
+              class="flex items-center justify-center bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 text-gray-800 no-underline h-14 md:h-24"
               >Изменить пароль</NuxtLink
             >
           </div>

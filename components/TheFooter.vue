@@ -5,7 +5,7 @@
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 md:col-span-6 lg:col-span-3">
           <div class="space-y-6">
-            <div><img src="~/assets/images/logo-santur.svg" /></div>
+            <div class="mt-[7px]"><img src="~/assets/images/logo-santur.svg" alt="logo" /></div>
             <div class="text-sm">
               <span class="block">1995-{{ currenYear }}</span>
               <span class="block">ООО «УЦСК «Сантехкомплект-Урал»</span>
@@ -174,13 +174,7 @@
                   >Контакты</NuxtLink
                 >
               </li>
-              <li>
-                <NuxtLink
-                  to="/profile/feedback"
-                  class="no-underline text-gray-700"
-                  >Обратная связь</NuxtLink
-                >
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -208,6 +202,13 @@
                   >Прием рекламаций</NuxtLink
                 >
               </li>
+              <li>
+                <NuxtLink
+                  to="/profile/feedback"
+                  class="no-underline text-gray-700"
+                  >Обратная связь</NuxtLink
+                >
+              </li>
             </ul>
           </div>
           <div>
@@ -221,6 +222,11 @@
               <li>
                 <NuxtLink class="no-underline text-gray-700" to="/clients/brands"
                   >Наши бренды</NuxtLink
+                >
+              </li>
+              <li>
+                <NuxtLink class="no-underline text-gray-700" to="/clients/how-buy"
+                  >Как купить товар</NuxtLink
                 >
               </li>
             </ul>
