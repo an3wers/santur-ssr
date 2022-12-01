@@ -85,7 +85,8 @@ export const useHomeStore = defineStore('home', {
     async loadNews() {
       const { API_ADMIN } = useConfig();
       try {
-        const response = await $fetch(`${API_ADMIN}api/post/fresh_news`, {
+        const response = await $fetch('api/post/fresh_news', {
+          baseURL: API_ADMIN,
           method: 'post',
           credentials: 'include',
         });
