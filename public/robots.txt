@@ -6,6 +6,7 @@ Disallow: /successactivate
 Disallow: /successban
 Disallow: /failactivate
 Disallow: /nuxt
+Disallow: /staff
 Disallow: /apissz/
 Disallow: /apiauth/
 Disallow: */?

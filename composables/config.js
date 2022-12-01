@@ -88,6 +88,11 @@ export const useMainMenu = () => {
           target: '_self'
         },
         {
+          name: 'Как купить товар',
+          url: '/clients/how-buy',
+          target: '_self'
+        },
+        {
           name: 'Отзывы о компании',
           url: '/clients/reviews',
           target: '_self'
