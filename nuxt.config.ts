@@ -5,27 +5,27 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
         // {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap'},
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
         },
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       ],
       htmlAttrs: {
-        lang: 'ru',
+        lang: "ru",
       },
     },
   },
   ssr: true,
-  modules: ['@pinia/nuxt'],
-  css: ['~/assets/scss/main.scss'],
+  modules: ["@pinia/nuxt"],
+  css: ["~/assets/scss/main.scss"],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
-      'postcss-preset-env': {},
+      "postcss-preset-env": {},
     },
   },
   build: {
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
     //     },
     //   },
     // },
-    transpile: ['vue3-popper', 'vue3-carousel'],
+    transpile: ["vue3-popper", "vue3-carousel"],
     // babel: {
     //   presets() {
     //     return [['@nuxt/babel-preset-app']];
@@ -47,9 +47,13 @@ export default defineNuxtConfig({
   },
   vite: {
     resolve: {
-      dedupe: ['vue'],
+      dedupe: ["vue"],
     },
   },
+  plugins: [
+    // { src: "~/plugins/maska.ts", mode: "client" }
+    // { src: "~/plugins/v-mask.client.js", mode: "client" }
+  ],
   // nitro: {
   //   // devProxy: {    '/api/post': 'http://localhost:3000',    '/api/post': { target: 'https://example.com', changeOrigin: true }  }
   // }

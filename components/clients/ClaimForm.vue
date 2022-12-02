@@ -36,6 +36,7 @@
             inputType="border"
             placeholder="Введите ваш телефон"
             v-model="phone"
+            v-maska="'+7 (###) ###-##-##'"
           />
           <!-- v-mask="'+# (###) ###-##-##'" -->
           <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
@@ -334,11 +335,12 @@ function uploadFileHandler(event) {
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
   const { name, phone, company, inn, email, comment, nombersTmc } = values;
   const data = new FormData();
+  const cleanedPhone = phoneCleanerFormat(phone)
 
   data.append('authorname', name);
   data.append('subjectname', company);
   data.append('subjectinn', inn);
-  data.append('phone', phone);
+  data.append('phone', cleanedPhone);
   data.append('email', email);
   data.append('sngood', nombersTmc);
   data.append('descr', comment);

@@ -36,6 +36,7 @@
         <app-input
           type="tel"
           v-model.trim="phoneR"
+          v-maska="'+7 (###) ###-##-##'"
           @blur="blurPhone"
           :inputType="
             errorPhone && metaPhone.touched ? 'border-error' : 'border'
@@ -230,11 +231,11 @@ const registrIsActive = computed(() => {
 
 const onRegister = handleSubmit(async (values, { resetForm }) => {
   const { nameR, companyR, innR, phoneR, emailR } = values;
-
+  const cleanedPhone = phoneCleanerFormat(phoneR)
   try {
     registerProcessing.value = true;
     const response = await useCustomFetch(
-      `apissz/AccountReg/?name=${nameR}&companyname=${companyR}&phone=${phoneR}&email=${emailR}&inn=${innR}&ownerid=${selectedFilial.value}`
+      `apissz/AccountReg/?name=${nameR}&companyname=${companyR}&phone=${cleanedPhone}&email=${emailR}&inn=${innR}&ownerid=${selectedFilial.value}`
     );
     console.log('Форма регистрации', response);
     if (response.success) {
