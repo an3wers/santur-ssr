@@ -77,6 +77,8 @@ onMounted(() => {
 
 await homeStore.loadNews();
 
+// await useCustomFetch('/users/')
+
 // async function loadHomePage() {
 //   // await homeStore.loadTopSlider();
 //   // await homeStore.loadNarrowSlider();

@@ -50,11 +50,13 @@ export default defineNuxtConfig({
       dedupe: ["vue"],
     },
   },
-  plugins: [
-    // { src: "~/plugins/maska.ts", mode: "client" }
-    // { src: "~/plugins/v-mask.client.js", mode: "client" }
-  ],
+  // plugins: [
+  //   // { src: "~/plugins/maska.ts", mode: "client" }
+  //   // { src: "~/plugins/v-mask.client.js", mode: "client" }
+  // ],
   // nitro: {
   //   // devProxy: {    '/api/post': 'http://localhost:3000',    '/api/post': { target: 'https://example.com', changeOrigin: true }  }
+  //   // devProxy: { '/apiauth/': 'https://isantur.ru/' }
+  //   // proxyRequest: {'/apiauth/': 'https://isantur.ru/'}
   // }
 });
