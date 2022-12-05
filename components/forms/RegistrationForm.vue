@@ -36,13 +36,13 @@
         <app-input
           type="tel"
           v-model.trim="phoneR"
-          v-maska="'+7 (###) ###-##-##'"
           @blur="blurPhone"
           :inputType="
             errorPhone && metaPhone.touched ? 'border-error' : 'border'
-          "
+            "
           inputSize="lg"
-        />
+          />
+          <!-- v-maska="'+7 (###) ###-##-##'" -->
         <div
           v-if="errorPhone && metaPhone.touched"
           class="text-sm text-red-500"
