@@ -77,15 +77,6 @@ onMounted(() => {
 
 await homeStore.loadNews();
 
-async function testFetch() {
-  const res = await $fetch('/api/test/?id=2')
-
-  if(res.length) {
-    console.log(res[0])
-  }
-}
-
-await testFetch()
 
 // await useCustomFetch('/users/')
 
