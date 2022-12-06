@@ -9,7 +9,7 @@
         <Slide v-for="slide in slides" :key="slide.id">
           <div class="carousel__item">
             <div class="home-slider__banner w-full h-full">
-              <NuxtLink target="_blank" :to="slide.url">
+              <NuxtLink :target="slide.target" :to="slide.url">
                 <img
                   :src="`/images/banners/${slide.image}`"
                   alt=""
@@ -39,28 +39,33 @@ import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
 const slides = ref([
   {
     id: '1',
-    url: 'https://santur.ru',
+    url: '/about/news/6094',
     image: 'top_1.jpg',
+    target: "_self"
   },
   {
     id: '2',
-    url: 'https://santur.ru',
+    url: '/about/company',
     image: 'top_2.jpg',
+    target: "_self"
   },
   {
     id: '3',
-    url: 'https://santur.ru',
+    url: 'https://fire.santur.ru',
     image: 'top_3.jpg',
+    target: "_blank"
   },
   {
     id: '4',
-    url: 'https://santur.ru',
+    url: 'https://pro.santur.ru',
     image: 'top_4.jpg',
+    target: "_blank"
   },
   {
     id: '5',
-    url: 'https://santur.ru',
+    url: 'https://seti.santur.ru',
     image: 'top_5.jpg',
+    target: "_blank"
   },
 ]);
 

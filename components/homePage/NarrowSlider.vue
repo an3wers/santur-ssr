@@ -8,13 +8,13 @@
       <Slide v-for="slide in sliders" :key="slide.id">
         <div class="carousel__item">
           <div class="w-full h-full">
-            <a target="_blank" :href="slide.url">
+            <NuxtLink :target="slide.target" :href="slide.url">
               <img
                 :src="`/images/banners/${slide.image}`"
                 alt=""
                 class="w-full h-full object-cover object-center rounded-lg lg:rounded-2xl"
               />
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </Slide>
@@ -38,33 +38,39 @@ import { ref } from "vue";
 const sliders = ref([
   {
     id: "6",
-    url: "https://santur.ru",
+    url: "/clients/brands/uponor",
     image: "uponor_01122022_santur_new.jpg",
+    target: '_self'
   },
   {
     id: "1",
-    url: "https://santur.ru",
+    url: "/catalog/100817?Бренд=РОС",
     image: "bottom_1.jpg",
+    target: '_self'
   },
   {
     id: "2",
-    url: "https://santur.ru",
+    url: "/catalog/100817",
     image: "bottom_2.jpg",
+    target: '_self'
   },
   {
     id: "3",
-    url: "https://santur.ru",
+    url: "/catalog/100870?Бренд=Aquasfera",
     image: "bottom_3.jpg",
+    target: '_self'
   },
   {
     id: "4",
-    url: "https://santur.ru",
+    url: "/clients/brands/sanita",
     image: "bottom_4.jpg",
+    target: '_self'
   },
   {
     id: "5",
-    url: "https://santur.ru",
+    url: "/catalog/100914?search=regula",
     image: "bottom_5.jpg",
+    target: '_self'
   },
 ]);
 
