@@ -15,7 +15,7 @@
           </div>
           <div class="space-y-10">
             <!-- card 1 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">
                 Надежный партнер в обеспечении продукцией высокого качества.
               </h3>
@@ -40,7 +40,7 @@
             </div>
             <!-- # card 1 -->
             <!-- card 2 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">
                 Сантехкомплект-Урал — надежный партнер, проверенный временем.
               </h3>
@@ -69,7 +69,7 @@
             </div>
             <!-- # card 2 -->
             <!-- card 3 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">
                 Сантехкомплект-Урал является надежным звеном.
               </h3>
@@ -92,7 +92,7 @@
             </div>
             <!-- # card 3 -->
             <!-- card 4 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">
                 Высокий профессионализм, ответственность и умение держать свое
                 слово – опорные точки нашего сотрудничества.
@@ -131,7 +131,7 @@
             </div>
             <!-- # card 4 -->
             <!-- card 5 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">
                 Компания «Сантехкомплект-Урал» — это пример настоящего Партнера.
               </h3>
@@ -174,7 +174,7 @@
             </div>
             <!-- # card 5 -->
             <!-- card 6 -->
-            <div class="px-6 py-6 space-y-4 bg-slate-100 rounded-xl">
+            <div class="px-8 py-6 space-y-4 bg-slate-150 rounded-xl">
               <h3 class="!my-0">Признанный авторитет на уральском рынке</h3>
               <div>
                 <p>
@@ -207,12 +207,12 @@
 </template>
 
 <script setup>
-import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
-import AppButton from '@/components/UI/Buttons/AppButton.vue';
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import AppButton from "@/components/UI/Buttons/AppButton.vue";
 
 useHead({
-  title: 'Отзывы о компании',
+  title: "Отзывы о компании",
 });
 
-const breadcrumbs = [{ name: 'Отзывы о компании', url: '/clients/reviews' }];
+const breadcrumbs = [{ name: "Отзывы о компании", url: "/clients/reviews" }];
 </script>
