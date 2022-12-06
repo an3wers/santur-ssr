@@ -341,7 +341,7 @@ function closeProductsModalHandler(event) {
 }
 
 function mergeHandler(selected, id) {
-  console.log(selected, id);
+  // console.log(selected, id);
 
   if (selected) {
     mergeOrders.value.push(id);

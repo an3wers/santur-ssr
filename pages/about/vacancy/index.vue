@@ -76,7 +76,7 @@
               <template #title>
                 <div class="text-base md:text-lg font-medium">
                   <span class="text-sm md:text-base block font-normal mb-1"
-                    >...</span
+                    >{{ item.custom_fields[0][1].value }}</span
                   >
                   <div v-html="useHTMLDecoding(item.post_title)"></div>
                 </div>
@@ -265,11 +265,22 @@ async function fetchVacancy() {
       credentials: "include",
     });
 
+    // for test
+    let tmpArr = []
+
+    tmpArr = response.items.map(el => {
+      return {...el, custom_fields: Object.entries(el.custom_fields)}
+    })
+
+
+    // console.log("Вакансии",response)
+    // console.log("TMP Вакансии",tmpArr)
+
     if (response) {
-      vacancy.value = response.items;
+      // vacancy.value = response.items;
+      vacancy.value = tmpArr;
     }
     // TODO: обработать ошибку
-    // console.log("Вакансии",response)
   } catch (error) {
     console.log(error.message);
   }
@@ -298,6 +309,9 @@ async function fetchSingleVacancy(id) {
         ID: id,
       },
     });
+
+    // console.log('fetchSingleVacancy', response)
+
     if (response.status === "ok") {
       singleVacancy.value = response.data;
     } else {

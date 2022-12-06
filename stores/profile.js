@@ -187,7 +187,7 @@ export const useProfileStore = defineStore('profile', {
       const appMessageStore = useAppMessage();
       try {
         const response = await useCustomFetch(`apissz/LoginFogot/?u=${email}`);
-        console.log(response);
+        // console.log(response);
         if (response.success) {
           appMessageStore.open(
             'success',
@@ -258,7 +258,7 @@ export const useProfileStore = defineStore('profile', {
     async checkUsersForActivate() {
       try {
         const response = await useCustomFetch('apissz/GetListForActivate');
-        console.log(response);
+        // console.log(response);
         if (response.success) {
           this.usersForActivate = response.data || [];
         } else {

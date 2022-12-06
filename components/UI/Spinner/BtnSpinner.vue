@@ -38,7 +38,7 @@ const spinnerSize = {
 };
 
 const spinnerType = {
-  light: 'text-white fill-[#E5E7EB]',
-  dark: 'text-gray-400 fill-blue-600',
+  light: 'text-[#CBCED3] fill-white',
+  dark: 'text-gray-200 fill-primary',
 };
 </script>

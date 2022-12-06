@@ -123,7 +123,8 @@ function inputFocusHandler() {
 onMounted(() => {
   if (isResultSearch.value) {
     window.addEventListener('click', (e) => {
-      console.log(e.target);
+      // TODO: ???
+      // console.log(e.target);
     });
   }
 });

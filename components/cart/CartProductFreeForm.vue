@@ -64,7 +64,7 @@ const freeProduct = reactive({
 });
 
 function onSubmit() {
-  console.log('Free product', freeProduct);
+  // console.log('Free product', freeProduct);
   freeProduct.name = '';
   freeProduct.amount = '';
   freeProduct.price = '';
