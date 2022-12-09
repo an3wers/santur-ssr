@@ -1,12 +1,16 @@
 <template>
   <div class="container">
     <Head>
-      <Title>{{ post?.post_title }}</Title>
+      <Title>
+        {{ useHTMLDecoding(post?.post_title) }}
+      </Title>
       <Meta name="description" :content="post?.post_description" />
     </Head>
     <div class="post-wrapper" v-if="postIsLoaded && !isError">
       <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
-      <h1 class="text-center">{{ post?.post_title }}</h1>
+      <h1 class="text-center">
+        <span v-html="useHTMLDecoding(post?.post_title)"></span>  
+      </h1>
       <div class="grid grid-cols-12">
         <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11">
           <div class="text-gray-500 font-medium mb-2">

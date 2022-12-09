@@ -1,0 +1,32 @@
+.table {
+    // w-full text-sm text-left text-gray-500 dark:text-gray-400
+    width: 100%;
+    text-align: left;
+    margin: 1rem 0;
+    thead {
+        // text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400
+        font-size: 0.75rem;
+        line-height: 1rem;
+        text-transform: uppercase;
+        background-color: #f3f4f6;
+    }
+    tbody {
+        th {
+            // py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+        }
+        tr {
+            // bg-white border-b dark:bg-gray-800 dark:border-gray-700
+            background-color: white;
+            border-bottom: 1px solid #d1d5db;
+            &:hover {
+                background-color: #f1f5f9;
+            }
+        }
+        td {
+            // py-4 px-6
+            padding: 0.75rem 1rem;
+        }
+    }
+}
