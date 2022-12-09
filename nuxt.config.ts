@@ -16,6 +16,9 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "ru",
       },
+      script: [
+        {src: '//code.jivo.ru/widget/0vaVd8xIjv', async:true}
+      ]
     },
   },
   ssr: true,
