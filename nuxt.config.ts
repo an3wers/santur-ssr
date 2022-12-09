@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ["vue3-popper", "vue3-carousel"],
+    transpile: ["vue3-popper", "vue3-carousel", '@gtm-support/core'],
   },
   vite: {
     resolve: {
