@@ -12,7 +12,6 @@
       </div>
       <div class="input-group space-y-2">
         <label for="userPhone">Телефон</label>
-        <!-- v-mask="'+# (###) ###-##-##'" -->
         <app-input
           type="tel"
           v-model.trim="phone"
@@ -20,7 +19,6 @@
           inputType="border"
           inputSize="md"
           />
-          <!-- v-maska="'+7 (###) ###-##-##'" -->
         <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
       </div>
       <div class="input-group space-y-2">

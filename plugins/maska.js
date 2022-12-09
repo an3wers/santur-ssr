@@ -1,12 +1,7 @@
-// // import { maska } from 'maska'
-// // import mask from 'maska';
-
-// import pkg from 'maska';
-// const { maska } = pkg;
+// import {mask} from 'vue-the-mask'
+// import {vMaska as mask} from 'maska'
 
 export default defineNuxtPlugin((nuxtApp) => {
-
-    // const { maska } = mask()
-
-    // nuxtApp.vueApp.directive('maska', maska)
+    // nuxtApp.vueApp.directive('mask', mask)
+    // nuxtApp.vueApp.use(VueTheMask)
 });

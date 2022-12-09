@@ -37,8 +37,6 @@
             placeholder="Введите ваш телефон"
             v-model="phone"
             />
-            <!-- v-maska="'+7 (###) ###-##-##'" -->
-          <!-- v-mask="'+# (###) ###-##-##'" -->
           <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
         </div>
         <div class="input-group col-span-2 md:col-span-1 space-y-2">

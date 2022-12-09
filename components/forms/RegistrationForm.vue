@@ -42,8 +42,8 @@
             "
           inputSize="lg"
           />
-          <!-- v-maska="'+7 (###) ###-##-##'" -->
-        <div
+          <!-- v-mask="'+7 (###) ###-##-##'" -->
+          <div
           v-if="errorPhone && metaPhone.touched"
           class="text-sm text-red-500"
         >
@@ -143,6 +143,8 @@ import * as yup from 'yup';
 import { useAuthStore } from '@/stores/auth';
 import { useProfileStore } from '@/stores/profile';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
+
+const testInput = ref('')
 
 const { handleSubmit, submitCount, isSubmitting } = useForm();
 

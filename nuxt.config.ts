@@ -29,34 +29,12 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    // postcss: {
-    //   postcssOptions: {
-    //     plugins: {
-    //       tailwindcss: {},
-    //       autoprefixer: {},
-    //       'postcss-preset-env': {},
-    //     },
-    //   },
-    // },
     transpile: ["vue3-popper", "vue3-carousel"],
-    // babel: {
-    //   presets() {
-    //     return [['@nuxt/babel-preset-app']];
-    //   },
-    // },
   },
   vite: {
     resolve: {
       dedupe: ["vue"],
     },
   },
-  // plugins: [
-  //   // { src: "~/plugins/maska.ts", mode: "client" }
-  //   // { src: "~/plugins/v-mask.client.js", mode: "client" }
-  // ],
-  // nitro: {
-  //   // devProxy: {    '/api/post': 'http://localhost:3000',    '/api/post': { target: 'https://example.com', changeOrigin: true }  }
-  //   // devProxy: { '/apiauth/': 'https://isantur.ru/' }
-  //   // proxyRequest: {'/apiauth/': 'https://isantur.ru/'}
-  // }
+  // plugins: ["~plugins/maska.js"],
 });
