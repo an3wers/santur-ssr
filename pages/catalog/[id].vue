@@ -296,7 +296,7 @@ async function loadCategory() {
   if (getParams.value) {
     await categoryStore.setCategory(getParams.value);
   } else {
-    navigateTo({ path: "/404" });
+    throw createError({ statusCode: 404, fatal: true, statusMessage: 'Page Not Found'})
   }
 
   // Устанавливаем параметр в наличии

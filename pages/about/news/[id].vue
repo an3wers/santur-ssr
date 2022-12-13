@@ -64,11 +64,9 @@ async function loadPost(id) {
 
 await loadPost(route.params.id);
 
-onMounted(() => {
-  if (!post?.value?.ID) {
-    navigateTo({ path: '/404' });
-  }
-});
+if(!post.value?.ID) {
+  throw createError({ statusCode: 404, fatal: true, statusMessage: 'Page Not Found'})
+}
 
 const breadcrumbs = [{ name: 'Новости', url: '/about/news' }, {}];
 </script>

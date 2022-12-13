@@ -129,6 +129,9 @@ async function loadOrder(id) {
   try {
     orderIsLoaded.value = false;
     const resp = await useCustomFetch(`apissz/getord/?id=${id}`);
+
+    // console.log(resp)
+
     if (resp.success) {
       order.value = resp.data;
       // console.log(order.value);
@@ -145,7 +148,10 @@ async function loadOrder(id) {
 }
 
 if (process.client) {
-  loadOrder(route.params.id);
+  await loadOrder(route.params.id);
+  if(!order.value) {
+    throw createError({ statusCode: 404, fatal: true, statusMessage: 'Page Not Found'})
+  }
 }
 
 async function confirmOrderHandler(id) {

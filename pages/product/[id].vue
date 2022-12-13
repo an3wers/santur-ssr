@@ -489,8 +489,8 @@ const getBreadcrumbsProduct = computed(() => {
     ];
   } else {
     // обрабатываю некорректный роут
-    navigateTo({ path: '/404' });
-    return undefined;
+    throw createError({ statusCode: 404, fatal: true, statusMessage: 'Page Not Found'})
+    // return undefined;
   }
 });
 
