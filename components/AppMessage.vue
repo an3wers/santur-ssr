@@ -12,11 +12,9 @@
         architecto ea reiciendis.</slot
       >
     </div>
-    <button type="button" @click="close">
+    <button type="button" aria-label="Close" @click="close">
       <close-icon-20
         color="#ffffff"
-        aria-label="Close"
-        role="button"
         class="mt-[3px] shrink-0 cursor-pointer"
       />
     </button>

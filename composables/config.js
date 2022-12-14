@@ -133,6 +133,11 @@ export const useMainMenu = () => {
           url: 'https://seti.santur.ru',
           target: '_blank'
         },
+        {
+          name: 'Сервис самостоятельных заявок',
+          url: 'https://santechportal.ru',
+          target: '_blank'
+        },
       ],
     },
     {

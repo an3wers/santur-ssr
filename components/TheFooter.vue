@@ -5,7 +5,9 @@
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 md:col-span-6 lg:col-span-3">
           <div class="space-y-6">
-            <div class="mt-[7px]"><img src="~/assets/images/logo-santur.svg" alt="logo" /></div>
+            <div class="mt-[7px]">
+              <img src="~/assets/images/logo-santur.svg" alt="logo" />
+            </div>
             <div class="text-sm">
               <span class="block">1995-{{ currenYear }}</span>
               <span class="block">ООО «УЦСК «Сантехкомплект-Урал»</span>
@@ -128,6 +130,15 @@
                   >Наружные сети</NuxtLink
                 >
               </li>
+              <li>
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  target="_blank"
+                  to="https://santechportal.ru"
+                >
+                  Сервис самостоятельных заявок
+                </NuxtLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -174,7 +185,6 @@
                   >Контакты</NuxtLink
                 >
               </li>
-              
             </ul>
           </div>
         </div>
@@ -220,12 +230,16 @@
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="/clients/brands"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/clients/brands"
                   >Наши бренды</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink class="no-underline text-gray-700" to="/clients/how-buy"
+                <NuxtLink
+                  class="no-underline text-gray-700"
+                  to="/clients/how-buy"
                   >Как купить товар</NuxtLink
                 >
               </li>
@@ -267,56 +281,11 @@
       <!-- # Section two -->
     </div>
   </footer>
-
-  <!-- <div class="container">
-    <div class="flex space-x-4 py-6 h-96">
-      <div>footer</div>
-      <div><NuxtLink to="/uikit">UI KIT</NuxtLink></div>
-      <div><NuxtLink to="/registration">Регистрация</NuxtLink></div>
-      <div>
-        <button @click="checkSession('getsession')">Get session</button>
-      </div>
-      <div><button @click="checkSession('gettoken')">Get token</button></div>
-      <div><button @click="checkShortCart">Get short cart</button></div>
-      <div><button @click="checkCart">Get cart</button></div>
-      <div><button @click="openMessage">Open message</button></div>
-    </div>
-  </div> -->
 </template>
 
 <script setup>
-// import {ref} from 'vue'
-// import AppButtonIcon from '@/components/UI/Buttons/AppButtonIcon.vue';
-// import { useAppMessage } from '@/stores/appMessage';
-// import { useCartStore } from '@/stores/cart';
-// import { useAuthStore } from '@/stores/auth';
-import WhatsappIcon_24 from '@/components/UI/Icons/WhatsappIcon_24.vue';
+import WhatsappIcon_24 from "@/components/UI/Icons/WhatsappIcon_24.vue";
 
-const { WHATSAPP_SITE, SOCIAL_URLS } = useConfig()
+const { WHATSAPP_SITE, SOCIAL_URLS } = useConfig();
 const currenYear = new Date().getFullYear();
-
-// const appMessage = useAppMessage();
-// const cartStore = useCartStore();
-// const authStore = useAuthStore();
-
-// async function checkSession(param) {
-//   const response = await useCustomFetch(`apiauth/${param}`);
-//   console.log(`checkSession response: ${param} ${response.data}`);
-// }
-
-// async function checkShortCart() {
-//   await cartStore.getShortCart();
-// }
-
-// async function checkCart() {
-//   await cartStore.getCart();
-// }
-
-// function openMessage() {
-//   appMessage.openWithTimer('info', 'На странице произошла ошибка', 'info');
-// }
-
-// async function getAIm() {
-//   await authStore.setUser();
-// }
 </script>

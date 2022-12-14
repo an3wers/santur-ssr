@@ -23,7 +23,7 @@ export const useAppMessage = defineStore('appMessage', {
       const timeout = setTimeout(() => {
         this.close();
         clearTimeout(timeout);
-      }, 12000);
+      }, 6000);
     },
 
     close() {
