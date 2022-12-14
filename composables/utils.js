@@ -76,7 +76,10 @@ export const phoneFormatter = (phone) => {
 };
 
 export const phoneCleanerFormat = (phone) => {
-  return phone.replace(/[^0-9]/g, '');
+  if(phone) {
+    return phone.replace(/[^0-9]/g, '');
+  }
+  return ''
 };
 
 export const useStrCrop = (str, charsCount) => {

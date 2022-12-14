@@ -29,15 +29,26 @@
           />
         </div>
         <div class="input-group col-span-2 md:col-span-1 space-y-2">
-          <label>Телефон</label>
+          <label>Телефон*</label>
           <app-input
             type="tel"
             inputSize="md"
-            inputType="border"
+            :inputType="
+              errorPhone && metaPhone.touched ? 'border-error' : 'border'
+            "
+            @blur="blurPhone"
             placeholder="Введите ваш телефон"
             v-model="phone"
-            />
-          <div class="text-sm text-gray-500">Например: +7 (912) 345-67-89</div>
+          />
+          <div
+            v-if="errorPhone && metaPhone.touched"
+            class="text-sm text-red-500"
+          >
+            {{ errorPhone }}
+          </div>
+          <div v-else class="text-sm text-gray-500">
+            Например: +7 (912) 345-67-89
+          </div>
         </div>
         <div class="input-group col-span-2 md:col-span-1 space-y-2">
           <label>Email*</label>
@@ -125,7 +136,12 @@
           >
         </p>
         <ul>
-          <li>Заявление на возврат с подписью и печатью (<nuxt-link to="https://old.santur.ru/wp-content/uploads/2022/07/claim_blank_2022.docx">скачать бланк</nuxt-link>>).</li>
+          <li>
+            Заявление на возврат с подписью и печатью (<nuxt-link
+              to="https://old.santur.ru/wp-content/uploads/2022/07/claim_blank_2022.docx"
+              >скачать бланк</nuxt-link
+            >).
+          </li>
           <li>
             Копии УПД и/или транспортной накладной, по которым передавался
             товар.
@@ -143,36 +159,65 @@
       <div class="space-y-4">
         <div class="input-group">
           <input
-            class=""
+            class="mr-4 mb-2"
             ref="refFileOne"
             id="file_input_one"
             type="file"
             @change="uploadFileHandler($event)"
           />
+          
+            <AppButton
+              btnSize="xs"
+              btnType="secondary"
+              v-if="file_one || refFileOne?.value"
+              @click="removeFileHandler('One')"
+            >
+              Удалить
+            </AppButton>
+          
         </div>
         <div class="input-group">
           <input
-            class=""
+            class="mr-4 mb-2"
             ref="refFileTwo"
             id="file_input_two"
             type="file"
             @change="uploadFileHandler($event)"
           />
+          <AppButton
+            btnSize="xs"
+            btnType="secondary"
+            v-if="file_two || refFileTwo?.value"
+            @click="removeFileHandler('Two')"
+          >
+            Удалить
+          </AppButton>
         </div>
         <div class="input-group">
           <input
-            class=""
+            class="mr-4 mb-2"
             ref="refFileThree"
             id="file_input_three"
             type="file"
             @change="uploadFileHandler($event)"
           />
+          <AppButton
+            btnSize="xs"
+            btnType="secondary"
+            v-if="file_three || refFileThree?.value"
+            @click="removeFileHandler('Three')"
+          >
+            Удалить
+          </AppButton>
+        </div>
+        <div class="text-red-500" v-if="filesError">
+          Максимальный вес файла не должен превышать 20 мб.
         </div>
       </div>
     </div>
     <app-button
       btnSize="lg"
-      :disabled="!getIsSubmit || isSubmitting"
+      :disabled="!getIsSubmit || formIsSubmiting"
       type="submit"
     >
       <btn-spinner v-if="formIsSubmiting" />
@@ -182,54 +227,57 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
-import AppSelectorSlots from '@/components/UI/Forms/AppSelectorSlots.vue';
-import AppInput from '@/components/UI/Forms/AppInput.vue';
-import AppTextarea from '@/components/UI/Forms/AppTextarea.vue';
-import AppButton from '@/components/UI/Buttons/AppButton.vue';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
-import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
-import { useAppMessage } from '@/stores/appMessage';
+import { ref, reactive, computed } from "vue";
+import AppSelectorSlots from "@/components/UI/Forms/AppSelectorSlots.vue";
+import AppInput from "@/components/UI/Forms/AppInput.vue";
+import AppTextarea from "@/components/UI/Forms/AppTextarea.vue";
+import AppButton from "@/components/UI/Buttons/AppButton.vue";
+import { useField, useForm } from "vee-validate";
+import * as yup from "yup";
+import BtnSpinner from "@/components/UI/Spinner/BtnSpinner.vue";
+import { useAppMessage } from "@/stores/appMessage";
 
 const { API_BASE_URL } = useConfig();
 const MIN_LENGTH_INN = 10;
 const MAX_LENGTH_INN = 12;
+const MAX_LIMIT_FILE = 20000000;
+
+const filesError = ref(false);
 
 const reasons = [
   {
-    name: 'Технический брак',
-    value: '1',
+    name: "Технический брак",
+    value: "1",
   },
   {
-    name: 'Недовоз, излишек, пересорт',
-    value: '2',
+    name: "Недовоз, излишек, пересорт",
+    value: "2",
   },
   {
-    name: 'Нарушение товарного вида (технические повреждения)',
-    value: '3',
+    name: "Нарушение товарного вида (технические повреждения)",
+    value: "3",
   },
   {
-    name: 'Недостача внутри заводской упаковки',
-    value: '4',
+    name: "Недостача внутри заводской упаковки",
+    value: "4",
   },
   {
-    name: 'Пересорт внутри заводской упаковки',
-    value: '5',
+    name: "Пересорт внутри заводской упаковки",
+    value: "5",
   },
   {
-    name: 'Жалоба на торгового агента',
-    value: '6',
+    name: "Жалоба на торгового агента",
+    value: "6",
   },
   {
-    name: 'Брак с ущербом',
-    value: '7',
+    name: "Брак с ущербом",
+    value: "7",
   },
 ];
 
 const appMessageStore = useAppMessage();
 
-const selectedReason = ref('default');
+const selectedReason = ref("default");
 
 const formIsSubmiting = ref(false);
 
@@ -240,21 +288,21 @@ const {
   errorMessage: errorName,
   handleBlur: blurName,
   meta: metaName,
-} = useField('name', yup.string().trim());
+} = useField("name", yup.string().trim());
 const {
   value: phone,
   errorMessage: errorPhone,
   handleBlur: blurPhone,
   meta: metaPhone,
-} = useField('phone', yup.string().trim());
+} = useField("phone", yup.string().required("Введите ваш телефон").trim());
 const {
   value: company,
   errorMessage: errorCompany,
   handleBlur: blurCompany,
   meta: metaCompany,
 } = useField(
-  'company',
-  yup.string().required('Введите название компании').trim()
+  "company",
+  yup.string().required("Введите название компании").trim()
 );
 const {
   value: inn,
@@ -262,10 +310,10 @@ const {
   handleBlur: blurInn,
   meta: metaInn,
 } = useField(
-  'inn',
+  "inn",
   yup
     .string()
-    .required('Введите ИНН компании')
+    .required("Введите ИНН компании")
     .min(MIN_LENGTH_INN, `Минимальная длина поля ${MIN_LENGTH_INN} символов`)
     .max(MAX_LENGTH_INN, `Максимальная длина поля ${MAX_LENGTH_INN} символов`)
     .trim()
@@ -276,11 +324,11 @@ const {
   handleBlur: blurEmail,
   meta: metaEmail,
 } = useField(
-  'email',
+  "email",
   yup
     .string()
-    .email('Введите корректный email')
-    .required('Введите ваш email')
+    .email("Введите корректный email")
+    .required("Введите ваш email")
     .trim()
 );
 const {
@@ -289,8 +337,8 @@ const {
   handleBlur: blurComment,
   meta: metaComment,
 } = useField(
-  'comment',
-  yup.string().required('Введите ваш комментарий').trim()
+  "comment",
+  yup.string().required("Введите ваш комментарий").trim()
 );
 
 const {
@@ -298,88 +346,127 @@ const {
   errorMessage: errorNombersTmc,
   handleBlur: blurNombersTmc,
   meta: metaNombersTmc,
-} = useField('nombersTmc', yup.string());
+} = useField("nombersTmc", yup.string());
 
-const formFiles = reactive({
-  file_one: '',
-  file_two: '',
-  file_three: '',
-});
+// const formFiles = reactive({
+//   file_one: "",
+//   file_two: "",
+//   file_three: "",
+// });
+
+const file_one = ref("");
+const file_two = ref("");
+const file_three = ref("");
 
 const refFileOne = ref(null);
 const refFileTwo = ref(null);
 const refFileThree = ref(null);
 
 const getIsSubmit = computed(() => {
-  return selectedReason.value !== 'default';
+  return selectedReason.value !== "default";
 });
 
 function uploadFileHandler(event) {
+  filesError.value = false;
+  // console.log("File event", event.target.files[0].size)
+  // console.log("File event", !!event.target.files);
+  if (event.target.files) {
+    event.target.files[0].size > MAX_LIMIT_FILE
+      ? (filesError.value = true)
+      : (filesError.value = false);
+  }
+  // event.target.files
+
+  // console.log(event.target);
+
   switch (event.target.id) {
-    case 'file_input_one':
-      formFiles.file_one = event.target.files[0];
+    case "file_input_one":
+      file_one.value = event.target.files[0];
       break;
-    case 'file_input_two':
-      formFiles.file_two = event.target.files[0];
+    case "file_input_two":
+      file_two.value = event.target.files[0];
       break;
-    case 'file_input_three':
-      formFiles.file_three = event.target.files[0];
+    case "file_input_three":
+      file_three.value = event.target.files[0];
       break;
     default:
       break;
   }
 }
 
+function removeFileHandler(payload) {
+  if (payload === "One") {
+    // console.log(refFileOne);
+    refFileOne.value.value = "";
+    file_one.value = "";
+  }
+  if (payload === "Two") {
+    // console.log(refFileOne);
+    refFileTwo.value.value = "";
+    file_two.value = "";
+  }
+  if (payload === "Three") {
+    // console.log(refFileOne);
+    refFileThree.value.value = "";
+    file_three.value = "";
+  }
+}
+
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
   const { name, phone, company, inn, email, comment, nombersTmc } = values;
   const data = new FormData();
-  const cleanedPhone = phoneCleanerFormat(phone)
+  const cleanedPhone = phoneCleanerFormat(phone);
 
-  data.append('authorname', name);
-  data.append('subjectname', company);
-  data.append('subjectinn', inn);
-  data.append('phone', cleanedPhone);
-  data.append('email', email);
-  data.append('sngood', nombersTmc);
-  data.append('descr', comment);
-  data.append('reason', selectedReason.value);
-  data.append('file_1', formFiles.file_one);
-  data.append('file_2', formFiles.file_two);
-  data.append('file_3', formFiles.file_three);
+  const reasonValue =
+    reasons.find((el) => el.value === selectedReason.value) || "default";
+
+  // console.log(reasonValue?.name);
+
+  data.append("authorname", name);
+  data.append("subjectname", company);
+  data.append("subjectinn", inn);
+  data.append("phone", cleanedPhone);
+  data.append("email", email);
+  data.append("sngood", nombersTmc);
+  data.append("descr", comment);
+  data.append("reason", reasonValue?.name);
+  data.append("file_1", file_one.value);
+  data.append("file_2", file_two.value);
+  data.append("file_3", file_three.value);
 
   try {
     formIsSubmiting.value = true;
     const res = await $fetch(`${API_BASE_URL}apissz/SendClaim`, {
-      method: 'post',
-      credentials: 'include',
+      method: "post",
+      credentials: "include",
       body: data,
     });
 
     if (res.success) {
       // Обнуляем данные
       resetForm();
-      selectedReason.value = 'default';
+      selectedReason.value = "default";
 
       // очищаю файлы
-      formFiles.file_one = '';
-      formFiles.file_two = '';
-      formFiles.file_three = '';
+      file_one.value = "";
+      file_two.value = "";
+      file_three.value = "";
 
-      refFileOne.value.value = '';
-      refFileTwo.value.value = '';
-      refFileThree.value.value = '';
+      refFileOne.value.value = "";
+      refFileTwo.value.value = "";
+      refFileThree.value.value = "";
 
       appMessageStore.open(
-        'success',
-        'Рекламация успешно отправлена',
-        'success'
+        "success",
+        "Рекламация успешно отправлена",
+        "success"
       );
     } else {
-      throw new Error(res.message || 'При отправки формы произошла ошибка');
+      throw new Error(res.message || "При отправки формы произошла ошибка");
     }
   } catch (error) {
     // console.log(error);
-    appMessageStore.open('error', error.message, 'error');
+    appMessageStore.open("error", error.message, "error");
   } finally {
     formIsSubmiting.value = false;
   }
