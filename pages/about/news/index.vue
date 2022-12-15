@@ -2,8 +2,6 @@
   <div class="container">
     <app-breadcrumbs :breadcrumbs="breadcrumbs" position="center" />
     <h1 class="text-center">Новости компании</h1>
-    <!-- Перебор новостей + постраничная навигация -->
-
     <div v-if="!isError && isNewsLoaded" class="grid grid-cols-12">
       <div class="col-start-1 col-end-13 xl:col-start-3 xl:col-end-11 relative">
         <div v-if="news.length" class="space-y-10 mb-6">
@@ -31,17 +29,17 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import NewsPreview from '@/components/news/NewsPreview.vue';
-import AppPageError from '@/components/AppPageError.vue';
-import PageLoader from '@/components/loaders/PageLoader.vue';
-import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
-import AppPagination from '@/components/AppPagination.vue';
-import { useAppMessage } from '@/stores/appMessage';
+import { ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import NewsPreview from "@/components/news/NewsPreview.vue";
+import AppPageError from "@/components/AppPageError.vue";
+import PageLoader from "@/components/loaders/PageLoader.vue";
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import AppPagination from "@/components/AppPagination.vue";
+import { useAppMessage } from "@/stores/appMessage";
 
 useHead({
-  title: 'Новости компании',
+  title: "Новости компании",
 });
 
 const { API_ADMIN } = useConfig();
@@ -53,31 +51,37 @@ const isUpdated = ref(true);
 const route = useRoute();
 const page = ref(+route.query.page || 1);
 const countPages = ref(1);
+const perPage = 15;
 
-const setNewsParams = {
-  filters: {
-    category: {
-      name: 'Категория',
-      all_filters: [],
-      current_filters: [
-        {
-          ID: '21',
-          name: 'Новости',
-          value: true,
-        },
-      ],
-    },
-  },
-};
+// const setNewsParams = {
+//   filters: {
+//     category: {
+//       name: "Категория",
+//       all_filters: [],
+//       current_filters: [
+//         {
+//           ID: "21",
+//           name: "Новости",
+//           value: true,
+//         },
+//       ],
+//     },
+//   },
+// };
 
 async function loadNews(page) {
   isError.value = false;
+  // body: { page: page, search: "", ...setNewsParams },
   try {
-    const res = await $fetch('post/news', {
+    const res = await $fetch("post/news", {
       baseURL: API_ADMIN,
-      method: 'post',
-      credentials: 'include',
-      body: { page: page, search: '', ...setNewsParams },
+      method: "post",
+      credentials: "include",
+      body: {
+        current_page: page,
+        per_page: perPage,
+        search: "",
+      },
     });
     news.value = res.items;
     countPages.value = res.all_pages_count;
@@ -87,7 +91,7 @@ async function loadNews(page) {
   } catch (error) {
     console.log(error);
     isError.value = true;
-    appMessageStore.open('error', 'На странице произошла ошибка', 'error');
+    appMessageStore.open("error", "На странице произошла ошибка", "error");
   } finally {
     isNewsLoaded.value = true;
   }
@@ -99,7 +103,7 @@ const isPagination = computed(() => {
 
 await loadNews(page.value);
 
-const breadcrumbs = [{ name: 'Новости', url: '/about/news' }];
+const breadcrumbs = [{ name: "Новости", url: "/about/news" }];
 
 async function setPageHandler(p) {
   // console.log(page);
@@ -116,7 +120,7 @@ async function setPageHandler(p) {
 
   window.scrollTo({
     top: 0,
-    behavior: 'smooth',
+    behavior: "smooth",
   });
   await loadNews(page.value);
   isUpdated.value = true;

@@ -11,8 +11,9 @@
           />
         </div>
         <div class="mt-4 text-center">
-          <p class="">Страница, которую вы запрашиваете, не существует</p>
-          <app-button btnType="secondary" @click="$router.push({ path: '/' })" btnSize="lg"
+          <h2>{{ error.statusCode }}</h2>
+          <p class="">{{ error.message }}</p>
+          <app-button btnType="secondary" @click="handleHome" btnSize="lg"
             >Перейти на главную</app-button
           >
         </div>
@@ -47,7 +48,13 @@ import AppButton from "@/components/UI/Buttons/AppButton.vue";
 //   await cartStore.getShortCart();
 // }
 
+defineProps(['error'])
+
 useHead({
   title: "Страница не найдена",
 });
+
+function handleHome() {
+  clearError({ redirect: '/'})
+}
 </script>
