@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 rounded-xl bg-slate-100 sticky top-4">
+  <div class="p-6 rounded-xl bg-slate-100 relative lg:sticky top-4">
     <!-- Лоадер -->
     <div
       v-if="!checkoutIsUpdate"
