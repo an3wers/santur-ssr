@@ -68,42 +68,33 @@
             >
             на hh.ru
           </p>
-          <div class="divide-y divide-gray-300 my-4">
-            <div v-for="item in vacancy" :key="item.ID" class="flex text-left space-x-2 justify-between items-center w-full p-4 md:p-5 bg-slate-150">
+          <div v-if="isVacancyError">
+            <p>При загрузке вакансий произошла ошибка</p>
+            <div class="mt-6">
+              <AppButton @click="$router.go(0)">Обновить страницу</AppButton>
+            </div>
+          </div>
+          <div v-else class="divide-y divide-gray-300 my-4">
+            <div
+              v-for="item in vacancy"
+              :key="item.ID"
+              class="flex text-left space-x-2 justify-between items-center w-full p-4 md:p-5 bg-slate-150"
+            >
               <div class="text-base md:text-lg font-medium">
-                  <span class="text-sm md:text-base block font-normal mb-1"
-                    >{{ item.custom_fields[0][1].value }}</span
-                  >
-                  <NuxtLink class=" text-gray-900 no-underline" :to="`/about/vacancy/${item.ID}`"><div v-html="useHTMLDecoding(item.post_title)"></div></NuxtLink>
-                </div>
+                <span class="text-sm md:text-base block font-normal mb-1">{{
+                  item.custom_fields[0][1].value
+                }}</span>
+                <NuxtLink
+                  class="text-gray-900 no-underline"
+                  :to="`/about/vacancy/${item.ID}`"
+                  ><div v-html="useHTMLDecoding(item.post_title)"></div
+                ></NuxtLink>
+              </div>
               <span>
                 <ArrowForvardIcon_24 />
               </span>
             </div>
           </div>
-          <!-- <AccordionWrapper
-            v-if="vacancy.length"
-            @itemHandler="accordionItemHandler"
-          >
-            <AccordionItem v-for="item in vacancy" :key="item.ID" :id="item.ID">
-              <template #title>
-                <div class="text-base md:text-lg font-medium">
-                  <span class="text-sm md:text-base block font-normal mb-1"
-                    >{{ item.custom_fields[0][1].value }}</span
-                  >
-                  <div v-html="useHTMLDecoding(item.post_title)"></div>
-                </div>
-              </template>
-              <template #content>
-                <div v-if="singleIsLoading">
-                  <AppLoader />
-                </div>
-                <div v-else v-html="useHTMLDecoding(singleVacancy?.post_content)">
-                  
-                </div>
-              </template>
-            </AccordionItem>
-          </AccordionWrapper> -->
         </div>
       </div>
     </div>
@@ -113,11 +104,8 @@
 <script setup>
 import { ref } from "vue";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
-import AccordionWrapper from "@/components/UI/Accordion/AccordionWrapper.vue";
-import AccordionItem from "@/components/UI/Accordion/AccordionItem.vue";
-import AppLoader from "@/components/loaders/AppLoader.vue";
 import ArrowForvardIcon_24 from "~~/components/UI/Icons/ArrowForvardIcon_24.vue";
-
+import AppButton from "~~/components/UI/Buttons/AppButton.vue";
 const pageDescr =
   "Сантехкомплект-Урал в топ-20 компаний из Екатеринбурга в списке лучших работодателей страны. Наша компания уделяет, большое внимание развитию персонала. У наших сотрудников есть возможность участвовать в проектном управлении компании, возможность карьерного и профессионального роста, внутреннего и внешнего обучения.";
 
@@ -129,75 +117,34 @@ useHead({
 const { API_ADMIN } = useConfig();
 
 const vacancy = ref([]);
-const singleVacancy = ref(null);
-const singleIsLoading = ref(false);
+const isVacancyError = ref(false);
 
 const breadcrumbs = [{ name: "Вакансии", url: "/about/vacancy" }];
 
 async function fetchVacancy() {
+  isVacancyError.value = false;
   try {
-    const response = await $fetch('post/vakansii', {
+    const response = await $fetch("post/vakansii", {
       baseURL: API_ADMIN,
       method: "post",
       credentials: "include",
     });
 
     // for test
-    let tmpArr = []
+    let tmpArr = [];
 
-    tmpArr = response.items.map(el => {
-      return {...el, custom_fields: Object.entries(el.custom_fields)}
-    })
-
-
-    // console.log("Вакансии",response)
-    // console.log("TMP Вакансии",tmpArr)
+    tmpArr = response.items.map((el) => {
+      return { ...el, custom_fields: Object.entries(el.custom_fields) };
+    });
 
     if (response) {
-      // vacancy.value = response.items;
       vacancy.value = tmpArr;
     }
-    // TODO: обработать ошибку
   } catch (error) {
     console.log(error.message);
+    isVacancyError.value = true;
   }
 }
 
 await fetchVacancy();
-
-async function accordionItemHandler(id) {
-  if (id) {
-    if (singleVacancy.value && singleVacancy.value.ID === id) {
-      return undefined;
-    } else {
-      await fetchSingleVacancy(id);
-    }
-  }
-}
-
-async function fetchSingleVacancy(id) {
-  singleIsLoading.value = true;
-  try {
-    const response = await $fetch('/post/detail', {
-      baseURL: API_ADMIN,
-      method: "post",
-      credentials: "include",
-      body: {
-        ID: id,
-      },
-    });
-
-    // console.log('fetchSingleVacancy', response)
-
-    if (response.status === "ok") {
-      singleVacancy.value = response.data;
-    } else {
-      throw new Error("При загрузки вакансии произошла ошибка");
-    }
-  } catch (error) {
-    console.log(error.message);
-  } finally {
-    singleIsLoading.value = false;
-  }
-}
 </script>

@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { watch } from "vue";
 import { useRoute } from "vue-router";
 import AppPageError from "@/components/AppPageError.vue";
 import PageLoader from "@/components/loaders/PageLoader.vue";
@@ -81,7 +81,8 @@ const {
 );
 
 watch(vacancy, async (newVal) => {
-  if (await !newVal.data) {
+  const data = await newVal.data
+  if (!data) {
     console.log("newVal", newVal.data);
     throw createError({
       statusCode: 404,

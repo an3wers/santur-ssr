@@ -38,6 +38,7 @@
 
 <script setup>
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
+import { ref } from 'vue'
 
 const breadcrumbs = [
   { name: 'Менеджмент компании', url: '/about/company-managers' },
@@ -47,6 +48,7 @@ useHead({
   title: 'Менеджмент компании',
 });
 
+// mock
 const managers = [
   {
     name: 'Федорцев Виталий Викторович',
@@ -169,4 +171,18 @@ const managers = [
     position: 'Руководитель отдела по защите ресурсов',
   },
 ];
+
+// fetch from server
+// const { pending: mPending, error: mError, data: menegersComp} = useLazyAsyncData('menegersComp', () => {
+//   $fetch('post/managers', {
+//     method: 'post',
+//     baseURL: API_ADMIN,
+//     credentials: 'include',
+//     body: {
+//       current_page: currentPage,
+//       per_page: perPage,
+//       search: ''
+//     }
+//   })
+// })
 </script>

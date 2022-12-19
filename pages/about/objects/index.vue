@@ -44,13 +44,18 @@
 
 <script setup>
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
+import { ref } from 'vue'
+// import AppPageError from '@/components/AppPageError.vue'
 
 useHead({
   title: 'Объекты комплектации',
 });
 
+const { API_ADMIN } = useConfig()
+
 const breadcrumbs = [{ name: 'Объекты комплектации', url: '/about/objects' }];
 
+// mock
 const objects = [
   {
     name: 'ЖК Форум-сити',
@@ -183,4 +188,23 @@ const objects = [
     image: '/images/objects/object-mmc-tashkent.jpg',
   },
 ];
+
+const currentPage = ref(1)
+const perPage = 20
+
+// fetch from server
+// const { pending: ePending, error: oError, data: objectsComp} = useLazyAsyncData('objectsComp', () => {
+//   $fetch('post/objects_complec', {
+//     method: 'post',
+//     baseURL: API_ADMIN,
+//     credentials: 'include',
+//     body: {
+//       current_page: currentPage,
+//       per_page: perPage,
+//       search: ''
+//     }
+//   })
+// })
+
+
 </script>
