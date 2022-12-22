@@ -6,15 +6,30 @@ export const useBrandStore = defineStore('brands', {
   state: () => {
     return {
       allBrands: [],
+      onlyHaveSert: false,
+      searchValue: ''
     };
   },
   getters: {
     getBrands(state) {
-      return brandsGroupByChar(state.allBrands);
+
+      if(state.onlyHaveSert) {
+        return state.allBrands.map(el => {
+
+          const brands = el.brands.filter(b => b.fileSertDil == true)
+          if(brands.length) {
+             return {letter: el.letter, brands}
+          }
+
+        }).filter(el => !!el)
+      } else {
+        return state.allBrands
+      }
+      
     },
   },
   actions: {
-    async fetchBrands(char) {
+    async fetchBrands(char = '', search = '') {
       // GetListBrends/?letter=...&search=...
 
       const mainStore = useMainStore();
@@ -23,11 +38,11 @@ export const useBrandStore = defineStore('brands', {
         mainStore.pageError = false;
 
         const response = !char
-          ? await useCustomFetch('apissz/GetListBrends')
-          : await useCustomFetch(`apissz/GetListBrends/?letter=${char}`);
+          ? await useCustomFetch(`apissz/GetListBrends/?search=${search}`)
+          : await useCustomFetch(`apissz/GetListBrends/?letter=${char}&search=${search}`);
 
         if (response.success) {
-          this.allBrands = response.data.brends;
+          this.allBrands = brandsGroupByChar(response.data.brends) ;
         } else {
           throw new Error(
             response.message || 'При загрузке брендов произошла ошибка'

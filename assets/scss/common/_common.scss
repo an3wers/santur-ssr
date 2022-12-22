@@ -9,6 +9,7 @@
 @import "./badges.scss";
 @import "./popper.scss";
 @import "./table.scss";
+@import "./forms.scss";
 // @import '../../../node_modules/vue3-carousel/dist/carousel.css';
 
 /* GLOBAL*/
@@ -152,7 +153,7 @@ blockquote {
 }
 
 .pageloader {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;

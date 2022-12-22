@@ -2,19 +2,12 @@
   <div class="feedback-wrap">
     <ProfilePageWrapper title="Обратная связь">
       <div class="space-y-6">
-        <app-informer type="primary" icon="info">
+        <app-informer type="info" icon="info">
           <div>
-            <div class="text-lg font-bold">Прием рекламаций</div>
-            <div>
-              У вас претензия или рекламация? Воспользуйтесь сервисом для приема
-              рекламаций.
-            </div>
+            У вас претензия или рекламация?
+            <NuxtLink to="/clients/claim">Воспользуйтесь сервисом</NuxtLink> для
+            приема рекламаций.
           </div>
-          <app-button
-            @click="$router.push({ path: '/clients/claim' })"
-            btnType="primary"
-            >Подать рекламацию</app-button
-          >
         </app-informer>
         <form-feedback />
       </div>
@@ -24,15 +17,15 @@
 </template>
 
 <script setup>
-import ProfilePageWrapper from '@/components/profile/ProfilePageWrapper.vue';
-import PageLoader from '@/components/loaders/PageLoader.vue';
-import FormFeedback from '@/components/profile/feedback/FormFeedback.vue';
-import AppInformer from '@/components/AppInformer.vue';
-import AppButton from '@/components/UI/Buttons/AppButton.vue';
-import { onMounted, ref } from 'vue';
+import ProfilePageWrapper from "@/components/profile/ProfilePageWrapper.vue";
+import PageLoader from "@/components/loaders/PageLoader.vue";
+import FormFeedback from "@/components/profile/feedback/FormFeedback.vue";
+import AppInformer from "@/components/AppInformer.vue";
+import AppButton from "@/components/UI/Buttons/AppButton.vue";
+import { onMounted, ref } from "vue";
 
 useHead({
-  title: 'Обратная связь',
+  title: "Обратная связь",
 });
 
 const pageIsLoaded = ref(false);

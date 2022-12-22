@@ -1,12 +1,10 @@
 <template>
   <div class="p-6 rounded-xl bg-slate-100 relative lg:sticky top-4">
     <!-- Лоадер -->
-    <div
-      v-if="!cartStore.cartIsUpdated"
-      class="absolute top-0 left-0 w-full h-full bg-white/50 flex items-center justify-center"
-    >
-      <app-spinner-medium />
-    </div>
+    
+
+    <ContainerLoader v-if="!cartStore.cartIsUpdated" />
+
     <!-- # Лоадер -->
 
     <h2 v-if="!cartStore.cartId">Информация о заказе</h2>
@@ -104,12 +102,12 @@ import { useAuthStore } from '@/stores/auth';
 import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { ref, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
 // import AppSelector from '@/components/UI/Forms/AppSelector.vue';
 import { useProfileStore } from '@/stores/profile';
 import { useAppMessage } from '@/stores/appMessage';
 import { useOrderStore } from '@/stores/order';
 import { storeToRefs } from 'pinia';
+import ContainerLoader from '@/components/loaders/ContainerLoader.vue';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();

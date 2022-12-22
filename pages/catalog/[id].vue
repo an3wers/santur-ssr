@@ -53,7 +53,17 @@
           <!-- :filters="categoryStore.categoryFilters" -->
         </div>
         <div class="col-span-12 lg:col-span-8 xl:col-span-9 relative">
-          <page-loader v-if="!categoryIsUpdated" />
+          <!-- <page-loader v-if="!categoryIsUpdated" /> -->
+          <!-- <ContainerLoader v-if="!categoryIsUpdated" /> -->
+
+          <!-- Лоадер -->
+          <div
+            v-if="!categoryIsUpdated"
+            class="absolute top-0 left-0 w-full h-full bg-white/50 flex justify-center py-16"
+          >
+            <app-spinner-medium />
+          </div>
+          <!-- # Лоадер -->
 
           <div>
             <!-- Сортировка -->
@@ -158,17 +168,19 @@ import ProductListPagination from "@/components/catalog/ProductListPagination.vu
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
 import CatalogProductChips from "@/components/catalog/CatalogProductChips.vue";
 import CatalogSort from "@/components/catalog/CatalogSort.vue";
-import PageLoader from "@/components/loaders/PageLoader.vue";
+// import PageLoader from "@/components/loaders/PageLoader.vue";
 import { useAppMessage } from "@/stores/appMessage";
 import AppButton from "@/components/UI/Buttons/AppButton.vue";
 import CloseIcon24 from "@/components/UI/Icons/CloseIcon_24.vue";
 import AppButtonIcon from "@/components/UI/Buttons/AppButtonIcon.vue";
 import BtnSpinner from "@/components/UI/Spinner/BtnSpinner.vue";
 import { useAuthStore } from "@/stores/auth";
+// import ContainerLoader from "@/components/loaders/ContainerLoader.vue";
+import AppSpinnerMedium from "@/components/loaders/AppSpinnerMedium.vue";
 
 const categoryIsLoaded = ref(false);
 const categoryIsUpdated = ref(true);
-const filterIsChecking = ref(false)
+const filterIsChecking = ref(false);
 
 const isMobileFilters = ref(false);
 
@@ -296,7 +308,11 @@ async function loadCategory() {
   if (getParams.value) {
     await categoryStore.setCategory(getParams.value);
   } else {
-    throw createError({ statusCode: 404, fatal: true, statusMessage: 'Page Not Found'})
+    throw createError({
+      statusCode: 404,
+      fatal: true,
+      statusMessage: "Page Not Found",
+    });
   }
 
   // Устанавливаем параметр в наличии
@@ -388,7 +404,7 @@ function pushUrlState(payload) {
 // Клик на чекбокс
 async function handleFilter(filter) {
   // console.log(filter)
-  filterIsChecking.value = true
+  filterIsChecking.value = true;
   categoryIsUpdated.value = false;
   page.value = 1;
 
@@ -401,9 +417,8 @@ async function handleFilter(filter) {
 
   pushUrlState(getParamsUrl.value);
   categoryIsUpdated.value = true;
-  filterIsChecking.value = false
+  filterIsChecking.value = false;
 }
-
 
 async function handleChip(chip) {
   categoryIsUpdated.value = false;
@@ -515,5 +530,4 @@ async function handleChangeInCash(value) {
   pushUrlState(getParamsUrl.value);
   categoryIsUpdated.value = true;
 }
-
 </script>

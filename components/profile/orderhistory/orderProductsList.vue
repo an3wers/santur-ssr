@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="!isModalProductsLoaded">
-      <!-- Загрузка... -->
       <AppLoader />
     </div>
     <div v-else-if="data.length && isModalProductsLoaded">

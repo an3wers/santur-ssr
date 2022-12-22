@@ -1,13 +1,9 @@
 <template>
   <div class="p-6 rounded-xl bg-slate-100 relative lg:sticky top-4">
     <!-- Лоадер -->
-    <div
-      v-if="!checkoutIsUpdate"
-      class="absolute top-0 left-0 w-full h-full bg-white/50 flex items-center justify-center"
-    >
-      <app-spinner-medium />
-    </div>
+    <ContainerLoader v-if="!checkoutIsUpdate" />
     <!-- # Лоадер -->
+    
 
     <h2 v-if="!cartStore.cartId">Информация о заказе</h2>
     <h2 v-else>Заказ №{{ cartStore.cartId }}</h2>
@@ -80,7 +76,7 @@ import AppButton from '@/components/UI/Buttons/AppButton.vue';
 import { ref } from 'vue';
 import { useProfileStore } from '@/stores/profile';
 import BtnSpinner from '@/components/UI/Spinner/BtnSpinner.vue';
-import AppSpinnerMedium from '@/components/loaders/AppSpinnerMedium.vue';
+import ContainerLoader from '@/components/loaders/ContainerLoader.vue';
 
 const profileStore = useProfileStore();
 const cartStore = useCartStore();

@@ -1,6 +1,6 @@
 <template>
   <div class="home-page -mt-5">
-    <PageLoader v-if="!homeIsLoaded" />
+    <!-- <PageLoader v-if="!homeIsLoaded" /> -->
     <div class="home-page -mt-5">
       <!-- <home-body /> -->
       <div class="section_grey pt-8 pb-16 bg-slate-150">
@@ -12,6 +12,7 @@
               />
             </ClientOnly>
             <home-slider />
+            <AppLoader v-if="!homeIsLoaded" />
             <!-- <template v-else> -->
             <ClientOnly>
               <features />
@@ -52,6 +53,7 @@ import { useAuthStore } from "@/stores/auth";
 
 import { useHomeStore } from "@/stores/home";
 import { ref, onMounted } from "vue";
+import AppLoader from "~~/components/loaders/AppLoader.vue";
 
 const profileStore = useProfileStore();
 const authStore = useAuthStore();

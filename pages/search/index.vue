@@ -124,7 +124,7 @@ async function getFilters() {
 
 async function loadSearchPage() {
   const res = await useCustomFetch(
-    `apissz//quicksearch/?search=${route.query.search}`
+    `apissz/quicksearch/?search=${route.query.search}`
   );
   mainStore.searchResultStore = res.data;
 

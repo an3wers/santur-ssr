@@ -1,6 +1,8 @@
 <template>
   <div class="pageloader">
-    <div class="app-loader relative z-20 py-40 text-center">
+    <!-- position fixed -->
+    <!-- Лоадер, который переклывает полностью страницу -->
+    <div style="z-index: 30;" class="app-loader relative py-40 text-center">
       <svg
         role="status"
         class="inline mr-2 text-gray-200 animate-spin fill-primary"
@@ -19,7 +21,7 @@
         />
       </svg>
     </div>
-    <div class="pageloader-backdrop z-10"></div>
+    <div style="z-index: 20;" class="pageloader-backdrop"></div>
   </div>
 </template>
 

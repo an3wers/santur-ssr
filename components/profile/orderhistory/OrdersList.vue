@@ -10,38 +10,44 @@
         @onOrderForMerge="onMerge"
       />
     </div>
-    <page-loader v-if="!isLoaded" />
+    <!-- Лоадер -->
+    <div
+      v-if="!isLoaded"
+      class="absolute top-0 left-0 w-full h-full bg-white/50 flex justify-center py-16"
+    >
+      <app-spinner-medium />
+    </div>
+    <!-- # Лоадер -->
     <orders-empty-state v-if="!orders.length" />
   </div>
 </template>
 
 <script setup>
-import OrderPreview from '@/components/profile/orderhistory/OrderPreview.vue'
-import OrdersEmptyState from '@/components/profile/orderhistory/OrdersEmptyState.vue'
-import PageLoader from '@/components/loaders/PageLoader.vue'
+import OrderPreview from "@/components/profile/orderhistory/OrderPreview.vue";
+import OrdersEmptyState from "@/components/profile/orderhistory/OrdersEmptyState.vue";
+import AppSpinnerMedium from "@/components/loaders/AppSpinnerMedium.vue";
 
 defineProps({
   isLoaded: {
     type: Boolean,
-    default: false
+    default: false,
   },
   orders: {
     type: Array,
-    default: []
+    default: [],
   },
   isOrderMergeMode: {
-    type: Boolean
+    type: Boolean,
   },
   mergeOrders: {
-    type: Array
-  }
-})
+    type: Array,
+  },
+});
 
-const emits = defineEmits(['merge'])
+const emits = defineEmits(["merge"]);
 
 function onMerge(selected, id) {
   // console.log(selected, id)
-  emits('merge', selected, id)
-
+  emits("merge", selected, id);
 }
 </script>

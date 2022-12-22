@@ -156,68 +156,30 @@
           BMP, GIF, PNG, ZIP, AVI, MP4, MOV или PDF) не превышающие 20 МБ.
         </p>
       </div>
-      <div class="space-y-4">
-        <div class="input-group">
-          <input
-            class="mr-4 mb-2"
-            ref="refFileOne"
-            id="file_input_one"
-            type="file"
-            @change="uploadFileHandler($event)"
-          />
-          
-            <AppButton
-              btnSize="xs"
-              btnType="secondary"
-              v-if="file_one || refFileOne?.value"
-              @click="removeFileHandler('One')"
-            >
-              Удалить
-            </AppButton>
-          
-        </div>
-        <div class="input-group">
-          <input
-            class="mr-4 mb-2"
-            ref="refFileTwo"
-            id="file_input_two"
-            type="file"
-            @change="uploadFileHandler($event)"
-          />
-          <AppButton
-            btnSize="xs"
-            btnType="secondary"
-            v-if="file_two || refFileTwo?.value"
-            @click="removeFileHandler('Two')"
-          >
-            Удалить
-          </AppButton>
-        </div>
-        <div class="input-group">
-          <input
-            class="mr-4 mb-2"
-            ref="refFileThree"
-            id="file_input_three"
-            type="file"
-            @change="uploadFileHandler($event)"
-          />
-          <AppButton
-            btnSize="xs"
-            btnType="secondary"
-            v-if="file_three || refFileThree?.value"
-            @click="removeFileHandler('Three')"
-          >
-            Удалить
-          </AppButton>
-        </div>
-        <div class="text-red-500" v-if="filesError">
-          Максимальный вес файла не должен превышать 20 мб.
-        </div>
+      <div class="input-group space-y-2">
+        <AppInputFile
+          :file="formFiles.fileOne"
+          :limit="MAX_FILE_SIZE_MB"
+          @onChangeFile="updateFileHandler"
+          @onClearFile="removeFileHandler"
+        />
+        <AppInputFile
+          :file="formFiles.fileTwo"
+          :limit="MAX_FILE_SIZE_MB"
+          @onChangeFile="updateFileHandler"
+          @onClearFile="removeFileHandler"
+        />
+        <AppInputFile
+          :file="formFiles.fileThree"
+          :limit="MAX_FILE_SIZE_MB"
+          @onChangeFile="updateFileHandler"
+          @onClearFile="removeFileHandler"
+        />
       </div>
     </div>
     <app-button
       btnSize="lg"
-      :disabled="!getIsSubmit || formIsSubmiting"
+      :disabled="!getIsSubmit || formIsSubmiting || isFilesError"
       type="submit"
     >
       <btn-spinner v-if="formIsSubmiting" />
@@ -236,13 +198,13 @@ import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import BtnSpinner from "@/components/UI/Spinner/BtnSpinner.vue";
 import { useAppMessage } from "@/stores/appMessage";
+import AppInputFile from "@/components/UI/Forms/AppInputFile.vue";
 
 const { API_BASE_URL } = useConfig();
 const MIN_LENGTH_INN = 10;
 const MAX_LENGTH_INN = 12;
-const MAX_LIMIT_FILE = 20000000;
-
-const filesError = ref(false);
+const MAX_FILE_SIZE = 20000000;
+const MAX_FILE_SIZE_MB = 20;
 
 const reasons = [
   {
@@ -281,7 +243,7 @@ const selectedReason = ref("default");
 
 const formIsSubmiting = ref(false);
 
-const { handleSubmit, submitCount, isSubmitting } = useForm();
+const { handleSubmit } = useForm();
 
 const {
   value: name,
@@ -348,67 +310,69 @@ const {
   meta: metaNombersTmc,
 } = useField("nombersTmc", yup.string());
 
-// const formFiles = reactive({
-//   file_one: "",
-//   file_two: "",
-//   file_three: "",
-// });
-
-const file_one = ref("");
-const file_two = ref("");
-const file_three = ref("");
-
-const refFileOne = ref(null);
-const refFileTwo = ref(null);
-const refFileThree = ref(null);
-
 const getIsSubmit = computed(() => {
   return selectedReason.value !== "default";
 });
 
-function uploadFileHandler(event) {
-  filesError.value = false;
-  // console.log("File event", event.target.files[0].size)
-  // console.log("File event", !!event.target.files);
-  if (event.target.files) {
-    event.target.files[0].size > MAX_LIMIT_FILE
-      ? (filesError.value = true)
-      : (filesError.value = false);
-  }
-  // event.target.files
+// files handlers
 
-  // console.log(event.target);
+const formFiles = reactive({
+  fileOne: {
+    value: "",
+    isError: false,
+    id: "fileOne",
+    file: null,
+  },
+  fileTwo: {
+    value: "",
+    isError: false,
+    id: "fileTwo",
+    file: null,
+  },
+  fileThree: {
+    value: "",
+    isError: false,
+    id: "fileThree",
+    file: null,
+  },
+});
 
-  switch (event.target.id) {
-    case "file_input_one":
-      file_one.value = event.target.files[0];
-      break;
-    case "file_input_two":
-      file_two.value = event.target.files[0];
-      break;
-    case "file_input_three":
-      file_three.value = event.target.files[0];
-      break;
-    default:
-      break;
+// files validation
+const isFilesError = computed(() => {
+  const isError =
+    formFiles.fileOne.isError ||
+    formFiles.fileTwo.isError ||
+    formFiles.fileThree.isError;
+  return isError; // true or false
+});
+
+function updateFileHandler(e) {
+  if (e.target.files.length) {
+    const id = e.target.id;
+
+    if (id in formFiles) {
+      formFiles[id] = {
+        ...formFiles[id],
+        value: e.target.files[0].name,
+        file: e.target.files[0],
+        isError: e.target.files[0].size >= MAX_FILE_SIZE,
+      };
+    }
   }
 }
 
-function removeFileHandler(payload) {
-  if (payload === "One") {
-    // console.log(refFileOne);
-    refFileOne.value.value = "";
-    file_one.value = "";
+function removeFileHandler(id) {
+  const domEl = document.querySelector(`#${id}`);
+  if (id in formFiles) {
+    formFiles[id] = {
+      ...formFiles[id],
+      value: "",
+      file: null,
+      isError: false,
+    };
   }
-  if (payload === "Two") {
-    // console.log(refFileOne);
-    refFileTwo.value.value = "";
-    file_two.value = "";
-  }
-  if (payload === "Three") {
-    // console.log(refFileOne);
-    refFileThree.value.value = "";
-    file_three.value = "";
+  if (domEl.value) {
+    domEl.value = "";
   }
 }
 
@@ -420,8 +384,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   const reasonValue =
     reasons.find((el) => el.value === selectedReason.value) || "default";
 
-  // console.log(reasonValue?.name);
-
   data.append("authorname", name);
   data.append("subjectname", company);
   data.append("subjectinn", inn);
@@ -429,10 +391,20 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   data.append("email", email);
   data.append("sngood", nombersTmc);
   data.append("descr", comment);
-  data.append("reason", reasonValue?.name);
-  data.append("file_1", file_one.value);
-  data.append("file_2", file_two.value);
-  data.append("file_3", file_three.value);
+  data.append(
+    "reason",
+    reasonValue !== "default" ? reasonValue.name : reasonValue
+  );
+
+  if (formFiles.fileOne.file) {
+    data.append("file_1", formFiles.fileOne.file);
+  }
+  if (formFiles.fileTwo.file) {
+    data.append("file_2", formFiles.fileTwo.file);
+  }
+  if (formFiles.fileThree.file) {
+    data.append("file_3", formFiles.fileThree.file);
+  }
 
   try {
     formIsSubmiting.value = true;
@@ -448,13 +420,9 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       selectedReason.value = "default";
 
       // очищаю файлы
-      file_one.value = "";
-      file_two.value = "";
-      file_three.value = "";
-
-      refFileOne.value.value = "";
-      refFileTwo.value.value = "";
-      refFileThree.value.value = "";
+      removeFileHandler('fileOne')
+      removeFileHandler('fileTwo')
+      removeFileHandler('fileThree')
 
       appMessageStore.open(
         "success",
@@ -465,7 +433,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       throw new Error(res.message || "При отправки формы произошла ошибка");
     }
   } catch (error) {
-    // console.log(error);
     appMessageStore.open("error", error.message, "error");
   } finally {
     formIsSubmiting.value = false;

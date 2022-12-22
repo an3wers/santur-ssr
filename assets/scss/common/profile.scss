@@ -2,11 +2,9 @@
 
 .profile-menu {
   &__item {
-    > a.active {
+    > a.router-link-active, a.router-link-exact-active{
       color: #1976d2;
       background-color: #dee8f3;
-    }
-    > a:hover {
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-10">
-    <div v-for="item in brands">
+    <div v-for="item in brands" key="item.letter">
       <h2 class="!mb-4">{{ item.letter }}</h2>
       <div class="grid grid-cols-12 gap-6">
         <div
@@ -11,7 +11,11 @@
           <NuxtLink
             class="no-underline text-gray-900"
             :to="`/clients/brands/${el.alias}`"
-            >{{ el.name }}</NuxtLink
+            >{{ el.name }}<span class="ml-1" v-if="el.fileSertDil">
+              <Popper hover content="Есть сертификат дилера">
+                <AppBadge size="xs" color="light-blue">д</AppBadge>
+              </Popper>
+            </span></NuxtLink
           >
         </div>
       </div>
@@ -20,6 +24,9 @@
 </template>
 
 <script setup>
+import AppBadge from '@/components/UI/Badge/AppBadge.vue';
+import Popper from 'vue3-popper';
+
 defineProps({
   brands: {
     type: Array,
