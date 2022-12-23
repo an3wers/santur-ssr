@@ -11,22 +11,22 @@ export const useBrandStore = defineStore('brands', {
     };
   },
   getters: {
-    getBrands(state) {
+    // getBrands(state) {
 
-      if(state.onlyHaveSert) {
-        return state.allBrands.map(el => {
+    //   if(state.onlyHaveSert) {
+    //     return state.allBrands.map(el => {
 
-          const brands = el.brands.filter(b => b.fileSertDil == true)
-          if(brands.length) {
-             return {letter: el.letter, brands}
-          }
+    //       const brands = el.brands.filter(b => b.fileSertDil == true)
+    //       if(brands.length) {
+    //          return {letter: el.letter, brands}
+    //       }
 
-        }).filter(el => !!el)
-      } else {
-        return state.allBrands
-      }
+    //     }).filter(el => !!el)
+    //   } else {
+    //     return state.allBrands
+    //   }
       
-    },
+    // },
   },
   actions: {
     async fetchBrands(char = '', search = '') {

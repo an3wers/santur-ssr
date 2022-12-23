@@ -63,7 +63,7 @@
           <button
             v-if="!authStore.user.id"
             @click="onClickAuthHandler"
-            class="flex text-left text-gray-700 w-full text-[0.9375rem] px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
+            class="flex text-left text-gray-700 w-full px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
           >
             <!-- Content -->
             Войти
@@ -72,7 +72,7 @@
         <template #footer>
           <button
             @click="onClickLogoutHandler"
-            class="flex text-left w-full text-[0.9375rem] text-gray-700 px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
+            class="flex text-left w-full text-gray-700 px-4 py-2 no-underline rounded-md hover:bg-slate-150 hover:text-primary"
             v-if="authStore.user.id"
           >
             <!-- Content -->

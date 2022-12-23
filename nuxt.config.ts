@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
   ssr: true,
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "nuxt-lodash"],
   css: ["~/assets/scss/main.scss"],
   postcss: {
     plugins: {

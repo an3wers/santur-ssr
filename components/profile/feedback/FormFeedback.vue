@@ -89,8 +89,8 @@
           {{ errorComment }}
         </div>
       </div>
-      <div class="input-group">
-        <!-- files components-->
+      <!-- files components-->
+      <!-- <div class="input-group">
         <div class="mb-2">
           <button
             class="bg-transparent border border-transparent hover:text-primary-hover focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 hover:no-underline text-primary underline inline-flex items-center text-center justify-center rounded-md disabled:opacity-70"
@@ -124,11 +124,12 @@
             @onClearFile="removeFileHandler"
           />
         </div>
+      </div> -->
+      <!-- # files components-->
 
-        <!-- # files components-->
-      </div>
+      <!-- isFilesError добавить к кнопке когда будет готово api-->
       <app-button
-        :disabled="!isBtnSubmit || isSubmitting || isFilesError"
+        :disabled="!isBtnSubmit || isSubmitting"
         type="submit"
         btnSize="lg"
       >

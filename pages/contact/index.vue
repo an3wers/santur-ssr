@@ -7,12 +7,32 @@
     <div class="grid gap-6 grid-cols-12">
       <div class="col-span-12 md:col-span-6">
         <div class="space-y-6">
+          <!-- Информер -->
+          <app-informer type="warning">
+            <div class="text-sm">
+              <p class="last:mb-0">
+                Сантехкомплект-Урал работает только с
+                юридическими лицами.
+              </p>
+              <p class="last:mb-0">
+                Для физических лиц действует сеть розничных магазинов
+                «Мастер-Сантехник», ближайший магазин по адресу: ул. Сулимова,
+                23
+              </p>
+            </div>
+          </app-informer>
+          <!-- Информер -->
           <!-- УЦСК -->
           <div>
             <div class="p-4 bg-slate-150">
               <h3 class="mb-0">Сантехкомплект-Урал</h3>
               <div>Офис оптовых продаж в Екатеринбурге</div>
             </div>
+            <!-- Форма -->
+          <div class="flex flex-col mt-4">
+            <AppButton @click="$router.push('/profile/feedback')" btnType="outline">Форма обратной связи</AppButton>
+          </div>
+          <!-- # Форма -->
             <div class="divide-y divide-gray-300">
               <div class="px-4 py-4 flex justify-between space-x-4">
                 <span class="text-gray-500 w-24 md:w-48">Адрес</span>
@@ -52,27 +72,16 @@
                   сб, вс — выходной</span
                 >
               </div>
-              <!-- TODO: Модальное окно с реквизитами -->
               <div class="px-4 py-4 text-right">
                 <button @click="toggleModal">Реквизиты</button>
               </div>
             </div>
           </div>
-          <!-- Информер -->
-          <app-informer type="warning">
-            <div class="text-sm">
-              <p class="last:mb-0">
-                Офис и база ООО «УЦСК» Сантехкомплект-Урал» работает только с
-                юридическими лицами.
-              </p>
-              <p class="last:mb-0">
-                Для физических лиц действует сеть розничных магазинов
-                «Мастер-Сантехник», ближайший магазин по адресу: ул. Сулимова,
-                23
-              </p>
-            </div>
-          </app-informer>
-          <!-- Информер -->
+
+          
+
+          
+          
           <!-- Пункт выдачи -->
 
           <div>
@@ -223,6 +232,7 @@
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 import AppModal from '@/components/modal/AppModal.vue';
 import AppInformer from '@/components/AppInformer.vue';
+import AppButton from '@/components/UI/Buttons/AppButton.vue'
 
 useHead({
   title: 'Контакты и реквизиты',

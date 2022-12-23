@@ -272,7 +272,7 @@
             /></NuxtLink>
           </div>
           <div class="order-1">
-            <NuxtLink class="text-sm no-underline text-gray-700" to="/">
+            <NuxtLink to="/politika" class="text-sm no-underline text-gray-700">
               Политика обработки персональных данных
             </NuxtLink>
           </div>

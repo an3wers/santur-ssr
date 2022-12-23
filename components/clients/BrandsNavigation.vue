@@ -46,7 +46,6 @@
         <input
           type="checkbox"
           @change="$emit('handleHaveSert', $event.target.checked)"
-          v-model="sertValue"
           :checked="sertValue"
           class="sr-only peer"
         />
@@ -64,14 +63,14 @@
             v-model="brandSearchValue"
             @input="$emit('handleSearchValue', brandSearchValue)"
           />
-          <button type="submit" class="absolute right-[12px] top-[9px]">
+          <button v-if="!isRemoveSearchValue" type="submit" class="absolute right-[12px] top-[9px]">
             <search-icon-20 color="#1976D2" />
           </button>
           <button
             type="button"
             @click="onCleanSearchValue"
-            v-if="isRemoveSearchValue"
-            class="absolute right-[36px] top-[9px]"
+            v-else
+            class="absolute right-[12px] top-[9px]"
           >
             <close-icon-20 color="#6b7280" />
           </button>
@@ -416,6 +415,7 @@ const nums = ref({
 });
 
 const sertValue = ref(props.onlyHaveSert);
+
 const brandSearchValue = ref(props.searchValue);
 
 const isRemoveSearchValue = computed(() => {
