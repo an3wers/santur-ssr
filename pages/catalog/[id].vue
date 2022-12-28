@@ -23,13 +23,18 @@
 
       <div v-else class="grid grid-cols-12 gap-6">
         <div class="col-span-12 lg:col-span-4 xl:col-span-3">
+          <div class="hidden lg:block">
+            <AppButton @click="$router.push('/clients/how-buy')" btnType="outline" class="w-full mb-4"
+              >Как купить товар?</AppButton
+            >
+          </div>
           <div v-if="getIsTn">
             <catalog-subcategory :subcategory="getSubcatgory" />
           </div>
-          <div class="flex lg:hidden">
+          <div class="flex lg:hidden justify-between space-x-2">
             <app-button
               @click="isMobileFilters = !isMobileFilters"
-              btnType="outline"
+              btnType="secondary"
               >Фильтры
               <span
                 v-if="
@@ -39,6 +44,7 @@
                 class="ml-2 rounded-full w-2 h-2 bg-primary"
               ></span>
             </app-button>
+            <AppButton @click="$router.push('/clients/how-buy')" btnType="outline">Как купить товар?</AppButton>
           </div>
           <div class="hidden lg:block">
             <catalog-filter-list

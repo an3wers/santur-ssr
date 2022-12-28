@@ -11,8 +11,7 @@
           <app-informer type="warning">
             <div class="text-sm">
               <p class="last:mb-0">
-                Сантехкомплект-Урал работает только с
-                юридическими лицами.
+                Сантехкомплект-Урал работает только с юридическими лицами.
               </p>
               <p class="last:mb-0">
                 Для физических лиц действует сеть розничных магазинов
@@ -28,11 +27,7 @@
               <h3 class="mb-0">Сантехкомплект-Урал</h3>
               <div>Офис оптовых продаж в Екатеринбурге</div>
             </div>
-            <!-- Форма -->
-          <div class="flex flex-col mt-4">
-            <AppButton @click="$router.push('/profile/feedback')" btnType="outline">Форма обратной связи</AppButton>
-          </div>
-          <!-- # Форма -->
+
             <div class="divide-y divide-gray-300">
               <div class="px-4 py-4 flex justify-between space-x-4">
                 <span class="text-gray-500 w-24 md:w-48">Адрес</span>
@@ -76,12 +71,17 @@
                 <button @click="toggleModal">Реквизиты</button>
               </div>
             </div>
+            <!-- Форма -->
+            <div class="flex flex-col">
+              <AppButton
+                @click="$router.push('/profile/feedback')"
+                btnType="outline"
+                >Форма обратной связи</AppButton
+              >
+            </div>
+            <!-- # Форма -->
           </div>
 
-          
-
-          
-          
           <!-- Пункт выдачи -->
 
           <div>
@@ -229,16 +229,16 @@
 </template>
 
 <script setup>
-import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
-import AppModal from '@/components/modal/AppModal.vue';
-import AppInformer from '@/components/AppInformer.vue';
-import AppButton from '@/components/UI/Buttons/AppButton.vue'
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import AppModal from "@/components/modal/AppModal.vue";
+import AppInformer from "@/components/AppInformer.vue";
+import AppButton from "@/components/UI/Buttons/AppButton.vue";
 
 useHead({
-  title: 'Контакты и реквизиты',
+  title: "Контакты и реквизиты",
 });
 
-const breadcrumbs = [{ name: 'Контакты', url: '/contact' }];
+const breadcrumbs = [{ name: "Контакты", url: "/contact" }];
 
 const isOpenModal = ref(false);
 

@@ -2,7 +2,7 @@
   <div class="default-layout flex justify-center flex-col min-h-screen">
     <!-- <the-header /> -->
     <div class="container mt-4 mb-16">
-      <div class="flex flex-col">
+      <div class="flex flex-col items-center">
         <div class="max-w-4xl w-full h-auto mx-auto">
           <img
             class="w-full h-auto"

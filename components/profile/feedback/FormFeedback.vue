@@ -90,7 +90,7 @@
         </div>
       </div>
       <!-- files components-->
-      <!-- <div class="input-group">
+      <div class="input-group">
         <div class="mb-2">
           <button
             class="bg-transparent border border-transparent hover:text-primary-hover focus:outline-none focus:ring-blue-500 focus:ring focus:ring-opacity-20 hover:no-underline text-primary underline inline-flex items-center text-center justify-center rounded-md disabled:opacity-70"
@@ -98,12 +98,15 @@
             @click="isAddFiles = !isAddFiles"
           >
             Добавить файлы
-            <span :class="isAddFiles && 'rotate-180'"><ExpandMoreIcon_20 color="#1976D2" /></span>
+            <span :class="isAddFiles && 'rotate-180'"
+              ><ExpandMoreIcon_20 color="#1976D2"
+            /></span>
           </button>
         </div>
         <div v-if="isAddFiles" class="space-y-2">
           <p class="text-sm">
-            Максимальный размер каждого файла не должен превышать {{ MAX_FILE_SIZE_MB }} мб.
+            Максимальный размер каждого файла не должен превышать
+            {{ MAX_FILE_SIZE_MB }} мб.
           </p>
           <AppInputFile
             :file="formFiles.fileOne"
@@ -124,12 +127,12 @@
             @onClearFile="removeFileHandler"
           />
         </div>
-      </div> -->
+      </div>
       <!-- # files components-->
 
       <!-- isFilesError добавить к кнопке когда будет готово api-->
       <app-button
-        :disabled="!isBtnSubmit || isSubmitting"
+        :disabled="!isBtnSubmit || isSubmitting || isFilesError"
         type="submit"
         btnSize="lg"
       >
@@ -284,9 +287,12 @@ const isBtnSubmit = computed(() => {
 
 // files validation
 const isFilesError = computed(() => {
-  const isError = formFiles.fileOne.isError || formFiles.fileTwo.isError || formFiles.fileThree.isError
-  return isError // true or false
-})
+  const isError =
+    formFiles.fileOne.isError ||
+    formFiles.fileTwo.isError ||
+    formFiles.fileThree.isError;
+  return isError; // true or false
+});
 
 function updateFileHandler(e) {
   if (e.target.files.length) {
@@ -329,7 +335,15 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
   data.append("email", email);
   data.append("descr", comment);
 
-  // TODO: Доделать отправку файлов через форму
+  if (formFiles.fileOne.file) {
+    data.append("file_1", formFiles.fileOne.file);
+  }
+  if (formFiles.fileTwo.file) {
+    data.append("file_2", formFiles.fileTwo.file);
+  }
+  if (formFiles.fileThree.file) {
+    data.append("file_3", formFiles.fileThree.file);
+  }
 
   try {
     const res = await $fetch(`${API_BASE_URL}apissz/SendFeedback`, {
@@ -341,6 +355,11 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
     if (res.success) {
       // console.log(res);
       resetForm();
+
+      removeFileHandler("fileOne");
+      removeFileHandler("fileTwo");
+      removeFileHandler("fileThree");
+
       appMessage.openWithTimer(
         "success",
         "Сообщение успешно отправлено",
