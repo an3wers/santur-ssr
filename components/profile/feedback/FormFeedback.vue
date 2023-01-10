@@ -298,7 +298,7 @@ function updateFileHandler(e) {
   if (e.target.files.length) {
     const id = e.target.id;
 
-    if (id in formFiles) {
+    if (Object.hasOwn(formFiles, id)) {
       formFiles[id] = {
         ...formFiles[id],
         value: e.target.files[0].name,
@@ -311,7 +311,7 @@ function updateFileHandler(e) {
 
 function removeFileHandler(id) {
   const domEl = document.querySelector(`#${id}`);
-  if (id in formFiles) {
+  if (Object.hasOwn(formFiles, id)) {
     formFiles[id] = {
       ...formFiles[id],
       value: "",
@@ -344,7 +344,7 @@ const fromFeedbackHandler = handleSubmit(async (values, { resetForm }) => {
   if (formFiles.fileThree.file) {
     data.append("file_3", formFiles.fileThree.file);
   }
-
+  
   try {
     const res = await $fetch(`${API_BASE_URL}apissz/SendFeedback`, {
       method: "post",

@@ -16,6 +16,7 @@ export const useHomeStore = defineStore('home', {
     };
   },
   getters: {
+    // Рефакторинг геттеров
     getSlider(state) {
       return state.topSlider;
     },

@@ -3,13 +3,13 @@
     <p>* — поля обязательные для заполнения</p>
 
     <div>
-      <div class="text-xl mb-4 font-medium">Причина обращения</div>
+      <div class="text-xl mb-4 font-medium">Причина обращения*</div>
       <app-selector-slots
         inputSize="md"
         inputType="border"
         v-model="selectedReason"
       >
-        <option disabled="disabled" value="default">Выбрать причину</option>
+        <option key="default" value="default">Выбрать причину...</option>
         <option v-for="item in reasons" :key="item.name" :value="item.value">
           {{ item.name }}
         </option>
@@ -315,7 +315,6 @@ const getIsSubmit = computed(() => {
 });
 
 // files handlers
-
 const formFiles = reactive({
   fileOne: {
     value: "",
@@ -350,7 +349,8 @@ function updateFileHandler(e) {
   if (e.target.files.length) {
     const id = e.target.id;
 
-    if (id in formFiles) {
+    // if (id in formFiles) {
+    if (Object.hasOwn(formFiles, id)) {
       formFiles[id] = {
         ...formFiles[id],
         value: e.target.files[0].name,
@@ -363,7 +363,8 @@ function updateFileHandler(e) {
 
 function removeFileHandler(id) {
   const domEl = document.querySelector(`#${id}`);
-  if (id in formFiles) {
+
+  if (Object.hasOwn(formFiles, id)) {
     formFiles[id] = {
       ...formFiles[id],
       value: "",
@@ -420,9 +421,9 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       selectedReason.value = "default";
 
       // очищаю файлы
-      removeFileHandler('fileOne')
-      removeFileHandler('fileTwo')
-      removeFileHandler('fileThree')
+      removeFileHandler("fileOne");
+      removeFileHandler("fileTwo");
+      removeFileHandler("fileThree");
 
       appMessageStore.open(
         "success",

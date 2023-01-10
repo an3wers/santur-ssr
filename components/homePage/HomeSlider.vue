@@ -8,7 +8,7 @@
       >
         <Slide v-for="slide in slides" :key="slide.id">
           <div class="carousel__item">
-            <div class="home-slider__banner w-full h-full">
+            <div class="home-slider__banner w-full h-full max-w-[1504px] max-h-[400px]">
               <NuxtLink :target="slide.target" :to="slide.url">
                 <img
                   :src="`/images/banners/${slide.image}`"

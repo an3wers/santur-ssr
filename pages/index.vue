@@ -50,7 +50,6 @@ import ActivateUsers from "@/components/homePage/ActivateUsers.vue";
 // import AppLoader from '@/components/loaders/AppLoader.vue';
 import { useProfileStore } from "@/stores/profile";
 import { useAuthStore } from "@/stores/auth";
-
 import { useHomeStore } from "@/stores/home";
 import { ref, onMounted } from "vue";
 import AppLoader from "~~/components/loaders/AppLoader.vue";
